@@ -1,0 +1,106 @@
+import { Button } from "@/components/ui/button";
+import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import heroBackground from "@/assets/hero-bg.jpg";
+
+const Hero = () => {
+  const scrollToProjects = () => {
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url(${heroBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/95" />
+      </div>
+
+      {/* Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in-up">
+          {/* Greeting */}
+          <div className="inline-block">
+            <span className="text-sm sm:text-base font-mono text-muted-foreground bg-secondary/50 px-4 py-2 rounded-full backdrop-blur-sm">
+              👋 שלום, אני
+            </span>
+          </div>
+
+          {/* Name */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+            <span className="text-gradient">מפתח Full-Stack</span>
+          </h1>
+
+          {/* Title */}
+          <p className="text-xl sm:text-2xl md:text-3xl text-foreground/90 font-medium">
+            מתמחה באוטומציה ופיתוח React
+          </p>
+
+          {/* Description */}
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            בונה פתרונות אוטומציה חכמים ואפליקציות web מתקדמות.
+            <br className="hidden sm:block" />
+            מתמקד ביצירת קוד נקי, יעיל ומדויק.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+            <Button 
+              size="lg" 
+              className="w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-lg hover:shadow-glow transition-all"
+              onClick={scrollToProjects}
+            >
+              צפה בפרויקטים
+              <ArrowDown className="mr-2 h-5 w-5" />
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              צור קשר
+            </Button>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex gap-4 justify-center pt-8">
+            <a 
+              href="#" 
+              className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
+              aria-label="GitHub"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+            <a 
+              href="#" 
+              className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a 
+              href="#" 
+              className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
+              aria-label="Email"
+            >
+              <Mail className="h-5 w-5" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <ArrowDown className="h-6 w-6 text-muted-foreground" />
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
