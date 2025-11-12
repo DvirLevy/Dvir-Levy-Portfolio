@@ -52,6 +52,9 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         tech: {
+          primary: "hsl(var(--tech-blue))",
+          secondary: "hsl(var(--tech-purple))",
+          accent: "hsl(var(--tech-cyan))",
           cyan: "hsl(var(--tech-cyan))",
           blue: "hsl(var(--tech-blue))",
           purple: "hsl(var(--tech-purple))",
