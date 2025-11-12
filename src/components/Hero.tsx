@@ -27,25 +27,25 @@ const Hero = () => {
           {/* Greeting */}
           <div className="inline-block">
             <span className="text-sm sm:text-base font-mono text-muted-foreground bg-secondary/50 px-4 py-2 rounded-full backdrop-blur-sm">
-              👋 שלום, אני
+              👋 Hello, I'm
             </span>
           </div>
 
           {/* Name */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-            <span className="text-gradient">מפתח Full-Stack</span>
+            <span className="text-gradient">Dvir Levy</span>
           </h1>
 
           {/* Title */}
           <p className="text-xl sm:text-2xl md:text-3xl text-foreground/90 font-medium">
-            מתמחה באוטומציה ופיתוח React
+            Automation Engineer & Tools Developer
           </p>
 
           {/* Description */}
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            בונה פתרונות אוטומציה חכמים ואפליקציות web מתקדמות.
+            I leverage my development and testing skills by creating tools and scripts that drive efficiency.
             <br className="hidden sm:block" />
-            מתמקד ביצירת קוד נקי, יעיל ומדויק.
+            Passionate about designing automation frameworks, CI/CD practices, and data-driven testing.
           </p>
 
           {/* CTA Buttons */}
@@ -55,7 +55,7 @@ const Hero = () => {
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-lg hover:shadow-glow transition-all"
               onClick={scrollToProjects}
             >
-              צפה בפרויקטים
+              View Projects
               <ArrowDown className="mr-2 h-5 w-5" />
             </Button>
             <Button 
@@ -64,28 +64,32 @@ const Hero = () => {
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              צור קשר
+              Contact Me
             </Button>
           </div>
 
           {/* Social Links */}
           <div className="flex gap-4 justify-center pt-8">
             <a 
-              href="#" 
+              href="https://github.com/dvirlh1" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
               aria-label="GitHub"
             >
               <Github className="h-5 w-5" />
             </a>
             <a 
-              href="#" 
+              href="https://www.linkedin.com/in/dvir-levy" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
               aria-label="LinkedIn"
             >
               <Linkedin className="h-5 w-5" />
             </a>
             <a 
-              href="#" 
+              href="mailto:dvirlh1@gmail.com"
               className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
               aria-label="Email"
             >

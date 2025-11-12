@@ -4,24 +4,29 @@ import { Badge } from "@/components/ui/badge";
 const Skills = () => {
   const skillCategories = [
     {
-      title: "אוטומציה & Testing",
+      title: "Test Automation",
       icon: "🤖",
-      skills: ["Python", "Selenium", "Playwright", "Pytest", "API Testing", "CI/CD", "Jenkins", "GitHub Actions"]
+      skills: ["Playwright", "Selenium", "Oxygen Platform", "Cypress", "E2E Testing", "UI Automation", "API Testing", "DB Validation"]
     },
     {
-      title: "Frontend Development",
+      title: "Performance & Monitoring",
+      icon: "⚡",
+      skills: ["JMeter", "Coralogix", "Performance Testing", "Load Testing", "Trace Analysis", "Postman", "Fiddler", "Charles"]
+    },
+    {
+      title: "Development & Frameworks",
       icon: "⚛️",
-      skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5", "CSS3", "Responsive Design", "Next.js"]
+      skills: ["React", "TypeScript", "JavaScript", "Node.js", "Express.js", "Vite", "Redux", "Material-UI"]
     },
     {
-      title: "Backend & Databases",
-      icon: "⚙️",
-      skills: ["Node.js", "REST APIs", "PostgreSQL", "MongoDB", "SQL", "Express", "Authentication", "WebSockets"]
+      title: "Cloud & DevOps",
+      icon: "☁️",
+      skills: ["Azure", "CloudBeat", "AWS (S3, CloudFront)", "CI/CD", "GitHub Actions", "Docker", "VMware", "Git"]
     },
     {
-      title: "כלים ופלטפורמות",
-      icon: "🛠️",
-      skills: ["Git", "Docker", "VS Code", "Postman", "Linux", "AWS", "Vercel", "Chrome DevTools"]
+      title: "Databases & Analytics",
+      icon: "🗄️",
+      skills: ["SQL", "PostgreSQL", "MySQL", "MongoDB", "Oracle", "Redshift", "BigQuery", "SSMS", "NoSQL"]
     }
   ];
 
@@ -32,10 +37,10 @@ const Skills = () => {
           {/* Section Header */}
           <div className="text-center space-y-4 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              כישורים וטכנולוגיות
+              Skills & Technologies
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              מגוון רחב של כלים וטכנולוגיות מודרניות
+              My automation and development expertise
             </p>
           </div>
 
@@ -74,7 +79,7 @@ const Skills = () => {
           {/* Additional Info */}
           <Card className="p-6 sm:p-8 bg-primary/5 border-primary/20">
             <p className="text-center text-base sm:text-lg text-muted-foreground">
-              🚀 תמיד לומד טכנולוגיות חדשות ומתעדכן בטרנדים האחרונים בעולם הפיתוח
+              🚀 Always learning new technologies and staying updated with the latest industry trends
             </p>
           </Card>
         </div>

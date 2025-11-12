@@ -9,27 +9,27 @@ import { toast } from "sonner";
 const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("ההודעה נשלחה בהצלחה! אחזור אליך בהקדם.");
+    toast.success("Message sent successfully! I'll get back to you soon.");
   };
 
   const contactMethods = [
     {
       icon: Mail,
-      title: "אימייל",
-      value: "your.email@example.com",
-      link: "mailto:your.email@example.com"
+      title: "Email",
+      value: "dvirlh1@gmail.com",
+      link: "mailto:dvirlh1@gmail.com"
     },
     {
       icon: Linkedin,
       title: "LinkedIn",
-      value: "linkedin.com/in/yourprofile",
-      link: "#"
+      value: "linkedin.com/in/dvir-levy",
+      link: "https://www.linkedin.com/in/dvir-levy"
     },
     {
       icon: Github,
       title: "GitHub",
-      value: "github.com/yourusername",
-      link: "#"
+      value: "github.com/dvirlh1",
+      link: "https://github.com/dvirlh1"
     }
   ];
 
@@ -40,10 +40,10 @@ const Contact = () => {
           {/* Section Header */}
           <div className="text-center space-y-4 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              צור קשר
+              Get In Touch
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              מעוניין לשמוע על הפרויקט הבא שלך? בוא נדבר!
+              Interested in discussing your next automation project? Let's talk!
             </p>
           </div>
 
@@ -53,11 +53,11 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
-                    שם מלא
+                    Full Name
                   </label>
                   <Input 
                     id="name"
-                    placeholder="השם שלך"
+                    placeholder="Your name"
                     required
                     className="bg-background"
                   />
@@ -65,7 +65,7 @@ const Contact = () => {
 
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium">
-                    אימייל
+                    Email
                   </label>
                   <Input 
                     id="email"
@@ -78,11 +78,11 @@ const Contact = () => {
 
                 <div className="space-y-2">
                   <label htmlFor="subject" className="text-sm font-medium">
-                    נושא
+                    Subject
                   </label>
                   <Input 
                     id="subject"
-                    placeholder="על מה תרצה לדבר?"
+                    placeholder="What would you like to discuss?"
                     required
                     className="bg-background"
                   />
@@ -90,11 +90,11 @@ const Contact = () => {
 
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-sm font-medium">
-                    הודעה
+                    Message
                   </label>
                   <Textarea 
                     id="message"
-                    placeholder="ספר לי על הפרויקט שלך..."
+                    placeholder="Tell me about your project..."
                     rows={5}
                     required
                     className="bg-background resize-none"
@@ -106,7 +106,7 @@ const Contact = () => {
                   className="w-full"
                   size="lg"
                 >
-                  שלח הודעה
+                  Send Message
                   <Send className="mr-2 h-4 w-4" />
                 </Button>
               </form>
@@ -115,12 +115,14 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="space-y-6">
               <Card className="p-6 sm:p-8 bg-primary/5 border-primary/20">
-                <h3 className="text-2xl font-semibold mb-6">דרכי התקשרות</h3>
+                <h3 className="text-2xl font-semibold mb-6">Contact Details</h3>
                 <div className="space-y-4">
                   {contactMethods.map((method, index) => (
                     <a
                       key={index}
                       href={method.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-start gap-4 p-4 rounded-lg hover:bg-background/50 transition-colors group"
                     >
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
@@ -137,16 +139,16 @@ const Contact = () => {
 
               <Card className="p-6 sm:p-8 bg-card/50 backdrop-blur-sm border-2">
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold">💼 זמין לפרויקטים</h3>
+                  <h3 className="text-xl font-semibold">💼 Available For</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    אני זמין לפרויקטים חדשים ומחפש הזדמנויות מעניינות.
-                    בין אם אתה מחפש פתרונות אוטומציה או פיתוח אפליקציות React -
-                    אשמח לשמוע ולעזור!
+                    I'm available for new opportunities and looking for exciting challenges.
+                    Whether you need automation solutions or development expertise -
+                    I'd love to hear from you!
                   </p>
-                  <div className="flex gap-3 pt-2">
-                    <Badge variant="secondary">אוטומציה</Badge>
-                    <Badge variant="secondary">React Development</Badge>
-                    <Badge variant="secondary">Full-Stack</Badge>
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    <Badge variant="secondary">Test Automation</Badge>
+                    <Badge variant="secondary">Performance Testing</Badge>
+                    <Badge variant="secondary">Tools Development</Badge>
                   </div>
                 </div>
               </Card>

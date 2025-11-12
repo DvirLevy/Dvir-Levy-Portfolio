@@ -1,22 +1,27 @@
 import { Card } from "@/components/ui/card";
-import { Code2, Workflow, Zap } from "lucide-react";
+import { Code2, Workflow, Zap, TestTube } from "lucide-react";
 
 const About = () => {
   const highlights = [
     {
-      icon: Code2,
-      title: "פיתוח React מתקדם",
-      description: "יצירת ממשקי משתמש מודרניים עם React, TypeScript ו-Tailwind CSS"
-    },
-    {
-      icon: Workflow,
-      title: "אוטומציה ו-Testing",
-      description: "בניית פתרונות אוטומציה חכמים עם Python, Selenium ו-Playwright"
+      icon: TestTube,
+      title: "E2E Test Automation",
+      description: "Expert in Playwright, Selenium, and Oxygen Platform for comprehensive test coverage"
     },
     {
       icon: Zap,
-      title: "ביצועים ואיכות",
-      description: "דגש על קוד נקי, יעיל ובעל ביצועים גבוהים"
+      title: "Performance Testing",
+      description: "JMeter load testing with Coralogix monitoring and trace analysis"
+    },
+    {
+      icon: Code2,
+      title: "Tools Development",
+      description: "Building custom automation tools and SQL analytics platforms"
+    },
+    {
+      icon: Workflow,
+      title: "CI/CD & Cloud",
+      description: "Azure DevOps, CloudBeat, and comprehensive infrastructure automation"
     }
   ];
 
@@ -27,15 +32,15 @@ const About = () => {
           {/* Section Header */}
           <div className="text-center space-y-4 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              אודות
+              About Me
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              מפתח עם תשוקה לטכנולוגיה ופתרונות יעילים
+              Automation Engineer with passion for building efficient testing solutions
             </p>
           </div>
 
           {/* Highlights Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {highlights.map((item, index) => (
               <Card 
                 key={index}
@@ -57,19 +62,17 @@ const About = () => {
 
           {/* Bio Section */}
           <Card className="p-8 sm:p-10 md:p-12 bg-card/50 backdrop-blur-sm border-2">
-            <div className="space-y-6 text-center md:text-right">
-              <h3 className="text-2xl sm:text-3xl font-bold">רקע מקצועי</h3>
+            <div className="space-y-6">
+              <h3 className="text-2xl sm:text-3xl font-bold">Professional Background</h3>
               <div className="space-y-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  אני מפתח Full-Stack עם התמחות באוטומציה ופיתוח צד לקוח. 
-                  מתמקד ביצירת פתרונות טכנולוגיים יעילים שמשפרים תהליכים ומייעלים עבודה.
+                  As an Automation Engineer with 7+ years of experience, I specialize in designing and implementing comprehensive automation frameworks that drive efficiency and quality. Currently at Jifiti, I lead E2E automation initiatives using Playwright while developing advanced testing infrastructure and performance monitoring solutions.
                 </p>
                 <p>
-                  בעל ניסיון בבניית מערכות אוטומציה מורכבות, פיתוח אפליקציות React מודרניות,
-                  ואינטגרציות עם API שונים. אוהב ללמוד טכנולוגיות חדשות ולהתמודד עם אתגרים טכניים.
+                  My journey includes significant roles at companies like Moovit, where I developed custom tools including SQL analytics platforms handling 100K+ data rows, and ironSource, where I honed my API testing and AWS expertise. I'm passionate about creating automation solutions that seamlessly integrate with CI/CD pipelines and cloud infrastructure.
                 </p>
                 <p className="font-medium text-foreground">
-                  שואף למצוינות בכל פרויקט ומחפש תמיד דרכים לשפר ולהתייעל.
+                  I'm a highly enthusiastic and motivated engineer, always eager to learn new technologies and frameworks. My commitment to data-driven testing, clean code practices, and continuous improvement drives me to build tools that not only solve today's problems but scale for tomorrow's challenges.
                 </p>
               </div>
             </div>

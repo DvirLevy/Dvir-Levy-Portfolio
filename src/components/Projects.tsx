@@ -6,42 +6,43 @@ import { ExternalLink, Github } from "lucide-react";
 const Projects = () => {
   const projects = [
     {
-      title: "מערכת אוטומציה לבדיקות Web",
-      description: "פיתוח מערכת אוטומציה מקיפה לבדיקות regression על אפליקציית web מורכבת. המערכת כוללת דוחות מפורטים, אינטגרציה עם CI/CD, והרצה מקבילית של בדיקות.",
-      tags: ["Python", "Selenium", "Pytest", "Jenkins", "API Testing"],
-      type: "אוטומציה",
+      title: "E2E Automation Framework",
+      description: "Architected and implemented comprehensive E2E testing framework using Playwright from scratch at Jifiti. Includes project architecture, test design patterns, and best practices implementation.",
+      tags: ["Playwright", "TypeScript", "CI/CD", "Test Automation"],
+      type: "Automation",
       highlight: true
     },
     {
-      title: "כלי אוטומציה לניהול נתונים",
-      description: "בניית כלי אוטומציה שמעבד ומנהל כמויות גדולות של נתונים. כולל scraping של מידע, עיבוד, וסנכרון אוטומטי עם מסדי נתונים.",
-      tags: ["Python", "Playwright", "PostgreSQL", "REST API"],
-      type: "אוטומציה",
+      title: "SQL Analytics Platform",
+      description: "Developed a powerful SQL analytics tool at Moovit capable of rendering 100K+ data rows with support for multiple database platforms including Redshift, BigQuery, PostgreSQL, and more.",
+      tags: ["SQL", "React", "Node.js", "BigQuery", "Redshift"],
+      type: "Development",
       highlight: true
     },
     {
-      title: "פלטפורמת ניהול פרויקטים",
-      description: "אפליקציית React מתקדמת לניהול פרויקטים ומשימות. ממשק משתמש אינטואיטיבי, real-time updates, ואינטגרציה עם APIs חיצוניים.",
-      tags: ["React", "TypeScript", "Tailwind CSS", "REST API"],
-      type: "React"
+      title: "Live Logs Fetching Tool",
+      description: "Built a streamlined tool at Moovit for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and system monitoring capabilities.",
+      tags: ["AWS", "Node.js", "EC2", "Monitoring"],
+      type: "Development"
     },
     {
-      title: "Dashboard אנליטי",
-      description: "בניית dashboard אינטראקטיבי להצגת נתונים ומדדים. כולל גרפים דינמיים, פילטרים מתקדמים, וexport של דוחות.",
-      tags: ["React", "TypeScript", "Chart.js", "API Integration"],
-      type: "React"
+      title: "Analytics Config Generator",
+      description: "Created an automated tool at Moovit for generating analytics configurations that map client-side events to Redshift, streamlining the analytics pipeline setup process.",
+      tags: ["Python", "Redshift", "Automation", "ETL"],
+      type: "Automation"
     },
     {
-      title: "בוט אוטומציה למדיה חברתית",
-      description: "פיתוח בוט חכם לאוטומציה של פעילויות במדיה חברתית. כולל תזמון פוסטים, איסוף analytics, ותגובות אוטומטיות.",
-      tags: ["Python", "API Integration", "Scheduling", "Database"],
-      type: "אוטומציה"
+      title: "Performance Testing Suite",
+      description: "Designed and executed comprehensive performance testing at Jifiti using JMeter with Coralogix integration for Pod monitoring and trace analysis.",
+      tags: ["JMeter", "Coralogix", "Performance", "Azure"],
+      type: "Automation",
+      highlight: true
     },
     {
-      title: "מערכת E-commerce",
-      description: "אפליקציית React מלאה לחנות אונליין. כוללת עגלת קניות, מערכת תשלומים, ניהול מלאי, ופאנל ניהול.",
-      tags: ["React", "Node.js", "MongoDB", "Stripe", "Authentication"],
-      type: "React"
+      title: "Progressive Web App",
+      description: "Volunteered as frontend developer for Code for Israel, implementing design systems with MUI, creating responsive React components from Figma designs, and managing full development cycle.",
+      tags: ["React", "Material-UI", "Vite", "PWA"],
+      type: "Development"
     }
   ];
 
@@ -52,10 +53,10 @@ const Projects = () => {
           {/* Section Header */}
           <div className="text-center space-y-4 animate-fade-in">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              פרויקטים נבחרים
+              Featured Projects
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              דוגמאות לעבודות שביצעתי בתחום האוטומציה ופיתוח React
+              Automation frameworks and tools I've built
             </p>
           </div>
 
@@ -73,14 +74,14 @@ const Projects = () => {
                   {/* Project Type Badge */}
                   <div className="flex items-center justify-between">
                     <Badge 
-                      variant={project.type === "אוטומציה" ? "default" : "secondary"}
+                      variant={project.type === "Automation" ? "default" : "secondary"}
                       className="font-medium"
                     >
                       {project.type}
                     </Badge>
                     {project.highlight && (
                       <Badge variant="outline" className="border-primary text-primary">
-                        מומלץ ⭐
+                        Featured ⭐
                       </Badge>
                     )}
                   </div>
@@ -107,25 +108,6 @@ const Projects = () => {
                       </Badge>
                     ))}
                   </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-3 pt-4">
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="flex-1"
-                    >
-                      <ExternalLink className="ml-2 h-4 w-4" />
-                      צפה בפרויקט
-                    </Button>
-                    <Button 
-                      variant="ghost" 
-                      size="sm"
-                      className="px-3"
-                    >
-                      <Github className="h-4 w-4" />
-                    </Button>
-                  </div>
                 </div>
               </Card>
             ))}
@@ -133,9 +115,15 @@ const Projects = () => {
 
           {/* More Projects CTA */}
           <div className="text-center pt-8">
-            <Button size="lg" variant="outline">
-              צפה בכל הפרויקטים ב-GitHub
-              <Github className="mr-2 h-5 w-5" />
+            <Button 
+              size="lg" 
+              variant="outline"
+              asChild
+            >
+              <a href="https://github.com/dvirlh1" target="_blank" rel="noopener noreferrer">
+                View All Projects on GitHub
+                <Github className="mr-2 h-5 w-5" />
+              </a>
             </Button>
           </div>
         </div>

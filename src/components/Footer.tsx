@@ -10,35 +10,35 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {/* About */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">מפתח Full-Stack</h3>
+              <h3 className="text-lg font-semibold">Dvir Levy</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                מתמחה באוטומציה ופיתוח React.
-                בונה פתרונות טכנולוגיים יעילים ומודרניים.
+                Automation Engineer & Tools Developer.
+                Specializing in test automation and performance testing.
               </p>
             </div>
 
             {/* Quick Links */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">קישורים מהירים</h3>
+              <h3 className="text-lg font-semibold">Quick Links</h3>
               <ul className="space-y-2 text-sm">
                 <li>
                   <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
-                    אודות
+                    About
                   </a>
                 </li>
                 <li>
                   <a href="#skills" className="text-muted-foreground hover:text-primary transition-colors">
-                    כישורים
+                    Skills
                   </a>
                 </li>
                 <li>
                   <a href="#projects" className="text-muted-foreground hover:text-primary transition-colors">
-                    פרויקטים
+                    Projects
                   </a>
                 </li>
                 <li>
                   <a href="#contact" className="text-muted-foreground hover:text-primary transition-colors">
-                    צור קשר
+                    Contact
                   </a>
                 </li>
               </ul>
@@ -46,24 +46,28 @@ const Footer = () => {
 
             {/* Social */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">עקוב אחרי</h3>
+              <h3 className="text-lg font-semibold">Connect</h3>
               <div className="flex gap-3">
                 <a 
-                  href="#" 
+                  href="https://github.com/dvirlh1" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center"
                   aria-label="GitHub"
                 >
                   <Github className="h-5 w-5" />
                 </a>
                 <a 
-                  href="#" 
+                  href="https://www.linkedin.com/in/dvir-levy" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
                 <a 
-                  href="#" 
+                  href="mailto:dvirlh1@gmail.com"
                   className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center"
                   aria-label="Email"
                 >
@@ -76,7 +80,7 @@ const Footer = () => {
           {/* Bottom Bar */}
           <div className="pt-8 border-t text-center">
             <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
-              © {currentYear} Built with
+              © {currentYear} Dvir Levy. Built with
               <Heart className="h-4 w-4 text-red-500 fill-red-500" />
               using React & Tailwind CSS
             </p>
