@@ -28,7 +28,7 @@ const Projects = () => {
       type: "Development",
       highlight: true,
       image: sqlAnalyticsImg,
-      githubUrl: "https://github.com/DvirLevy/Meron"
+      githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Analytics"
     },
     {
       title: "Live Logs Fetching Tool",
