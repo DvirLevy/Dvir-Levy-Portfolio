@@ -44,7 +44,7 @@ const Projects = () => {
       tags: ["Python", "Redshift", "Automation", "ETL"],
       type: "Automation",
       image: analyticsConfigImg,
-      githubUrl: "https://github.com/DvirLevy/Meron"
+      githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/UserId"
     },
     {
       title: "Performance Testing Suite",
