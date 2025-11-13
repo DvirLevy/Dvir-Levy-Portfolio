@@ -36,7 +36,7 @@ const Projects = () => {
       tags: ["AWS", "Node.js", "EC2", "Monitoring"],
       type: "Development",
       image: liveLogsImg,
-      githubUrl: null
+      githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Puttier"
     },
     {
       title: "Analytics Config Generator",
