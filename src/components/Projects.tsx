@@ -32,7 +32,7 @@ const Projects = () => {
     },
     {
       title: "Live Logs Fetching Tool",
-      description: "Built a streamlined tool at Moovit for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and system monitoring capabilities.",
+      description: "Develop a streamlined tool at Moovit for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and system monitoring capabilities.",
       tags: ["AWS", "Node.js", "EC2 Servers", "Monitoring"],
       type: "Development",
       image: liveLogsImg,
@@ -40,8 +40,8 @@ const Projects = () => {
     },
     {
       title: "Data Fetcher",
-      description: "Created an automated tool at Moovit for generating analytics configurations that map client-side events to Redshift, streamlining the analytics pipeline setup process.",
-      tags: ["JavaScript", "Redshift", "React", "Electorn","Vite"],
+      description: "Develop a tool that queries the database and retrieves user-specific data based on the provided environment and user ID.",
+      tags: ["JavaScript", "React", "Electorn","Vite"],
       type: "Development",
       image: analyticsConfigImg,
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/UserId"
