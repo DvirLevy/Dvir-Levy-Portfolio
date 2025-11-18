@@ -22,14 +22,14 @@ const Contact = () => {
     {
       icon: Linkedin,
       title: "LinkedIn",
-      value: "linkedin.com/in/dvir-levy",
-      link: "https://www.linkedin.com/in/dvir-levy"
+      value: "linkedin.com/in/dvirlevyhakak",
+      link: "https://www.linkedin.com/in/dvirlevyhakak"
     },
     {
       icon: Github,
       title: "GitHub",
-      value: "github.com/dvirlh1",
-      link: "https://github.com/dvirlh1"
+      value: "github.com/DvirLevy",
+      link: "https://github.com/DvirLevy"
     }
   ];
 

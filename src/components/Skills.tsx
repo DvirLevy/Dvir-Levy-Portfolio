@@ -79,7 +79,7 @@ const Skills = () => {
           {/* Additional Info */}
           <Card className="p-6 sm:p-8 bg-primary/5 border-primary/20">
             <p className="text-center text-base sm:text-lg text-muted-foreground">
-              🚀 Always learning new technologies and staying updated with the latest industry trends
+              🎯 It's not about how hard you hit. It's about how hard you can get hit and keep moving forward. How much you can take and keep moving forward (Rocky Balboa) 🎯
             </p>
           </Card>
         </div>
