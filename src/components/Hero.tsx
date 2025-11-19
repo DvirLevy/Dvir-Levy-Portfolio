@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
-import ironsourceLogo from "@/assets/companies/ironsource.png";
+import ironsourceLogo from "@/assets/companies/ironsourceLogo.svg";
 import moovitLogo from "@/assets/companies/moovit.png";
 import giphyLogo from "@/assets/companies/giphy.png";
 
