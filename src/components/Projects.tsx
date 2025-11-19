@@ -22,6 +22,15 @@ const Projects = () => {
       githubUrl: null
     },
     {
+      title: "Live Logs Fetching Tool",
+      description: "Develop a streamlined tool at Moovit for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and QA testing time.",
+      tags: ["AWS", "Node.js", "EC2 Servers", "Monitoring"],
+      type: "Development",
+      image: liveLogsImg,
+      githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Puttier",
+      linkedinPost: "https://www.linkedin.com/feed/update/urn:li:activity:7185871122930749441/"
+    },
+    {
       title: "SQL Analytics Platform",
       description: "Developed a powerful SQL analytics tool at Moovit capable of rendering 100K+ data rows with support for multiple database platforms including Redshift, BigQuery, PostgreSQL, and more.",
       tags: ["SQL", "React", "Node.js", "BigQuery", "Redshift"],
@@ -29,14 +38,6 @@ const Projects = () => {
       highlight: true,
       image: sqlAnalyticsImg,
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Analytics"
-    },
-    {
-      title: "Live Logs Fetching Tool",
-      description: "Develop a streamlined tool at Moovit for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and system monitoring capabilities.",
-      tags: ["AWS", "Node.js", "EC2 Servers", "Monitoring"],
-      type: "Development",
-      image: liveLogsImg,
-      githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Puttier"
     },
     {
       title: "Data Fetcher",
@@ -160,6 +161,18 @@ const Projects = () => {
                         <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                           <Github className="mr-2 h-4 w-4" />
                           View Code
+                        </a>
+                      </Button>
+                    )}
+                    {project.linkedinPost && (
+                      <Button
+                        variant="default"
+                        size="sm"
+                        asChild
+                      >
+                        <a href={project.linkedinPost} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="mr-2 h-4 w-4" />
+                          See my Post on Linkedin
                         </a>
                       </Button>
                     )}
