@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
-import ironsourceLogo from "@/assets/companies/ironsourceLogo.svg";
-import moovitLogo from "@/assets/companies/moovit.png";
-import giphyLogo from "@/assets/companies/giphy.png";
+import ironsourceLogo from "@/assets/companies/islogo.png"
+import moovitLogo from "@/assets/companies/moovitLogo.png";
+import giphyLogo from "@/assets/companies/JifitiLogo.png";
 
 const Hero = () => {
   const scrollToProjects = () => {
@@ -141,7 +141,7 @@ const Hero = () => {
                     <img
                       src={company.logo}
                       alt={`${company.name} logo`}
-                      className="h-12 md:h-16 w-auto object-contain filter brightness-90 contrast-125"
+                      className={"h-24 md:h-16 w-auto object-contcain filter brightness-90 contrast-125 scale-550"}
                     />
                   </div>
                 </CarouselItem>
