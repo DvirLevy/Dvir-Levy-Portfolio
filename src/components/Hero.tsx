@@ -1,11 +1,26 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import heroBackground from "@/assets/hero-bg.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import ironsourceLogo from "@/assets/companies/ironsource.png";
+import moovitLogo from "@/assets/companies/moovit.png";
+import giphyLogo from "@/assets/companies/giphy.png";
 
 const Hero = () => {
   const scrollToProjects = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const companies = [
+    { name: "ironSource", logo: ironsourceLogo },
+    { name: "Moovit", logo: moovitLogo },
+    { name: "Giphy", logo: giphyLogo },
+  ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -96,6 +111,39 @@ const Hero = () => {
               <Mail className="h-5 w-5" />
             </a>
           </div>
+        </div>
+
+        {/* Companies Carousel */}
+        <div className="mt-16 relative z-10">
+          <p className="text-center text-sm text-muted-foreground mb-6">
+            Companies I've Worked With
+          </p>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 2000,
+              }),
+            ]}
+            className="w-full max-w-3xl mx-auto"
+          >
+            <CarouselContent>
+              {companies.map((company) => (
+                <CarouselItem key={company.name} className="basis-1/3 md:basis-1/3">
+                  <div className="p-4 flex items-center justify-center">
+                    <img
+                      src={company.logo}
+                      alt={`${company.name} logo`}
+                      className="h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </div>
 
