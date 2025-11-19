@@ -8,83 +8,83 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 25% 97%;
-    --foreground: 220 20% 10%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: 217 91% 60%;
+    --primary: 0 0% 20%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 15% 95%;
-    --secondary-foreground: 220 20% 10%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 220 15% 95%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 217 91% 60%;
+    --accent: 0 0% 30%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 20%;
 
     --radius: 0.75rem;
 
-    --tech-cyan: 189 94% 43%;
-    --tech-blue: 217 91% 60%;
-    --tech-purple: 263 70% 60%;
-    --tech-green: 142 76% 36%;
+    --tech-cyan: 0 0% 40%;
+    --tech-blue: 0 0% 35%;
+    --tech-purple: 0 0% 30%;
+    --tech-green: 0 0% 25%;
     
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(189 94% 43%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(220 25% 97%) 0%, hsl(220 20% 92%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(220 30% 96%) 0%, hsl(220 25% 98%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(0 0% 20%) 0%, hsl(0 0% 40%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 98%) 0%, hsl(0 0% 92%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 96%) 100%);
     
-    --shadow-sm: 0 2px 8px hsl(220 20% 10% / 0.05);
-    --shadow-md: 0 4px 16px hsl(220 20% 10% / 0.08);
-    --shadow-lg: 0 8px 24px hsl(220 20% 10% / 0.12);
-    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.3);
+    --shadow-sm: 0 2px 8px hsl(0 0% 0% / 0.05);
+    --shadow-md: 0 4px 16px hsl(0 0% 0% / 0.08);
+    --shadow-lg: 0 8px 24px hsl(0 0% 0% / 0.12);
+    --shadow-glow: 0 0 40px hsl(0 0% 20% / 0.3);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
-    --background: 220 25% 8%;
-    --foreground: 220 15% 95%;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 220 20% 12%;
-    --card-foreground: 220 15% 95%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 220 20% 12%;
-    --popover-foreground: 220 15% 95%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 85%;
+    --primary-foreground: 0 0% 10%;
 
-    --secondary: 220 20% 15%;
-    --secondary-foreground: 220 15% 95%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 220 20% 15%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 0 0% 75%;
+    --accent-foreground: 0 0% 10%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 18%;
-    --input: 220 20% 18%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 85%;
     
-    --gradient-hero: linear-gradient(135deg, hsl(220 25% 10%) 0%, hsl(220 20% 12%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 8%) 0%, hsl(0 0% 12%) 100%);
     
     --shadow-sm: 0 2px 8px hsl(0 0% 0% / 0.3);
     --shadow-md: 0 4px 16px hsl(0 0% 0% / 0.4);
@@ -108,7 +108,7 @@ All colors MUST be HSL.
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-cyan-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground;
   }
   
   .card-hover {
