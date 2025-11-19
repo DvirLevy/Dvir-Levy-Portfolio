@@ -7,6 +7,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
 import ironsourceLogo from "@/assets/companies/ironsource.png";
 import moovitLogo from "@/assets/companies/moovit.png";
 import giphyLogo from "@/assets/companies/giphy.png";
@@ -16,11 +17,18 @@ const Hero = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 2500, stopOnInteraction: false })
+  );
+
   const companies = [
     { name: "ironSource", logo: ironsourceLogo },
     { name: "Moovit", logo: moovitLogo },
     { name: "Giphy", logo: giphyLogo },
   ];
+
+  // Duplicate companies for smoother infinite scroll
+  const duplicatedCompanies = [...companies, ...companies];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -115,29 +123,25 @@ const Hero = () => {
 
         {/* Companies Carousel */}
         <div className="mt-16 relative z-10">
-          <p className="text-center text-sm text-muted-foreground mb-6">
+          <p className="text-center text-sm text-muted-foreground mb-6 font-medium">
             Companies I've Worked With
           </p>
           <Carousel
             opts={{
-              align: "start",
+              align: "center",
               loop: true,
             }}
-            plugins={[
-              Autoplay({
-                delay: 2000,
-              }),
-            ]}
-            className="w-full max-w-3xl mx-auto"
+            plugins={[autoplayPlugin.current]}
+            className="w-full max-w-4xl mx-auto"
           >
-            <CarouselContent>
-              {companies.map((company) => (
-                <CarouselItem key={company.name} className="basis-1/3 md:basis-1/3">
-                  <div className="p-4 flex items-center justify-center">
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {duplicatedCompanies.map((company, index) => (
+                <CarouselItem key={`${company.name}-${index}`} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3">
+                  <div className="p-6 flex items-center justify-center bg-card/50 backdrop-blur-sm rounded-lg border border-border/50 hover:bg-card/80 transition-all">
                     <img
                       src={company.logo}
                       alt={`${company.name} logo`}
-                      className="h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+                      className="h-12 md:h-16 w-auto object-contain filter brightness-90 contrast-125"
                     />
                   </div>
                 </CarouselItem>
