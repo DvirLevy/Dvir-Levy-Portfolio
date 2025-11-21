@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
-import ironsourceLogo from "@/assets/companies/islogo.png"
+import ironsourceLogo from "@/assets/companies/ironsource.svg"
 import moovitLogo from "@/assets/companies/moovitLogo.png";
 import giphyLogo from "@/assets/companies/JifitiLogo.png";
 
@@ -137,11 +137,11 @@ const Hero = () => {
             <CarouselContent className="-ml-2 md:-ml-4">
               {duplicatedCompanies.map((company, index) => (
                 <CarouselItem key={`${company.name}-${index}`} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3">
-                  <div className="p-6 flex items-center justify-center bg-card/50 backdrop-blur-sm rounded-lg border border-border/50 hover:bg-card/80 transition-all">
+                  <div className="p-6 flex items-center justify-center  backdrop-blur-sm transition-all">
                     <img
                       src={company.logo}
                       alt={`${company.name} logo`}
-                      className={"h-24 md:h-16 w-auto object-contcain filter brightness-90 contrast-125 scale-550"}
+                      className={"h-24 md:h-36 w-auto object-contcain filter brightness-90 contrast-125 scale-550"}
                     />
                   </div>
                 </CarouselItem>
