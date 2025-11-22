@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Linkedin } from "lucide-react";
 import e2eAutomationImg from "@/assets/projects/e2e-automation.jpg";
 import sqlAnalyticsImg from "@/assets/projects/sql-analytics.jpg";
 import liveLogsImg from "@/assets/projects/live-logs.jpg";
@@ -172,7 +172,7 @@ const Projects = () => {
                       >
                         <a href={project.linkedinPost} target="_blank" rel="noopener noreferrer">
                           <ExternalLink className="mr-2 h-4 w-4" />
-                          See my Post on Linkedin
+                          View my Post <Linkedin className="h-5 w-5" />
                         </a>
                       </Button>
                     )}
