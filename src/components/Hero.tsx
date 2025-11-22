@@ -11,6 +11,7 @@ import { useRef } from "react";
 import ironsourceLogo from "@/assets/companies/ironsource.svg"
 import moovitLogo from "@/assets/companies/moovitLogo.png";
 import giphyLogo from "@/assets/companies/ironsource.svg";
+import whatsappLogo from '../assets/companies/WhatsApp.svg.webp'
 
 const Hero = () => {
   const scrollToProjects = () => {
@@ -21,6 +22,13 @@ const Hero = () => {
     Autoplay({ delay: 2500, stopOnInteraction: false })
   );
 
+  const wa = { name: "waLogo", logo: whatsappLogo }
+
+  const handleWa = ()=>{
+    const phoneNumber = '972542663619'
+    const message = ''
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
+  }
   const companies = [
     { name: "ironSource", logo: ironsourceLogo },
     { name: "Moovit", logo: moovitLogo },
@@ -131,6 +139,12 @@ const Hero = () => {
             >
               <Mail className="h-5 w-5" />
             </a>
+            <img
+              src={wa.logo}
+              alt={wa.name}
+              className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
+              onClick={handleWa}
+            />
           </div>
         </div>
 
