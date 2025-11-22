@@ -10,7 +10,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
 import ironsourceLogo from "@/assets/companies/ironsource.svg"
 import moovitLogo from "@/assets/companies/moovitLogo.png";
-import giphyLogo from "@/assets/companies/ironsource.svg";
+import jifitiLogo from "@/assets/companies/JifitiLogo.png";
 import whatsappLogo from '../assets/companies/WhatsApp.svg.webp'
 
 const Hero = () => {
@@ -32,7 +32,7 @@ const Hero = () => {
   const companies = [
     { name: "ironSource", logo: ironsourceLogo },
     { name: "Moovit", logo: moovitLogo },
-    { name: "Giphy", logo: giphyLogo },
+    { name: "Giphy", logo: jifitiLogo },
   ];
 
   // Duplicate companies for smoother infinite scroll
