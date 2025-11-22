@@ -10,7 +10,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
 import ironsourceLogo from "@/assets/companies/ironsource.svg"
 import moovitLogo from "@/assets/companies/moovitLogo.png";
-import giphyLogo from "@/assets/companies/JifitiLogo.png";
+import giphyLogo from "@/assets/companies/ironsource.svg";
 
 const Hero = () => {
   const scrollToProjects = () => {
@@ -89,7 +89,20 @@ const Hero = () => {
             >
               Contact Me
             </Button>
+            <Button
+              size="lg" 
+              variant="outline" 
+              className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
+            >
+              <a
+                href="src/assets/companies/Dvir Levy - Automation Engineer.pdf"
+                download="Dvir Levy - Automation Engineer.pdf"
+              >
+                Download my Resume
+              </a>
+            </Button>
           </div>
+
 
           {/* Social Links */}
           <div className="flex gap-4 justify-center pt-8">
