@@ -141,7 +141,7 @@ const Hero = () => {
                     <img
                       src={company.logo}
                       alt={`${company.name} logo`}
-                      className={"h-24 md:h-36 w-auto object-contcain filter brightness-90 contrast-125 scale-550"}
+                      className={company.name == "ironSource" ? "h-24 md:h-36 w-auto scale-750" : "h-24 md:h-36 w-auto scale-550"}
                     />
                   </div>
                 </CarouselItem>
@@ -152,7 +152,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce -mb-8">
         <ArrowDown className="h-6 w-6 text-muted-foreground" />
       </div>
     </section>

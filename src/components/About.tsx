@@ -65,14 +65,23 @@ const About = () => {
             <div className="space-y-6">
               <h3 className="text-2xl sm:text-3xl font-bold">Professional Background</h3>
               <div className="space-y-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
-                <p>
-                  As an Automation Engineer with 7+ years of experience, I specialize in designing and implementing comprehensive automation frameworks that drive efficiency and quality. Currently at Jifiti, I lead E2E automation initiatives using Playwright while developing advanced testing infrastructure and performance monitoring solutions.
-                </p>
-                <p>
-                  My journey includes significant roles at companies like Moovit, where I developed custom tools including SQL analytics platforms handling 100K+ data rows, and ironSource, where I honed my API testing and AWS expertise. I'm passionate about creating automation solutions that seamlessly integrate with CI/CD pipelines and cloud infrastructure.
-                </p>
-                <p className="font-medium text-foreground">
-                  I'm a highly enthusiastic and motivated engineer, always eager to learn new technologies and frameworks. My commitment to data-driven testing, clean code practices, and continuous improvement drives me to build tools that not only solve today's problems but scale for tomorrow's challenges.
+                <p className="whitespace-pre-line">
+                  <span className="font-bold">Senior QA Automation Engineer</span>, specializing in building scalable, 
+                  reliable and data-driven automation systems.
+                  I focus on creating solutions that simplify testing, improve product quality, and integrate smoothly into modern CI/CD and cloud environments.<br/>
+                  </p>
+                  <p className="whitespace-pre-line">
+                  In my current role at<span className="font-bold"> Jifiti</span>, I design automation using Playwright, and Oxygen (a Selenium based framework), develop infrastructure improvements, develop DB scripts for CRUD procedure and validation.
+                  Develop performance testing, and monitoring. I enjoy working on systems that combine automation, cloud, and data, work closely with the Devops team.<br/>
+                  </p>
+                  <p className="whitespace-pre-line">
+                  Previously at <span className="font-bold">Moovit</span>, I developed internal tools, Develop a streamlined tool for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and QA testing time. Develop SQL analytics platform capable of processing 100K+ records and renders it to the user’s screen, a solutions that support large-scale analytics workflows and can be connected to deferent data services such as Redshift, BigQuery, Postgres, etc.
+                  </p>
+                  <p className="whitespace-pre-line">
+                  My time at <span className="font-bold">ironSource</span> strengthened my API testing, debugging, and AWS skills, while also giving me exposure to performance analysis and traffic inspection tools.
+                  </p>
+                  <p className="whitespace-pre-line">
+                  What drives me is solving real engineering problems with clean, maintainable code. I enjoy building tools teams actually use - solutions that remove friction, automate processes, improve workflow speed, and scale with the product. I'm constantly experimenting with new technologies, automation patterns, and architectural approaches to deliver smarter, more efficient testing systems.
                 </p>
               </div>
             </div>
