@@ -1,7 +1,16 @@
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, Heart, FileUser } from "lucide-react";
+import whatsappLogo from '../assets/companies/WhatsApp.svg.webp'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  const wa = { name: "waLogo", logo: whatsappLogo }
+
+  const handleWa = ()=>{
+    const phoneNumber = '972542663619'
+    const message = ''
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
+  }
 
   return (
     <footer className="bg-card/50 backdrop-blur-sm border-t">
@@ -73,6 +82,19 @@ const Footer = () => {
                 >
                   <Mail className="h-5 w-5" />
                 </a>
+                <a
+                  href="src/assets/companies/Dvir Levy - Automation Engineer.pdf"
+                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center"
+                  download="Dvir Levy - Automation Engineer.pdf"              
+                >
+                  <FileUser/>
+                </a>
+                <img
+                  src={wa.logo}
+                  alt={wa.name}
+                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center"
+                  onClick={handleWa}
+                />
               </div>
             </div>
           </div>
