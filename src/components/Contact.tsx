@@ -5,12 +5,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Linkedin, Github, Send } from "lucide-react";
 import { toast } from "sonner";
+import whatsappLogo from '../assets/companies/WhatsApp.svg.webp'
+import { link } from "fs";
 
 const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Message sent successfully! I'll get back to you soon.");
   };
+
+   const handleWa = ()=>{
+    const phoneNumber = '972542663619'
+    const message = ''
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
+  }
 
   const contactMethods = [
     {
@@ -30,7 +38,14 @@ const Contact = () => {
       title: "GitHub",
       value: "github.com/DvirLevy",
       link: "https://github.com/DvirLevy"
+    },
+     {
+      logo: whatsappLogo,
+      title: "WhatsApp",
+      value: "Catch me on WhatsApp",
+      link: ''
     }
+
   ];
 
   return (
@@ -120,13 +135,15 @@ const Contact = () => {
                   {contactMethods.map((method, index) => (
                     <a
                       key={index}
-                      href={method.link}
+                      href={method.title !== "WhatsApp" ? method.link : undefined}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-start gap-4 p-4 rounded-lg hover:bg-background/50 transition-colors group"
                     >
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                        <method.icon className="h-6 w-6 text-primary" />
+                        {method.title == "WhatsApp" ? <img src={method.logo} alt={method.title} className="h-10 w-10 text-primary"  />: 
+                        <method.icon className="h-6 w-6 text-primary" />}
+                        
                       </div>
                       <div className="space-y-1">
                         <p className="font-medium">{method.title}</p>
