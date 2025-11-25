@@ -6,19 +6,40 @@ import { Badge } from "@/components/ui/badge";
 import { Mail, Linkedin, Github, Send } from "lucide-react";
 import { toast } from "sonner";
 import whatsappLogo from '../assets/companies/WhatsApp.svg.webp'
-import { link } from "fs";
+import React from "react";
 
 const Contact = () => {
+  console.log("rendered")
+  const [getInTouchValidator,setGetInTouchValidator] = React.useState(false)
+
+  const [getInTouchForm,setGetInTouchForm] = React.useState({
+    fullName : '',
+    email : '',
+    subject: '',
+    message: ''
+  })
+
+
+  const handleGetInTouchForm =(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
+      setGetInTouchForm({...getInTouchForm ,
+        [e.target.id]:e.target.value
+      })
+  }
+  
+
+
+
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Message sent successfully! I'll get back to you soon.");
   };
 
-   const handleWa = ()=>{
-    const phoneNumber = '972542663619'
-    const message = ''
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
-  }
+  //  const handleWa = ()=>{
+  //   const phoneNumber = '972542663619'
+  //   const message = ''
+  //   window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
+  // }
 
   const contactMethods = [
     {
@@ -71,10 +92,13 @@ const Contact = () => {
                     Full Name
                   </label>
                   <Input 
-                    id="name"
+                    id="fullName"
                     placeholder="Your name"
                     required
                     className="bg-background"
+                    onChange={handleGetInTouchForm}
+                    value={getInTouchForm.fullName}
+
                   />
                 </div>
 
@@ -88,6 +112,8 @@ const Contact = () => {
                     placeholder="your.email@example.com"
                     required
                     className="bg-background"
+                    onChange={handleGetInTouchForm}
+                    value={getInTouchForm.email}
                   />
                 </div>
 
@@ -100,6 +126,8 @@ const Contact = () => {
                     placeholder="What would you like to discuss?"
                     required
                     className="bg-background"
+                    onChange={handleGetInTouchForm}
+                    value={getInTouchForm.subject}
                   />
                 </div>
 
@@ -113,6 +141,8 @@ const Contact = () => {
                     rows={5}
                     required
                     className="bg-background resize-none"
+                    onChange={handleGetInTouchForm}
+                    value={getInTouchForm.message}
                   />
                 </div>
 
