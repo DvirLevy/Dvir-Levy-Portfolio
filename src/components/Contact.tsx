@@ -6,12 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Mail, Linkedin, Github, Send } from "lucide-react";
 import { toast } from "sonner";
 import whatsappLogo from '../assets/companies/WhatsApp.svg.webp'
-import React from "react";
+import React, { useEffect } from "react";
+import EmailServiceLambda from "@/utils/EmailSender";
 
 const Contact = () => {
   console.log("rendered")
-  const [getInTouchValidator,setGetInTouchValidator] = React.useState(false)
-
+  const [formError,setFormError] = React.useState<Record<string,string>>({})
+  const [isFormValid, setIsFormValid] = React.useState(false)
   const [getInTouchForm,setGetInTouchForm] = React.useState({
     fullName : '',
     email : '',
@@ -19,20 +20,44 @@ const Contact = () => {
     message: ''
   })
 
+  const formValidator = () => {
+    const errors: Record<string,string> = {}
+
+    // Full Name validation
+    if(getInTouchForm.fullName.trim().length < 2){
+      errors.fullName = 'Full Name is required'
+    }
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if(!emailRegex.test(getInTouchForm.email)){
+      errors.email = 'Invalid email address'
+    }
+    // Subject validation
+    if(getInTouchForm.subject.trim().length < 2 && getInTouchForm.message.trim().length>20){
+      errors.subject = 'Subject is required'
+    }
+    // Message validation
+    if(getInTouchForm.message.trim().length < 5 && getInTouchForm.message.trim().length>100 ){
+      errors.message = 'Message must be at least 5 characters long and max 100 characters'
+    }
+
+    return errors
+  }
 
   const handleGetInTouchForm =(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
       setGetInTouchForm({...getInTouchForm ,
         [e.target.id]:e.target.value
       })
   }
-  
-
-
-
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent successfully! I'll get back to you soon.");
+    if(formError){
+      toast.success("Message sent successfully! I'll get back to you soon.");
+    }
+    else{
+      EmailServiceLambda(getInTouchForm)
+    }
   };
 
   //  const handleWa = ()=>{
@@ -69,6 +94,13 @@ const Contact = () => {
 
   ];
 
+  useEffect(()=>{
+    const errorValidation = formValidator()
+    setFormError(errorValidation)
+    setIsFormValid(Object.keys(errorValidation).length === 0)
+
+  },[getInTouchForm])
+
   return (
     <section className="py-20 sm:py-24 md:py-32" id="contact">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,8 +130,8 @@ const Contact = () => {
                     className="bg-background"
                     onChange={handleGetInTouchForm}
                     value={getInTouchForm.fullName}
-
                   />
+                  {formError.fullName && <p className="text-red-500 text-sm">{formError.fullName}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -115,6 +147,7 @@ const Contact = () => {
                     onChange={handleGetInTouchForm}
                     value={getInTouchForm.email}
                   />
+                  {formError.email && <p className="text-red-500 text-sm">{formError.email}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -129,6 +162,7 @@ const Contact = () => {
                     onChange={handleGetInTouchForm}
                     value={getInTouchForm.subject}
                   />
+                  {formError.subject && <p className="text-red-500 text-sm">{formError.subject}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -144,6 +178,7 @@ const Contact = () => {
                     onChange={handleGetInTouchForm}
                     value={getInTouchForm.message}
                   />
+                  {formError.message && <p className="text-red-500 text-sm">{formError.message}</p>}
                 </div>
 
                 <Button 
