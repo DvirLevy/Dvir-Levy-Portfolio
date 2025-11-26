@@ -16,6 +16,7 @@ const Contact = () => {
   const [getInTouchForm,setGetInTouchForm] = React.useState({
     fullName : '',
     email : '',
+    to:"dvirlh1@gmail.com",
     subject: '',
     message: ''
   })
@@ -50,13 +51,17 @@ const Contact = () => {
       })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit =async (e: React.FormEvent) => {
     e.preventDefault();
-    if(formError){
-      toast.success("Message sent successfully! I'll get back to you soon.");
+    if(!isFormValid){
+      toast.error("error try again")
+      console.log(formError)
     }
     else{
-      EmailServiceLambda(getInTouchForm)
+      console.log("from handleSubmit")
+      console.log(getInTouchForm)
+      await EmailServiceLambda(getInTouchForm)
+      toast.success("Message sent successfully! I'll get back to you soon.");
     }
   };
 

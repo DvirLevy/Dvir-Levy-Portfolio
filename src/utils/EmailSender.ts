@@ -1,10 +1,11 @@
 async function EmailServiceLambda(data:Record<string,string>={}) {
+  console.log("from EmailServiceLambda")
     try {
-      const res = await fetch(process.env.EMAIL_SERVICE_LAMBDA, {
+      const res = await fetch('https://rm0q9is55k.execute-api.eu-north-1.amazonaws.com/prod', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": process.env.REACT_APP_LAMBDA_API_KEY
+          "x-api-key": "86CU147qhP3sA8Fvh9QJv5Wg0a4X2gVx7Kx8MJ2C"
         },
         body: JSON.stringify(data),
       });
