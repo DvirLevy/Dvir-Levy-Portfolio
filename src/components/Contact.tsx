@@ -20,6 +20,12 @@ const Contact = () => {
     subject: '',
     message: ''
   })
+  const [touched, setTouched] = React.useState({
+    fullName: false,
+    email: false,
+    subject: false,
+    message: false,
+  });
 
   const formValidator = () => {
     const errors: Record<string,string> = {}
@@ -65,11 +71,11 @@ const Contact = () => {
     }
   };
 
-  //  const handleWa = ()=>{
-  //   const phoneNumber = '972542663619'
-  //   const message = ''
-  //   window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
-  // }
+   const handleWa = ()=>{
+    const phoneNumber = '972542663619'
+    const message = ''
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
+  }
 
   const contactMethods = [
     {
@@ -135,8 +141,9 @@ const Contact = () => {
                     className="bg-background"
                     onChange={handleGetInTouchForm}
                     value={getInTouchForm.fullName}
+                    onBlur={() => setTouched({ ...touched, fullName: true })}
                   />
-                  {formError.fullName && <p className="text-red-500 text-sm">{formError.fullName}</p>}
+                  {touched.fullName && formError.fullName && <p className="text-red-500 text-sm">{formError.fullName}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -151,8 +158,9 @@ const Contact = () => {
                     className="bg-background"
                     onChange={handleGetInTouchForm}
                     value={getInTouchForm.email}
+                    onBlur={() => setTouched({ ...touched, email: true })}
                   />
-                  {formError.email && <p className="text-red-500 text-sm">{formError.email}</p>}
+                  {touched.email && formError.email && <p className="text-red-500 text-sm">{formError.email}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -166,8 +174,9 @@ const Contact = () => {
                     className="bg-background"
                     onChange={handleGetInTouchForm}
                     value={getInTouchForm.subject}
+                    onBlur={() => setTouched({ ...touched, subject: true })}
                   />
-                  {formError.subject && <p className="text-red-500 text-sm">{formError.subject}</p>}
+                  {touched.subject && formError.subject && <p className="text-red-500 text-sm">{formError.subject}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -182,8 +191,9 @@ const Contact = () => {
                     className="bg-background resize-none"
                     onChange={handleGetInTouchForm}
                     value={getInTouchForm.message}
+                    onBlur={() => setTouched({ ...touched, message: true })}
                   />
-                  {formError.message && <p className="text-red-500 text-sm">{formError.message}</p>}
+                  {touched.message && formError.message && <p className="text-red-500 text-sm">{formError.message}</p>}
                 </div>
 
                 <Button 
@@ -209,6 +219,7 @@ const Contact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-start gap-4 p-4 rounded-lg hover:bg-background/50 transition-colors group"
+                      onClick={handleWa}
                     >
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
                         {method.title == "WhatsApp" ? <img src={method.logo} alt={method.title} className="h-10 w-10 text-primary"  />: 
