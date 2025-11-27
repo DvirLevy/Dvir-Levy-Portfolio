@@ -5,7 +5,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Linkedin, Github, Send } from "lucide-react";
 import { toast } from "sonner";
-import whatsappLogo from '../assets/companies/WhatsApp.svg.webp'
 import React, { useEffect } from "react";
 import EmailServiceLambda from "@/utils/EmailSender";
 
@@ -97,7 +96,7 @@ const Contact = () => {
       link: "https://github.com/DvirLevy"
     },
      {
-      logo: whatsappLogo,
+      s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/WhatsApp.svg.webp",
       title: "WhatsApp",
       value: "Catch me on WhatsApp",
       link: ''
@@ -222,7 +221,7 @@ const Contact = () => {
                       onClick={handleWa}
                     >
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                        {method.title == "WhatsApp" ? <img src={method.logo} alt={method.title} className="h-10 w-10 text-primary"  />: 
+                        {method.title == "WhatsApp" ? <img src={method.s3} alt={method.title} className="h-10 w-10 text-primary"  />: 
                         <method.icon className="h-6 w-6 text-primary" />}
                         
                       </div>

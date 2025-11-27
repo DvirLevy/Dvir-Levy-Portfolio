@@ -1,10 +1,9 @@
 import { Github, Linkedin, Mail, Heart, FileUser } from "lucide-react";
-import whatsappLogo from '../assets/companies/WhatsApp.svg.webp'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const wa = { name: "waLogo", logo: whatsappLogo }
+  const wa = { name: "waLogo", s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/WhatsApp.svg.webp" }
 
   const handleWa = ()=>{
     const phoneNumber = '972542663619'
@@ -91,7 +90,7 @@ const Footer = () => {
                   <FileUser className="h-5 w-5"/>
                 </a>
                 <img
-                  src={wa.logo}
+                  src={wa.s3}
                   alt={wa.name}
                   className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center"
                   onClick={handleWa}
