@@ -71,16 +71,16 @@ const Contact = () => {
   };
 
    const handleWa = ()=>{
-    const phoneNumber = '972542663619'
-    const message = ''
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
+      const phoneNumber = '972542663619'
+      const message = ''
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
   }
 
   const contactMethods = [
     {
       icon: Mail,
       title: "Email",
-      value: "dvirlh1@gmail.com",
+      value: "Dvirlh1@gmail.com",
       link: "mailto:dvirlh1@gmail.com"
     },
     {
