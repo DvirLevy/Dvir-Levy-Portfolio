@@ -6,12 +6,69 @@ import { Badge } from "@/components/ui/badge";
 import { Mail, Linkedin, Github, Send } from "lucide-react";
 import { toast } from "sonner";
 import whatsappLogo from '../assets/companies/WhatsApp.svg.webp'
-import { link } from "fs";
+import React, { useEffect } from "react";
+import EmailServiceLambda from "@/utils/EmailSender";
 
 const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  console.log("rendered")
+  const [formError,setFormError] = React.useState<Record<string,string>>({})
+  const [isFormValid, setIsFormValid] = React.useState(false)
+  const [getInTouchForm,setGetInTouchForm] = React.useState({
+    fullName : '',
+    email : '',
+    to:"dvirlh1@gmail.com",
+    subject: '',
+    message: ''
+  })
+  const [touched, setTouched] = React.useState({
+    fullName: false,
+    email: false,
+    subject: false,
+    message: false,
+  });
+
+  const formValidator = () => {
+    const errors: Record<string,string> = {}
+
+    // Full Name validation
+    if(getInTouchForm.fullName.trim().length < 2){
+      errors.fullName = 'Full Name is required'
+    }
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if(!emailRegex.test(getInTouchForm.email)){
+      errors.email = 'Invalid email address'
+    }
+    // Subject validation
+    if(getInTouchForm.subject.trim().length < 2 && getInTouchForm.message.trim().length>20){
+      errors.subject = 'Subject is required'
+    }
+    // Message validation
+    if(getInTouchForm.message.trim().length < 5 && getInTouchForm.message.trim().length>100 ){
+      errors.message = 'Message must be at least 5 characters long and max 100 characters'
+    }
+
+    return errors
+  }
+
+  const handleGetInTouchForm =(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
+      setGetInTouchForm({...getInTouchForm ,
+        [e.target.id]:e.target.value
+      })
+  }
+
+  const handleSubmit =async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent successfully! I'll get back to you soon.");
+    if(!isFormValid){
+      toast.error("error try again")
+      console.log(formError)
+    }
+    else{
+      console.log("from handleSubmit")
+      console.log(getInTouchForm)
+      await EmailServiceLambda(getInTouchForm)
+      toast.success("Message sent successfully! I'll get back to you soon.");
+    }
   };
 
    const handleWa = ()=>{
@@ -48,6 +105,13 @@ const Contact = () => {
 
   ];
 
+  useEffect(()=>{
+    const errorValidation = formValidator()
+    setFormError(errorValidation)
+    setIsFormValid(Object.keys(errorValidation).length === 0)
+
+  },[getInTouchForm])
+
   return (
     <section className="py-20 sm:py-24 md:py-32" id="contact">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,11 +135,15 @@ const Contact = () => {
                     Full Name
                   </label>
                   <Input 
-                    id="name"
+                    id="fullName"
                     placeholder="Your name"
                     required
                     className="bg-background"
+                    onChange={handleGetInTouchForm}
+                    value={getInTouchForm.fullName}
+                    onBlur={() => setTouched({ ...touched, fullName: true })}
                   />
+                  {touched.fullName && formError.fullName && <p className="text-red-500 text-sm">{formError.fullName}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -88,7 +156,11 @@ const Contact = () => {
                     placeholder="your.email@example.com"
                     required
                     className="bg-background"
+                    onChange={handleGetInTouchForm}
+                    value={getInTouchForm.email}
+                    onBlur={() => setTouched({ ...touched, email: true })}
                   />
+                  {touched.email && formError.email && <p className="text-red-500 text-sm">{formError.email}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -100,7 +172,11 @@ const Contact = () => {
                     placeholder="What would you like to discuss?"
                     required
                     className="bg-background"
+                    onChange={handleGetInTouchForm}
+                    value={getInTouchForm.subject}
+                    onBlur={() => setTouched({ ...touched, subject: true })}
                   />
+                  {touched.subject && formError.subject && <p className="text-red-500 text-sm">{formError.subject}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -113,7 +189,11 @@ const Contact = () => {
                     rows={5}
                     required
                     className="bg-background resize-none"
+                    onChange={handleGetInTouchForm}
+                    value={getInTouchForm.message}
+                    onBlur={() => setTouched({ ...touched, message: true })}
                   />
+                  {touched.message && formError.message && <p className="text-red-500 text-sm">{formError.message}</p>}
                 </div>
 
                 <Button 
@@ -139,6 +219,7 @@ const Contact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-start gap-4 p-4 rounded-lg hover:bg-background/50 transition-colors group"
+                      onClick={handleWa}
                     >
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
                         {method.title == "WhatsApp" ? <img src={method.logo} alt={method.title} className="h-10 w-10 text-primary"  />: 
