@@ -15,7 +15,7 @@ const About = () => {
     },
     {
       icon: Code2,
-      title: "Tools Development",
+      title: "Frontend Development",
       description: "Building custom automation tools and SQL analytics platforms"
     },
     {

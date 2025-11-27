@@ -64,7 +64,7 @@ const Hero = () => {
 
           {/* Title */}
           <p className="text-xl sm:text-2xl md:text-3xl text-foreground/90 font-medium">
-            Automation Engineer & Tools Developer
+            Automation Engineer & Frontend Developer
           </p>
 
           {/* Description */}
@@ -147,7 +147,7 @@ const Hero = () => {
         {/* Companies Carousel */}
         <div className="mt-16 relative z-10">
           <p className="text-center text-sm text-muted-foreground mb-6 font-medium">
-            Companies I've Worked With
+            Companies I've Worked At
           </p>
           <Carousel
             opts={{

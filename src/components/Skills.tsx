@@ -6,7 +6,7 @@ const Skills = () => {
     {
       title: "Test Automation",
       icon: "🤖",
-      skills: ["Playwright", "Selenium", "Oxygen Platform", "Cypress", "E2E Testing", "UI Automation", "API Testing", "DB Validation"]
+      skills: ["Playwright", "Selenium", "Oxygen Platform", "E2E Testing", "UI Automation", "API Testing", "DB Validation"]
     },
     {
       title: "Performance & Monitoring",
@@ -16,17 +16,17 @@ const Skills = () => {
     {
       title: "Development & Frameworks",
       icon: "⚛️",
-      skills: ["React", "TypeScript", "JavaScript", "Node.js", "Express.js", "Vite", "Redux", "Material-UI"]
+      skills: ["React", "TypeScript", "JavaScript", "Node.js", "Express.js", "Vite", "Redux", "Material-UI","Figma"]
     },
     {
       title: "Cloud & DevOps",
       icon: "☁️",
-      skills: ["Azure", "CloudBeat", "AWS (S3, CloudFront)", "CI/CD", "GitHub Actions", "Docker", "VMware", "Git"]
+      skills: ["Azure", "CloudBeat", "AWS-S3","AWS-Buckets","AWS-Lambda", "CI/CD", "GitHub Actions", "VMware", "Git","SourceTree"]
     },
     {
       title: "Databases & Analytics",
       icon: "🗄️",
-      skills: ["SQL", "PostgreSQL", "MySQL", "MongoDB", "Oracle", "Redshift", "BigQuery", "SSMS", "NoSQL"]
+      skills: ["SQL",, "MySQL", "MongoDB", "Oracle", "Redshift", "BigQuery", "SSMS"]
     }
   ];
 
