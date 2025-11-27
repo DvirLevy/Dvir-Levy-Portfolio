@@ -40,14 +40,13 @@ const Hero = () => {
       <div 
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: `url(${heroBackground})`,
+          backgroundImage: `url(https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/hero-bg.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/95" />
       </div>
-
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in-up">
