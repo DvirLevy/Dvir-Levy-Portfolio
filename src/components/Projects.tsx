@@ -18,7 +18,7 @@ const Projects = () => {
       tags: ["Playwright", "TypeScript", "CI/CD", "Test Automation"],
       type: "Automation",
       highlight: true,
-      image: e2eAutomationImg,
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/e2e-automation.jpg",
       githubUrl: null
     },
     {
@@ -26,7 +26,7 @@ const Projects = () => {
       description: "Develop a streamlined tool at Moovit for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and QA testing time.",
       tags: ["AWS", "Node.js", "EC2 Servers", "Monitoring"],
       type: "Development",
-      image: liveLogsImg,
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/live-logs.jpg",
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Puttier",
       linkedinPost: "https://www.linkedin.com/feed/update/urn:li:activity:7185871122930749441/"
     },
@@ -36,7 +36,7 @@ const Projects = () => {
       tags: ["SQL", "React", "Node.js", "BigQuery", "Redshift"],
       type: "Development",
       highlight: true,
-      image: sqlAnalyticsImg,
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/sql-analytics.jpg",
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Analytics"
     },
     {
@@ -44,7 +44,7 @@ const Projects = () => {
       description: "Develop a tool that queries the database and retrieves user-specific data based on the provided environment and user ID.",
       tags: ["JavaScript", "React", "Electorn","Vite"],
       type: "Development",
-      image: analyticsConfigImg,
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/analytics-config.jpg",
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/UserId"
     },
     {
@@ -53,7 +53,7 @@ const Projects = () => {
       tags: ["JMeter", "Coralogix", "Performance", "Azure"],
       type: "Automation",
       highlight: true,
-      image: performanceTestingImg,
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/performance-testing.jpg",
       githubUrl: null
     },
     {
@@ -61,7 +61,7 @@ const Projects = () => {
       description: "Volunteered as frontend developer for Code for Israel, implementing design systems with MUI, creating responsive React components from Figma designs, and managing full development cycle.",
       tags: ["React", "Material-UI", "Vite", "PWA"],
       type: "Development",
-      image: pwaImg,
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/pwa.jpg",
       githubUrl: "https://github.com/Code-For-Israel/reuth-fe"
     },
     {
@@ -69,7 +69,7 @@ const Projects = () => {
       description: "Designed and developed an elegant digital invitation platform for a housewarming celebration. Features interactive RSVP functionality, responsive design, and a beautiful user experience.",
       tags: ["React", "Lovable", "UI/UX", "Frontend"],
       type: "Development",
-      image: housewarmingImg,
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/housewarming.jpg",
       githubUrl: "https://github.com/DvirLevy/levys",
       liveUrl: "https://levys.lovable.app/"
     }
@@ -102,7 +102,7 @@ const Projects = () => {
                 {/* Project Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img 
-                    src={project.image} 
+                    src={project.imgS3} 
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                   />

@@ -8,10 +8,6 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
-import ironsourceLogo from "@/assets/companies/ironsource.svg"
-import moovitLogo from "@/assets/companies/moovitLogo.png";
-import jifitiLogo from "@/assets/companies/JifitiLogo.png";
-import whatsappLogo from '../assets/companies/WhatsApp.svg.webp'
 
 const Hero = () => {
   const scrollToProjects = () => {
@@ -22,7 +18,7 @@ const Hero = () => {
     Autoplay({ delay: 2500, stopOnInteraction: false })
   );
 
-  const wa = { name: "waLogo", logo: whatsappLogo }
+  const wa = { name: "waLogo", s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/WhatsApp.svg.webp" }
 
   const handleWa = ()=>{
     const phoneNumber = '972542663619'
@@ -30,9 +26,9 @@ const Hero = () => {
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
   }
   const companies = [
-    { name: "ironSource", logo: ironsourceLogo },
-    { name: "Moovit", logo: moovitLogo },
-    { name: "Giphy", logo: jifitiLogo },
+    { name: "ironSource", s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/ironsource.svg"},
+    { name: "Moovit", s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/JifitiLogo.png" },
+    { name: "Giphy", s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/moovitLogo.png" },
   ];
 
   // Duplicate companies for smoother infinite scroll
@@ -44,14 +40,13 @@ const Hero = () => {
       <div 
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: `url(${heroBackground})`,
+          backgroundImage: `url(https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/hero-bg.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/95" />
       </div>
-
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in-up">
@@ -103,8 +98,9 @@ const Hero = () => {
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
             >
               <a
-                href="src/assets/companies/Dvir Levy - Automation Engineer.pdf"
-                download="Dvir Levy - Automation Engineer.pdf"
+                href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Automation+Engineer.pdf"
+                target='_blank'
+                rel="noopener noreferrer"
               >
                 Download my Resume
               </a>
@@ -140,7 +136,7 @@ const Hero = () => {
               <Mail className="h-5 w-5" />
             </a>
             <img
-              src={wa.logo}
+              src={wa.s3}
               alt={wa.name}
               className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
               onClick={handleWa}
@@ -166,7 +162,7 @@ const Hero = () => {
                 <CarouselItem key={`${company.name}-${index}`} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3">
                   <div className="p-6 flex items-center justify-center transition-all">
                     <img
-                      src={company.logo}
+                      src={company.s3}
                       alt={`${company.name} logo`}
                       className={company.name == "ironSource" ? "h-24 md:h-36 w-auto scale-750" : "h-24 md:h-36 w-auto scale-550"}
                     />
