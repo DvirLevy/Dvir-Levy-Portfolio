@@ -26,7 +26,7 @@ const Skills = () => {
     {
       title: "Databases & Analytics",
       icon: "🗄️",
-      skills: ["SQL",, "MySQL", "MongoDB", "Oracle", "Redshift", "BigQuery", "SSMS"]
+      skills: ["SQL", "MySQL", "MongoDB", "Oracle", "Redshift", "BigQuery", "SSMS"]
     }
   ];
 
