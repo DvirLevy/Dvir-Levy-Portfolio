@@ -204,6 +204,7 @@ const Contact = () => {
                   type="submit" 
                   className="w-full"
                   size="lg"
+                  disabled={!isFormValid}
                 >
                   Send Message
                   <Send className="mr-2 h-4 w-4" />
