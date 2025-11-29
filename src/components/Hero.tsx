@@ -98,7 +98,7 @@ const Hero = () => {
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
             >
               <a
-                href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Automation+Engineer.pdf"
+                href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Resume.pdf"
                 target='_blank'
                 rel="noopener noreferrer"
               >
