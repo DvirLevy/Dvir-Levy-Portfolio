@@ -70,10 +70,15 @@ const Contact = () => {
     }
   };
 
-   const handleWa = ()=>{
+   const handleWa = (e:React.FormEvent)=>{
+    if(e.currentTarget.id !== 'WhatsApp'){
+      return null
+    }
+    else{
       const phoneNumber = '972542663619'
       const message = ''
       window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
+    }
   }
 
   const contactMethods = [
@@ -188,7 +193,7 @@ const Contact = () => {
                     rows={5}
                     required
                     className="bg-background resize-none"
-                    onChange={handleGetInTouchForm}
+                    onChange={e=>handleGetInTouchForm(e)}
                     value={getInTouchForm.message}
                     onBlur={() => setTouched({ ...touched, message: true })}
                   />
@@ -214,11 +219,12 @@ const Contact = () => {
                   {contactMethods.map((method, index) => (
                     <a
                       key={index}
-                      href={method.title !== "WhatsApp" ? method.link : undefined}
+                      href={method.title !== "WhatsApp" ? method.link : 'no href'}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-start gap-4 p-4 rounded-lg hover:bg-background/50 transition-colors group"
-                      onClick={handleWa}
+                      onClick={e=>handleWa(e)}
+                      id={`${method.title}`}
                     >
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
                         {method.title == "WhatsApp" ? <img src={method.s3} alt={method.title} className="h-10 w-10 text-primary"  />: 
