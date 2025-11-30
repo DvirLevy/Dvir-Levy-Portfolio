@@ -8,7 +8,6 @@ import { toast } from "sonner";
 import React, { useEffect } from "react";
 import {LambdaService} from "@/utils/lambdaService";
 const Contact = () => {
-  console.log("rendered")
   const [formError,setFormError] = React.useState<Record<string,string>>({})
   const [isFormValid, setIsFormValid] = React.useState(false)
   const [getInTouchForm,setGetInTouchForm] = React.useState({
