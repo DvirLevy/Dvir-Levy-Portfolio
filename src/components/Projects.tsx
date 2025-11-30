@@ -9,6 +9,8 @@ import analyticsConfigImg from "@/assets/projects/analytics-config.jpg";
 import performanceTestingImg from "@/assets/projects/performance-testing.jpg";
 import pwaImg from "@/assets/projects/pwa.jpg";
 import housewarmingImg from "@/assets/projects/housewarming.jpg";
+import { useEffect } from "react";
+import { LambdaService } from "@/utils/lambdaService";
 
 const Projects = () => {
   const projects = [
@@ -74,6 +76,10 @@ const Projects = () => {
       liveUrl: "https://levys.lovable.app/"
     }
   ];
+
+  useEffect(()=>{
+    LambdaService.DataAnalytics().then().catch()
+  },[])
 
   return (
     <section className="py-20 sm:py-24 md:py-32 bg-muted/30" id="projects">

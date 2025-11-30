@@ -6,8 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Mail, Linkedin, Github, Send } from "lucide-react";
 import { toast } from "sonner";
 import React, { useEffect } from "react";
-import EmailServiceLambda from "@/utils/EmailSender";
-
+import {LambdaService} from "@/utils/lambdaService";
 const Contact = () => {
   console.log("rendered")
   const [formError,setFormError] = React.useState<Record<string,string>>({})
@@ -65,7 +64,7 @@ const Contact = () => {
     else{
       console.log("from handleSubmit")
       console.log(getInTouchForm)
-      await EmailServiceLambda(getInTouchForm)
+      await LambdaService.EmailServiceLambda(getInTouchForm)
       toast.success("Message sent successfully! I'll get back to you soon.");
     }
   };
