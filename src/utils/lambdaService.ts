@@ -1,7 +1,11 @@
-export class LambdaService{
+export enum AwsRouts {
+  DOWNLOAD = 'downloadClick',
+  PORTFOLIO = 'portfolio'
+}
 
+export class LambdaService{
+  
 static async EmailServiceLambda(data:Record<string,string>={}) {
-  console.log("from EmailServiceLambda")
     try {
       const res = await fetch('https://rm0q9is55k.execute-api.eu-north-1.amazonaws.com/prod', {
         method: "POST",
@@ -24,15 +28,16 @@ static async EmailServiceLambda(data:Record<string,string>={}) {
     }
 }
 
-static async DataAnalytics(){
+static async DataAnalytics(data){
   try {
-      const res = await fetch('https://y7tmcxw46c.execute-api.eu-north-1.amazonaws.com/prod', {
-        method: "GET",
+    console.log(data.awsRoute)
+      const res = await fetch(`https://y7tmcxw46c.execute-api.eu-north-1.amazonaws.com/prod/${data.awsRoute}`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           "x-api-key": "GwGr93ZIeC5vGnx4eg4ow3dbkK1wuECC1sGeWQx2"
         },
-        // body: JSON.stringify(data),
+        body: JSON.stringify(data),
       });
   
       if (!res.ok) {

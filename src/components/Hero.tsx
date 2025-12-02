@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
-import heroBackground from "@/assets/hero-bg.jpg";
 import {
   Carousel,
   CarouselContent,
@@ -8,6 +7,7 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
+import { AwsRouts, LambdaService } from "@/utils/lambdaService";
 
 const Hero = () => {
   const scrollToProjects = () => {
@@ -33,6 +33,14 @@ const Hero = () => {
 
   // Duplicate companies for smoother infinite scroll
   const duplicatedCompanies = [...companies, ...companies];
+  const getResume = ()=>{
+    LambdaService.DataAnalytics({
+      awsRoute: AwsRouts.DOWNLOAD,
+      eventName: "download",
+      date: new Date().toString()})
+    const url = 'https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Resume.pdf'
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -96,14 +104,15 @@ const Hero = () => {
               size="lg" 
               variant="outline" 
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
+              onClick={()=>getResume()}
             >
-              <a
+              {/* <a
                 href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Resume.pdf"
                 target='_blank'
                 rel="noopener noreferrer"
-              >
+              > */}
                 Download my Resume
-              </a>
+              {/* </a> */}
             </Button>
           </div>
 

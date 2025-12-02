@@ -2,15 +2,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Linkedin } from "lucide-react";
-import e2eAutomationImg from "@/assets/projects/e2e-automation.jpg";
-import sqlAnalyticsImg from "@/assets/projects/sql-analytics.jpg";
-import liveLogsImg from "@/assets/projects/live-logs.jpg";
-import analyticsConfigImg from "@/assets/projects/analytics-config.jpg";
-import performanceTestingImg from "@/assets/projects/performance-testing.jpg";
-import pwaImg from "@/assets/projects/pwa.jpg";
-import housewarmingImg from "@/assets/projects/housewarming.jpg";
 import { useEffect } from "react";
-import { LambdaService } from "@/utils/lambdaService";
+import { AwsRouts, LambdaService } from "@/utils/lambdaService";
 
 const Projects = () => {
   const projects = [
@@ -78,7 +71,14 @@ const Projects = () => {
   ];
 
   useEffect(()=>{
-    LambdaService.DataAnalytics().then().catch()
+  if(!sessionStorage.getItem('analyticsSent')){
+    LambdaService.DataAnalytics({
+      awsRoute: AwsRouts.PORTFOLIO,
+      eventName: "portfolio",
+      date: new Date().toString()
+      }).catch(err => console.error("Analytics error:", err)) 
+     }
+     sessionStorage.setItem('analyticsSent','true')
   },[])
 
   return (
