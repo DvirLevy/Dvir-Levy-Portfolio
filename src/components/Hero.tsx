@@ -60,23 +60,23 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in-up">
           {/* Greeting */}
           <div className="inline-block">
-            <span className="text-sm sm:text-base font-mono text-muted-foreground bg-secondary/50 px-4 py-2 rounded-full backdrop-blur-sm">
+            <span id="greeting" className="text-sm sm:text-base font-mono text-muted-foreground bg-secondary/50 px-4 py-2 rounded-full backdrop-blur-sm">
               👋 Hello, I'm
             </span>
           </div>
 
           {/* Name */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+          <h1 id="name" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             <span className="text-gradient">Dvir Levy</span>
           </h1>
 
           {/* Title */}
-          <p className="text-xl sm:text-2xl md:text-3xl text-foreground/90 font-medium">
+          <p id="professionalTitle" className="text-xl sm:text-2xl md:text-3xl text-foreground/90 font-medium">
             Automation Engineer & Frontend Developer
           </p>
 
           {/* Description */}
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p id="description" className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             I leverage my development and testing skills by creating tools and scripts that drive efficiency.
             <br className="hidden sm:block" />
             Passionate about designing automation frameworks, CI/CD practices, and data-driven testing.
@@ -88,6 +88,7 @@ const Hero = () => {
               size="lg" 
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-lg hover:shadow-glow transition-all"
               onClick={scrollToProjects}
+              id="viewProjectsBtn"
             >
               View Projects
               <ArrowDown className="mr-2 h-5 w-5" />
@@ -97,6 +98,7 @@ const Hero = () => {
               variant="outline" 
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              id="contactMeBtn"
             >
               Contact Me
             </Button>
@@ -105,6 +107,7 @@ const Hero = () => {
               variant="outline" 
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
               onClick={()=>getResume()}
+              id="downloadResumeBtn"
             >
               {/* <a
                 href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Resume.pdf"
@@ -125,6 +128,7 @@ const Hero = () => {
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
               aria-label="GitHub"
+              id="githubLink"
             >
               <Github className="h-5 w-5" />
             </a>
@@ -134,6 +138,7 @@ const Hero = () => {
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
               aria-label="LinkedIn"
+              id="linkedinLink"
             >
               <Linkedin className="h-5 w-5" />
             </a>
@@ -141,6 +146,7 @@ const Hero = () => {
               href="mailto:dvirlh1@gmail.com"
               className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
               aria-label="Email"
+              id="emailLink"
             >
               <Mail className="h-5 w-5" />
             </a>
@@ -165,6 +171,7 @@ const Hero = () => {
             }}
             plugins={[autoplayPlugin.current]}
             className="w-full max-w-4xl mx-auto"
+            id="companiesCarousel"
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {duplicatedCompanies.map((company, index) => (
@@ -184,7 +191,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce -mb-8">
+      <div id="scrollIndicator" className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce -mb-8">
         <ArrowDown className="h-6 w-6 text-muted-foreground" />
       </div>
     </section>
