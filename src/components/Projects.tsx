@@ -8,6 +8,15 @@ import { AwsRouts, LambdaService } from "@/utils/lambdaService";
 const Projects = () => {
   const projects = [
     {
+      title: "Portfolio Automation Test",
+      description: "Developed an automated E2E test for my personal portfolio using Playwright and TypeScript, ensuring seamless functionality across various devices and browsers.",
+      tags: ["Playwright", "TypeScript", "GitHub Action", "Page Object Model"],
+      type: "Automation",
+      highlight: true,
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/protfolio-automation-report.jpeg",
+      githubUrl: "https://github.com/DvirLevy/protofolio-automation-test"
+    },
+    {
       title: "E2E Automation Framework",
       description: "Architected and implemented comprehensive E2E testing framework using Playwright from scratch at Jifiti. Includes project architecture, test design patterns, and best practices implementation.",
       tags: ["Playwright", "TypeScript", "CI/CD", "Test Automation"],
