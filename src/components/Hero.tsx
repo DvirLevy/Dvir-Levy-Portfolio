@@ -72,11 +72,13 @@ const Hero = () => {
 
           {/* Title */}
           <p id="professionalTitle" className="text-xl sm:text-2xl md:text-3xl text-foreground/90 font-medium">
-            Automation Engineer & Frontend Developer
+            Automation Engineer
           </p>
 
           {/* Description */}
           <p id="description" className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Skilled with Frontend development capabilities in React,Vite and TypeScript,
+            <br className="hidden sm:block" />
             I leverage my development and testing skills by creating tools and scripts that drive efficiency.
             <br className="hidden sm:block" />
             Passionate about designing automation frameworks, CI/CD practices, and data-driven testing.
