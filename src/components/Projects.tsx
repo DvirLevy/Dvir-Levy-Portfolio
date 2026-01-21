@@ -1,18 +1,28 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Alert } from "./ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github, Linkedin } from "lucide-react";
-import { useEffect } from "react";
+import { ExternalLink, FastForward, Github, Linkedin } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { AwsRouts, LambdaService } from "@/utils/lambdaService";
+import { set } from "date-fns";
 
 const Projects = () => {
+
+  const[cooldown,setCooldown] =  useState(false)
+
+  const automationState = useMemo(() => {return cooldown},[cooldown])
+
   const projects = [
     {
       title: "Portfolio Automation Test",
       description: "Developed an automated E2E test for my personal portfolio using Playwright and TypeScript, ensuring seamless functionality across various devices and browsers.",
-      tags: ["Playwright", "TypeScript", "GitHub Action", "Page Object Model"],
+      tags: ["Playwright", "TypeScript", "GitHub Actions", "CI/CD","Page Object Model", "Github Pages", "Docker", "Jenkins"],
       type: "Automation",
       highlight: true,
+      runAutomation: true,
+      report: true,
+      reportUrl : 'https://dvirlevy.github.io/protofolio-automation-test/',
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/protfolio-automation-report.jpeg",
       githubUrl: "https://github.com/DvirLevy/protofolio-automation-test"
     },
@@ -78,6 +88,32 @@ const Projects = () => {
       liveUrl: "https://levys.lovable.app/"
     }
   ];
+
+  const runAutomation = async() => {
+    if(cooldown){
+      console.log("Cooldown active. Please wait before running the test again.");
+    }
+    else{
+      console.log("Running portfolio automation test...");
+      setCooldown(true)
+      await LambdaService.regressionTest()
+      
+        setTimeout(() => {
+          setCooldown(false)
+        }, 60000*10);
+
+      // const interval = setInterval(() => {
+      //   clearInterval(interval);
+      //   setCooldown(false)
+      // }, 6000);
+
+    }
+    
+  }
+
+  const handleDisable = ()=>{
+    
+  }
 
   useEffect(()=>{
   if(!sessionStorage.getItem('analyticsSent')){
@@ -166,7 +202,7 @@ const Projects = () => {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-3 pt-4">
+                  <div className="flex flex-wrap gap-3 pt-4">
                     {project.githubUrl && (
                       <Button
                         variant="outline"
@@ -203,6 +239,33 @@ const Projects = () => {
                         </a>
                       </Button>
                     )}
+                    {project.runAutomation &&  (
+                      <div onClick={runAutomation}>
+                        <Button
+                        size="sm"
+                        // asChild
+                        // onClick={runAutomation}
+                        disabled={cooldown}
+                      >
+                        
+                          Run Portfolio Automation Test
+                        
+                      </Button>
+                      </div>
+                    )}
+                    {project.report && (
+                      <Button
+                        variant="default"
+                        size="sm"
+                        asChild
+                      >
+                        <a href={project.reportUrl} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="mr-2 h-4 w-4" />
+                          Last Run Report
+                        </a>
+                      </Button>
+                    )}
+
                   </div>
                 </div>
               </Card>
