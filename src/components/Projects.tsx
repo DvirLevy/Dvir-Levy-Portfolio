@@ -1,11 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Alert } from "./ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, FastForward, Github, Linkedin } from "lucide-react";
+import { ExternalLink, Github, Linkedin } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { AwsRouts, LambdaService } from "@/utils/lambdaService";
-import { set } from "date-fns";
+
 
 const Projects = () => {
 
@@ -90,8 +89,9 @@ const Projects = () => {
   ];
 
   const runAutomation = async() => {
+    const COOL_DOWN = 60000*20 // 20 minutes
     if(cooldown){
-      console.log("Cooldown active. Please wait before running the test again.");
+      alert("Cooldown active. Please wait before running the test again.");
     }
     else{
       console.log("Running portfolio automation test...");
@@ -100,18 +100,8 @@ const Projects = () => {
       
         setTimeout(() => {
           setCooldown(false)
-        }, 60000*10);
-
-      // const interval = setInterval(() => {
-      //   clearInterval(interval);
-      //   setCooldown(false)
-      // }, 6000);
-
+        }, COOL_DOWN);
     }
-    
-  }
-
-  const handleDisable = ()=>{
     
   }
 
