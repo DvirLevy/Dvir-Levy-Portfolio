@@ -10,8 +10,6 @@ const Projects = () => {
 
   const[cooldown,setCooldown] =  useState(false)
 
-  const automationState = useMemo(() => {return cooldown},[cooldown])
-
   const projects = [
     {
       title: "Portfolio Automation Test",
