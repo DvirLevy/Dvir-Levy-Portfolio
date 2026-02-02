@@ -20,5 +20,6 @@ This project is built with:
 - All assets are stored in AWS Buckets
 
 ## CI/CD
-This website is deployed by Netlify, on every approved full request the merged to the main brach
-Netlify run "npm run build" and then deploy the new build that create from the 'dist' folder
+This website is deployed on Netlify.
+Once a pull request is approved and merged into the main branch,
+an automated CI/CD pipeline runs npm run build and deploys the output from the dist directory.
