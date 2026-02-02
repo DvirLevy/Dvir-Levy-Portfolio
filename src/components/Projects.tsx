@@ -12,9 +12,12 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "Portfolio Automation Test",
-      description: "Developed an automated E2E test for my personal portfolio using Playwright and TypeScript, ensuring seamless functionality across various devices and browsers.",
-      tags: ["Playwright", "TypeScript", "GitHub Actions", "CI/CD","Page Object Model", "Github Pages", "Docker", "Jenkins"],
+      title: "Cloud-Driven E2E Automation System",
+      description: `Architected & Developed a Cloud-Driven E2E Automation System using Playwright and TypeScript, 
+                    exposed via AWS API Gateway and Lambda to trigger GitHub Actions workflows. 
+                    Each execution runs cross-browser tests, publishes Playwright reports to GitHub Pages, 
+                    and sends automated email notifications — simulating a real-world CI/CD testing platform.`,
+      tags: ["Playwright", "TypeScript", "GitHub Actions", "CI/CD","Page Object Model", "Github Pages", "Docker", "Jenkins", "Kubernetes"],
       type: "Automation",
       highlight: true,
       runAutomation: true,
@@ -26,7 +29,7 @@ const Projects = () => {
     {
       title: "E2E Automation Framework",
       description: "Architected and implemented comprehensive E2E testing framework using Playwright from scratch at Jifiti. Includes project architecture, test design patterns, and best practices implementation.",
-      tags: ["Playwright", "TypeScript", "CI/CD", "Test Automation"],
+      tags: ["Playwright", "TypeScript", "CI/CD", "Test Automation", "Azure DevOps"],
       type: "Automation",
       highlight: true,
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/e2e-automation.jpg",
@@ -35,7 +38,7 @@ const Projects = () => {
     {
       title: "Live Logs Fetching Tool",
       description: "Develop a streamlined tool at Moovit for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and QA testing time.",
-      tags: ["AWS", "Node.js", "EC2 Servers", "Monitoring"],
+      tags: ["AWS", "Node.js", "EC2 Servers", "Monitoring","Electron","React","MUI", "Vite"],
       type: "Development",
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/live-logs.jpg",
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Puttier",
@@ -44,7 +47,7 @@ const Projects = () => {
     {
       title: "SQL Analytics Platform",
       description: "Developed a powerful SQL analytics tool at Moovit capable of rendering 100K+ data rows with support for multiple database platforms including Redshift, BigQuery, PostgreSQL, and more.",
-      tags: ["SQL", "React", "Node.js", "BigQuery", "Redshift"],
+      tags: ["SQL", "React","Vite" ,"Node.js", "Redshift","Electron","React","MUI"],
       type: "Development",
       highlight: true,
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/sql-analytics.jpg",
@@ -53,7 +56,7 @@ const Projects = () => {
     {
       title: "Data Fetcher",
       description: "Develop a tool that queries the database and retrieves user-specific data based on the provided environment and user ID.",
-      tags: ["JavaScript", "React", "Electorn","Vite"],
+      tags: ["JavaScript", "React", "Electorn","Vite","Electron","React","MUI"],
       type: "Development",
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/analytics-config.jpg",
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/UserId"
@@ -61,7 +64,7 @@ const Projects = () => {
     {
       title: "Performance Testing Suite",
       description: "Designed and executed comprehensive performance testing at Jifiti using JMeter with Coralogix integration for Pod monitoring and trace analysis.",
-      tags: ["JMeter", "Coralogix", "Performance", "Azure"],
+      tags: ["JMeter", "Coralogix", "Performance", "Azure DevOps"],
       type: "Automation",
       highlight: true,
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/performance-testing.jpg",
@@ -70,7 +73,7 @@ const Projects = () => {
     {
       title: "Progressive Web App",
       description: "Volunteered as frontend developer for Code for Israel, implementing design systems with MUI, creating responsive React components from Figma designs, and managing full development cycle.",
-      tags: ["React", "Material-UI", "Vite", "PWA"],
+      tags: ["React", "Material-UI", "Vite", "PWA", "Figma"],
       type: "Development",
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/pwa.jpg",
       githubUrl: "https://github.com/Code-For-Israel/reuth-fe"
@@ -78,7 +81,7 @@ const Projects = () => {
     {
       title: "Housewarming Invitation",
       description: "Designed and developed an elegant digital invitation platform for a housewarming celebration. Features interactive RSVP functionality, responsive design, and a beautiful user experience.",
-      tags: ["React", "Lovable", "UI/UX", "Frontend"],
+      tags: ["React", "Lovable", "Vite", "Frontend"],
       type: "Development",
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/housewarming.jpg",
       githubUrl: "https://github.com/DvirLevy/levys",
@@ -134,7 +137,7 @@ const Projects = () => {
               <Card 
                 key={index}
                 className={`overflow-hidden card-hover bg-card/50 backdrop-blur-sm ${
-                  project.highlight ? 'border-primary/50 border-2 shadow-glow' : 'border-2'
+                  project.highlight ? 'border-primary/50 border-2 shadow-glow ' : 'border-2'
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
