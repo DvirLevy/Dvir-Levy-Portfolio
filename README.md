@@ -15,6 +15,14 @@ This project is built with:
 - Tailwind CSS
 - Lovable AI
 
+## What Automated Testing is used for this project?
+
+• Fully automated, cloud-triggered E2E validation  
+• Cross-browser coverage (Chromium, Firefox, WebKit)  
+• CI-driven execution with real reporting and notifications  
+
+Architected and developed...
+
 ## What Cloud technologies are used for this project?
 - AWS Lambda, for sending the "Get in touch" emails
 - All assets are stored in AWS Buckets
