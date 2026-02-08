@@ -66,23 +66,21 @@ const About = () => {
               <h3 className="text-2xl sm:text-3xl font-bold">Professional Background</h3>
               <div className="space-y-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
                 <p className="whitespace-pre-line">
-                  <span className="font-bold">Senior QA Automation Engineer</span>, specializing in building scalable, 
-                  reliable and data-driven automation systems.
-                  I focus on creating solutions that simplify testing, improve product quality, and integrate smoothly into modern CI/CD and cloud environments.<br/>
+                  <span className="font-bold">Senior Automation Engineer</span>, with hands-on experience designing and
+                  developing end-to-end automation frameworks and internal tools. Strong background in building automation solutions that include frontend components using React and TypeScript, alongside cloud-based
+                  implementations on AWS. Experienced in integrating automation with backend services, CI/CD pipelines, and infrastructure-driven workflows in production environments.<br/>
                   </p>
                   <p className="whitespace-pre-line">
-                  In my current role at<span className="font-bold"> Jifiti</span>, I design automation using Playwright, and Oxygen (a Selenium based framework), develop infrastructure improvements, develop DB scripts for CRUD procedure and validation.
-                  Develop performance testing, and monitoring. I enjoy working on systems that combine automation, cloud, and data, work closely with the Devops team.<br/>
+                  In my current role at<span className="font-bold"> Jifiti</span>, I work closely with Frontend, Backend, and DevOps teams to support and validate complex web-based flows within a SaaS ecosystem. My responsibilities include developing automation and infrastructure improvements, integrating solutions into CI/CD pipelines,
+                  and collaborating across teams to ensure high-quality,
+                  production-ready systems.<br/>
                   </p>
                   <p className="whitespace-pre-line">
-                  Previously at <span className="font-bold">Moovit</span>, I developed internal tools, Develop a streamlined tool for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and QA testing time. Develop SQL analytics platform capable of processing 100K+ records and renders it to the user’s screen, a solutions that support large-scale analytics workflows and can be connected to deferent data services such as Redshift, BigQuery, Postgres, etc.
+                  Previously at <span className="font-bold">Moovit</span>, I was promoted from senior QA Engineer to Full Stack Tools Developer, where I designed and developed internal tools used daily by engineering teams. I built Electron-based applications with React and Vite frontends, integrated with Node.js and Express backends, and developed data-intensive dashboards capable of rendering 100K+ records efficiently. These tools supported large-scale analytics workflows and integrated with multiple data services such as Redshift, BigQuery, and PostgreSQL.
                   </p>
                   <p className="whitespace-pre-line">
                   My time at <span className="font-bold">ironSource</span> strengthened my API testing, debugging, and AWS skills, while also giving me exposure to performance analysis and traffic inspection tools.
                   </p>
-                  <p className="whitespace-pre-line">
-                  What drives me is solving real engineering problems with clean, maintainable code. I enjoy building tools teams actually use - solutions that remove friction, automate processes, improve workflow speed, and scale with the product. I'm constantly experimenting with new technologies, automation patterns, and architectural approaches to deliver smarter, more efficient testing systems.
-                </p>
               </div>
             </div>
           </Card>

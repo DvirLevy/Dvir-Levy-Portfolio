@@ -16,17 +16,17 @@ const Skills = () => {
     {
       title: "Development & Frameworks",
       icon: "⚛️",
-      skills: ["React", "TypeScript", "JavaScript", "Node.js", "Express.js", "Vite", "Redux", "Material-UI","Figma"]
+      skills: ["React", "TypeScript", "JavaScript", "Node.js", "Express.js", "Vite", "Redux", "Material-UI","Figma", "Micro Services", "Electron"]
     },
     {
       title: "Cloud & DevOps",
       icon: "☁️",
-      skills: ["Azure", "CloudBeat", "AWS-S3","AWS-Buckets","AWS-Lambda", "CI/CD", "GitHub Actions", "VMware", "Git","SourceTree"]
+      skills: ["Azure DevOps", "CloudBeat", "AWS-S3","AWS-Buckets","AWS-Lambda", "CI/CD", "GitHub Actions", "VMware", "Git","SourceTree", "RabbitMQ", "Docker", "Kubernetes"]
     },
     {
       title: "Databases & Analytics",
       icon: "🗄️",
-      skills: ["SQL", "MySQL", "MongoDB", "Oracle", "Redshift", "BigQuery", "SSMS"]
+      skills: ["SQL", "MySQL", "MongoDB", "Oracle", "Redshift", "BigQuery", "SSMS","Oracle"]
     }
   ];
 

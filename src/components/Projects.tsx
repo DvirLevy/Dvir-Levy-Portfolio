@@ -11,7 +11,8 @@ const Projects = () => {
   const[cooldown,setCooldown] =  useState(false)
 
   const projects = [
-    {
+    { 
+      id: "cloudDrivenAuthomation",
       title: "Cloud-Driven E2E Automation System",
       description: `Architected & Developed a Cloud-Driven E2E Automation System using Playwright and TypeScript, 
                     exposed via AWS API Gateway and Lambda to trigger GitHub Actions workflows. 
@@ -27,6 +28,7 @@ const Projects = () => {
       githubUrl: "https://github.com/DvirLevy/protofolio-automation-test"
     },
     {
+      id: " e2eAutomation",
       title: "E2E Automation Framework",
       description: "Architected and implemented comprehensive E2E testing framework using Playwright from scratch at Jifiti. Includes project architecture, test design patterns, and best practices implementation.",
       tags: ["Playwright", "TypeScript", "CI/CD", "Test Automation", "Azure DevOps"],
@@ -36,6 +38,7 @@ const Projects = () => {
       githubUrl: null
     },
     {
+      id:"ec2Logger",
       title: "Live Logs Fetching Tool",
       description: "Develop a streamlined tool at Moovit for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and QA testing time.",
       tags: ["AWS", "Node.js", "EC2 Servers", "Monitoring","Electron","React","MUI", "Vite"],
@@ -45,6 +48,7 @@ const Projects = () => {
       linkedinPost: "https://www.linkedin.com/feed/update/urn:li:activity:7185871122930749441/"
     },
     {
+      id:"sqlAnalytics",
       title: "SQL Analytics Platform",
       description: "Developed a powerful SQL analytics tool at Moovit capable of rendering 100K+ data rows with support for multiple database platforms including Redshift, BigQuery, PostgreSQL, and more.",
       tags: ["SQL", "React","Vite" ,"Node.js", "Redshift","Electron","React","MUI"],
@@ -54,6 +58,7 @@ const Projects = () => {
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Analytics"
     },
     {
+      id: "dataFetcher",
       title: "Data Fetcher",
       description: "Develop a tool that queries the database and retrieves user-specific data based on the provided environment and user ID.",
       tags: ["JavaScript", "React", "Electorn","Vite","Electron","React","MUI"],
@@ -62,6 +67,7 @@ const Projects = () => {
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/UserId"
     },
     {
+      id: "preformance",
       title: "Performance Testing Suite",
       description: "Designed and executed comprehensive performance testing at Jifiti using JMeter with Coralogix integration for Pod monitoring and trace analysis.",
       tags: ["JMeter", "Coralogix", "Performance", "Azure DevOps"],
@@ -71,6 +77,7 @@ const Projects = () => {
       githubUrl: null
     },
     {
+      id:"cfi",
       title: "Progressive Web App",
       description: "Volunteered as frontend developer for Code for Israel, implementing design systems with MUI, creating responsive React components from Figma designs, and managing full development cycle.",
       tags: ["React", "Material-UI", "Vite", "PWA", "Figma"],
@@ -79,6 +86,7 @@ const Projects = () => {
       githubUrl: "https://github.com/Code-For-Israel/reuth-fe"
     },
     {
+      id:"invitation",
       title: "Housewarming Invitation",
       description: "Designed and developed an elegant digital invitation platform for a housewarming celebration. Features interactive RSVP functionality, responsive design, and a beautiful user experience.",
       tags: ["React", "Lovable", "Vite", "Frontend"],
@@ -123,18 +131,19 @@ const Projects = () => {
         <div className="max-w-6xl mx-auto space-y-12">
           {/* Section Header */}
           <div className="text-center space-y-4 animate-fade-in">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+            <h2 id="projects-title" className="text-3xl sm:text-4xl md:text-5xl font-bold">
               Projects
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p id="projects-subtitle" className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
               Tools, frameworks, and applications I've built
             </p>
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+          <div id="project-cards" className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
             {projects.map((project, index) => (
-              <Card 
+              <Card
+                id={`${project.id}`} 
                 key={index}
                 className={`overflow-hidden card-hover bg-card/50 backdrop-blur-sm ${
                   project.highlight ? 'border-primary/50 border-2 shadow-glow ' : 'border-2'
@@ -170,12 +179,12 @@ const Projects = () => {
                   </div>
 
                   {/* Project Title */}
-                  <h3 className="text-xl sm:text-2xl font-semibold leading-tight">
+                  <h3 className="card-title text-xl sm:text-2xl font-semibold leading-tight">
                     {project.title}
                   </h3>
 
                   {/* Project Description */}
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="card-description text-muted-foreground leading-relaxed">
                     {project.description}
                   </p>
 
@@ -193,7 +202,7 @@ const Projects = () => {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-wrap gap-3 pt-4">
+                  <div className="card-link-ref flex flex-wrap gap-3 pt-4">
                     {project.githubUrl && (
                       <Button
                         variant="outline"
