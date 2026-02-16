@@ -279,7 +279,7 @@ const Projects = () => {
               variant="outline"
               asChild
             >
-              <a href="https://github.com/DvirLevy" target="_blank" rel="noopener noreferrer">
+              <a id="gitHubLinkProj" href="https://github.com/DvirLevy" target="_blank" rel="noopener noreferrer">
                 <Github className="mr-2 h-5 w-5" />
                 View More on GitHub
               </a>
