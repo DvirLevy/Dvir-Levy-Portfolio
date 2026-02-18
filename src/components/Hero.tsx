@@ -38,7 +38,7 @@ const Hero = () => {
       awsRoute: AwsRouts.DOWNLOAD,
       eventName: "download",
       date: new Date().toString()})
-    const url = 'https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Resume.pdf'
+    const url = 'https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/DvirLevyAutomationEngineer.pdf'
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 
