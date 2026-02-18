@@ -67,19 +67,32 @@ const About = () => {
               <div className="space-y-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
                 <p className="whitespace-pre-line">
                   <span className="font-bold">Senior Automation Engineer</span>, with hands-on experience designing and
-                  developing end-to-end automation frameworks and internal tools. Strong background in building automation solutions that include frontend components using React and TypeScript, alongside cloud-based
-                  implementations on AWS. Experienced in integrating automation with backend services, CI/CD pipelines, and infrastructure-driven workflows in production environments.<br/>
+                  developing end-to-end automation frameworks and internal tools. 
+                  Strong background in building automation solutions that include frontend components using React and TypeScript, alongside cloud-based
+                  implementations on AWS. Experienced in integrating automation with backend services, CI/CD pipelines,
+                  and infrastructure-driven workflows in production environments.<br/>
                   </p>
                   <p className="whitespace-pre-line">
-                  In my current role at<span className="font-bold"> Jifiti</span>, I work closely with Frontend, Backend, and DevOps teams to support and validate complex web-based flows within a SaaS ecosystem. My responsibilities include developing automation and infrastructure improvements, integrating solutions into CI/CD pipelines,
+                  <p className="whitespace-pre-line"> In my current role at<span className="font-bold"> Jifiti, as a Senior Automation Engineer</span>,</p>
+                  <p className="whitespace-pre-line"> work closely with Frontend, Backend,
+                  and DevOps teams to support and validate complex web-based flows
+                  within a SaaS ecosystem. My responsibilities include developing automation and infrastructure improvements,
+                  integrating solutions into CI/CD pipelines,
                   and collaborating across teams to ensure high-quality,
                   production-ready systems.<br/>
+                  </p></p>
+                  <p className="whitespace-pre-line">
+                  Previously at <span className="font-bold">Moovit, as a senior QA Automation Engineer</span>,
+                  <p className="whitespace-pre-line">I was promoted to Tools Developer, where I designed and developed API test with Playwright and develop
+                  internal tools used daily by engineering teams.
+                  I built Electron-based applications with React and Vite frontends, 
+                  integrated with Node.js and Express backends, and developed data-intensive dashboards capable of rendering 100K+ records efficiently.
+                  These tools supported large-scale analytics workflows and integrated with multiple data services such as Redshift, BigQuery, and PostgreSQL.</p>
                   </p>
                   <p className="whitespace-pre-line">
-                  Previously at <span className="font-bold">Moovit</span>, I was promoted from senior QA Engineer to Full Stack Tools Developer, where I designed and developed internal tools used daily by engineering teams. I built Electron-based applications with React and Vite frontends, integrated with Node.js and Express backends, and developed data-intensive dashboards capable of rendering 100K+ records efficiently. These tools supported large-scale analytics workflows and integrated with multiple data services such as Redshift, BigQuery, and PostgreSQL.
-                  </p>
-                  <p className="whitespace-pre-line">
-                  My time at <span className="font-bold">ironSource</span> strengthened my API testing, debugging, and AWS skills, while also giving me exposure to performance analysis and traffic inspection tools.
+                  My time at <span className="font-bold">ironSource as a QA Automation Engineer</span>,
+                  <p className="whitespace-pre-line"> strengthened my API testing, UI Automation within the browser context,
+                  debugging, and AWS skills, while also giving me exposure to performance analysis and traffic inspection tools.</p>
                   </p>
               </div>
             </div>
