@@ -18,7 +18,7 @@ const Projects = () => {
                     exposed via AWS API Gateway and Lambda to trigger GitHub Actions workflows. 
                     Each execution runs cross-browser tests, publishes Playwright reports to GitHub Pages, 
                     and sends automated email notifications — simulating a real-world CI/CD testing platform.`,
-      tags: ["Playwright", "TypeScript", "GitHub Actions", "CI/CD","Page Object Model", "Github Pages", "Docker", "Jenkins", "Kubernetes"],
+      tags: ["Playwright","MCP", "TypeScript", "GitHub Actions", "CI/CD","Page Object Model", "Github Pages", "Docker", "Jenkins", "Kubernetes"],
       type: "Automation",
       highlight: true,
       runAutomation: true,
