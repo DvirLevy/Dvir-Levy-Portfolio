@@ -129,7 +129,7 @@ const Projects = () => {
     }
     else{
       console.log("Running portfolio automation test...");
-      // await LambdaService.regressionTest(repo)
+      await LambdaService.regressionTest(repo)
       setCooldown((prev) => ({
       ...prev,
       [repo]: true,
