@@ -54,15 +54,16 @@ export class LambdaService{
       }
   }
 
-  static async regressionTest(){
+  static async regressionTest(repo:string){
     try {
+        
         const res = await fetch(`${import.meta.env.VITE_AUTHOMATION_URL_TRIGER}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             "x-api-key": `${import.meta.env.VITE_API_KEY_REGRESSION}`
           },
-          // body: JSON.stringify(),
+          body: JSON.stringify({repo}),
         });
     
         if (!res.ok) {

@@ -2,15 +2,38 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Linkedin } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import {useEffect, useState } from "react";
 import { AwsRouts, LambdaService } from "@/utils/lambdaService";
 
 
 const Projects = () => {
 
-  const[cooldown,setCooldown] =  useState(false)
+  const[cooldownFOF,setCooldownFOF] =  useState(false)
+  const[cooldownPortfolio,setCooldownPortfolio] =  useState(false)
+
+  const [cooldown,setCooldown] = useState({
+      fof : false,
+      cloudDrivenAuthomation : false
+    })
 
   const projects = [
+    {
+      id:"fof",
+      title: "API Automation - Fish of Fortune Game",
+      description: `Develop an automated API testing for MicroServie Backend framework.
+        A Lambda-triggered workflow executes Playwright tests,
+        publishes reports to GitHub Pages, and sends execution notifications.`,
+      tags: ["Playwright", "TypeScript", "CI/CD", "API Automation","Newman", "AWS-Lambda", "Kuberneties", "Node.js", "GitHub Pages"],
+      type: "Automation",
+      highlight: true,
+      runAutomation: true,
+      report: true,
+      runBtnText:'Run Fish of Fortune Automation Test',
+      reportUrl : 'https://dvirlevy.github.io/whalo-api-automtation-assignment/',
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/FOF-image2.PNG",
+      githubUrl: "https://github.com/DvirLevy/whalo-api-automtation-assignment",
+      whaloLogo: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/whalo-logo.png"
+    },
     { 
       id: "cloudDrivenAuthomation",
       title: "Cloud-Driven E2E Automation System",
@@ -23,6 +46,7 @@ const Projects = () => {
       highlight: true,
       runAutomation: true,
       report: true,
+      runBtnText: 'Run Portfolio Automation Test',
       reportUrl : 'https://dvirlevy.github.io/protofolio-automation-test/',
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/protfolio-automation-report.jpeg",
       githubUrl: "https://github.com/DvirLevy/protofolio-automation-test"
@@ -97,19 +121,26 @@ const Projects = () => {
     }
   ];
 
-  const runAutomation = async() => {
+  const runAutomation = async(event: React.MouseEvent<HTMLButtonElement>) => {
     const COOL_DOWN = 60000*20 // 20 minutes
-    if(cooldown){
+    const repo = event.currentTarget.value
+    if(cooldown[repo]){
       alert("Cooldown active. Please wait before running the test again.");
     }
     else{
       console.log("Running portfolio automation test...");
-      setCooldown(true)
-      await LambdaService.regressionTest()
+      // await LambdaService.regressionTest(repo)
+      setCooldown((prev) => ({
+      ...prev,
+      [repo]: true,
+    }));
       
-        setTimeout(() => {
-          setCooldown(false)
-        }, COOL_DOWN);
+      setTimeout(() => {
+        setCooldown((prev) => ({
+          ...prev,
+          [repo]: false,
+        }));
+      }, COOL_DOWN);
     }
     
   }
@@ -240,18 +271,20 @@ const Projects = () => {
                       </Button>
                     )}
                     {project.runAutomation &&  (
-                      <div onClick={runAutomation}>
+                      // <div> 
                         <Button
+                        value={project.id}
+                        onClick={runAutomation}
                         size="sm"
                         // asChild
                         // onClick={runAutomation}
-                        disabled={cooldown}
+                        disabled={cooldown[project.id]}
                       >
                         
-                          Run Portfolio Automation Test
+                          {project.runBtnText}
                         
                       </Button>
-                      </div>
+                      // </div>
                     )}
                     {project.report && (
                       <Button
@@ -265,7 +298,6 @@ const Projects = () => {
                         </a>
                       </Button>
                     )}
-
                   </div>
                 </div>
               </Card>
