@@ -4,12 +4,12 @@ import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Linkedin } from "lucide-react";
 import {useEffect, useState } from "react";
 import { AwsRouts, LambdaService } from "@/utils/lambdaService";
+import PopupAutomationRunner from "./PopupAutomationRunner";
 
 
 const Projects = () => {
-
-  const[cooldownFOF,setCooldownFOF] =  useState(false)
-  const[cooldownPortfolio,setCooldownPortfolio] =  useState(false)
+  const[openDialg, setOpenDialg] = useState(false)
+  const [repo, setRepo] = useState('')
 
   const [cooldown,setCooldown] = useState({
       fof : false,
@@ -26,8 +26,8 @@ const Projects = () => {
       tags: ["Playwright", "TypeScript", "CI/CD", "API Automation","Newman", "AWS-Lambda", "Kuberneties", "Node.js", "GitHub Pages"],
       type: "Automation",
       highlight: true,
-      runAutomation: true,
-      report: true,
+      runAutomation: false,
+      report: false,
       runBtnText:'Run Fish of Fortune Automation Test',
       reportUrl : 'https://dvirlevy.github.io/whalo-api-automtation-assignment/',
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/FOF-image2.PNG",
@@ -121,27 +121,37 @@ const Projects = () => {
     }
   ];
 
-  const runAutomation = async(event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDisableBtn = (repo:string)=>{
     const COOL_DOWN = 60000*20 // 20 minutes
-    const repo = event.currentTarget.value
-    if(cooldown[repo]){
-      alert("Cooldown active. Please wait before running the test again.");
-    }
-    else{
-      console.log("Running portfolio automation test...");
-      await LambdaService.regressionTest(repo)
-      setCooldown((prev) => ({
+    //disabling the button
+    setCooldown(prev=>({
       ...prev,
-      [repo]: true,
-    }));
-      
-      setTimeout(() => {
+      [repo]:true
+    }))
+
+    //enabling the button after 20min
+    setTimeout(() => {
         setCooldown((prev) => ({
           ...prev,
           [repo]: false,
         }));
       }, COOL_DOWN);
-    }
+
+  }
+
+  const runAutomation = async(event: React.MouseEvent<HTMLButtonElement>) => {
+    // const COOL_DOWN = 60000*20 // 20 minutes
+    const repo = event.currentTarget.value
+    setRepo(repo)
+    // if(cooldown[repo]){
+    //   alert("Cooldown active. Please wait before running the test again.");
+    // }
+    // else{
+      setOpenDialg(true)
+      // await LambdaService.regressionTest(repo)
+      
+      
+    // }
     
   }
 
@@ -157,6 +167,7 @@ const Projects = () => {
   },[])
 
   return (
+    <>
     <section className="py-20 sm:py-24 md:py-32 bg-muted/30" id="projects">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto space-y-12">
@@ -273,6 +284,7 @@ const Projects = () => {
                     {project.runAutomation &&  (
                       // <div> 
                         <Button
+                        
                         value={project.id}
                         onClick={runAutomation}
                         size="sm"
@@ -320,6 +332,8 @@ const Projects = () => {
         </div>
       </div>
     </section>
+    {openDialg ? <PopupAutomationRunner coolDown={cooldown} repo={repo} handleDisableBtn={handleDisableBtn} /> : null}
+    </>
   );
 };
 
