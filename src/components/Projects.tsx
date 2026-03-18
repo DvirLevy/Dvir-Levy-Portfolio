@@ -17,23 +17,6 @@ const Projects = () => {
     })
 
   const projects = [
-    {
-      id:"fof",
-      title: "API Automation - Fish of Fortune Game",
-      description: `Develop an automated API testing for MicroServie Backend framework.
-        A Lambda-triggered workflow executes Playwright tests,
-        publishes reports to GitHub Pages, and sends execution notifications.`,
-      tags: ["Playwright", "TypeScript", "CI/CD", "API Automation","Newman", "AWS-Lambda", "Kuberneties", "Node.js", "GitHub Pages"],
-      type: "Automation",
-      highlight: true,
-      runAutomation: false,
-      report: false,
-      runBtnText:'Run Fish of Fortune Automation Test',
-      reportUrl : 'https://dvirlevy.github.io/whalo-api-automtation-assignment/',
-      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/FOF-image2.PNG",
-      githubUrl: "https://github.com/DvirLevy/whalo-api-automtation-assignment",
-      whaloLogo: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/whalo-logo.png"
-    },
     { 
       id: "cloudDrivenAuthomation",
       title: "Cloud-Driven E2E Automation System",
@@ -50,6 +33,23 @@ const Projects = () => {
       reportUrl : 'https://dvirlevy.github.io/protofolio-automation-test/',
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/protfolio-automation-report.jpeg",
       githubUrl: "https://github.com/DvirLevy/protofolio-automation-test"
+    },
+    {
+      id:"fof",
+      title: "API Automation - Fish of Fortune Game",
+      description: `Develop an automated API testing for MicroServie Backend framework.
+        A Lambda-triggered workflow executes Playwright tests,
+        publishes reports to GitHub Pages, and sends execution notifications.`,
+      tags: ["Playwright", "TypeScript", "CI/CD", "API Automation","Newman", "AWS-Lambda", "Kuberneties", "Node.js", "GitHub Pages"],
+      type: "Automation",
+      highlight: true,
+      runAutomation: false,
+      report: false,
+      runBtnText:'Run Fish of Fortune Automation Test',
+      reportUrl : 'https://dvirlevy.github.io/whalo-api-automtation-assignment/',
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/FOF-image2.PNG",
+      githubUrl: "https://github.com/DvirLevy/whalo-api-automtation-assignment",
+      whaloLogo: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/whalo-logo.png"
     },
     {
       id: " e2eAutomation",
