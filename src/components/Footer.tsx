@@ -20,7 +20,7 @@ const Footer = () => {
             <div id="aboutMeFooter" className="space-y-4">
               <h3 id='aboutMeName' className="text-lg font-semibold">Dvir Levy</h3>
               <p id="aboutMeText" className="text-sm text-muted-foreground leading-relaxed">
-                Automation Engineer & Tools Developer.
+                Senior Automation Engineer
                 Specializing in test automation and performance testing.
               </p>
             </div>
