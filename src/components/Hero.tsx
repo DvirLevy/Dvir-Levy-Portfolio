@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, MessageCircleQuestion } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -85,10 +85,19 @@ const Hero = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 w-full max-w-3xl mx-auto">
             <Button 
               size="lg" 
-              className="w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-lg hover:shadow-glow transition-all"
+              className="w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-[0_0_20px_rgba(79,70,229,0.5)] hover:shadow-[0_0_30px_rgba(79,70,229,0.7)] transition-all bg-indigo-600 hover:bg-indigo-500 font-bold"
+              onClick={() => window.dispatchEvent(new Event("open-portfolio-bot"))}
+            >
+              <MessageCircleQuestion className="mr-2 h-5 w-5" />
+              Ask My AI Assistant!
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-lg transition-all"
               onClick={scrollToProjects}
               id="viewProjectsBtn"
             >

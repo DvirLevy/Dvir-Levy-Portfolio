@@ -1,5 +1,7 @@
 import { Card } from "@/components/ui/card";
-import { Code2, Workflow, Zap, TestTube } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Github, Linkedin, Mail, MessageCircleQuestion, Code2, Workflow, Zap, TestTube } from "lucide-react";
 
 const About = () => {
   const highlights = [
@@ -70,30 +72,33 @@ const About = () => {
                   developing end-to-end automation frameworks and internal tools. 
                   Strong background in building automation solutions that include frontend components using React and TypeScript, alongside cloud-based
                   implementations on AWS. Experienced in integrating automation with backend services, CI/CD pipelines,
-                  and infrastructure-driven workflows in production environments.<br/>
+                  and infrastructure-driven workflows in production environments.
                   </p>
-                  <p className="whitespace-pre-line">
-                  <p className="whitespace-pre-line"> In my current role at<span className="font-bold"> Jifiti, as a Senior Automation Engineer</span>,</p>
-                  <p className="whitespace-pre-line"> work closely with Frontend, Backend,
-                  and DevOps teams to support and validate complex web-based flows
-                  within a SaaS ecosystem. My responsibilities include developing automation and infrastructure improvements,
-                  integrating solutions into CI/CD pipelines,
-                  and collaborating across teams to ensure high-quality,
-                  production-ready systems.<br/>
-                  </p></p>
-                  <p className="whitespace-pre-line">
-                  Previously at <span className="font-bold">Moovit, as a senior QA Automation Engineer</span>,
-                  <p className="whitespace-pre-line">I was promoted to Tools Developer, where I designed and developed API test with Playwright and develop
-                  internal tools used daily by engineering teams.
-                  I built Electron-based applications with React and Vite frontends, 
-                  integrated with Node.js and Express backends, and developed data-intensive dashboards capable of rendering 100K+ records efficiently.
-                  These tools supported large-scale analytics workflows and integrated with multiple data services such as Redshift, BigQuery, and PostgreSQL.</p>
-                  </p>
-                  <p className="whitespace-pre-line">
-                  My time at <span className="font-bold">ironSource as a QA Automation Engineer</span>,
-                  <p className="whitespace-pre-line"> strengthened my API testing, UI Automation within the browser context,
-                  debugging, and AWS skills, while also giving me exposure to performance analysis and traffic inspection tools.</p>
-                  </p>
+                  
+                  <div className="whitespace-pre-line">
+                    In my current role at<span className="font-bold"> Jifiti, as a Senior Automation Engineer</span>,
+                    I work closely with Frontend, Backend,
+                    and DevOps teams to support and validate complex web-based flows
+                    within a SaaS ecosystem. My responsibilities include developing automation and infrastructure improvements,
+                    integrating solutions into CI/CD pipelines,
+                    and collaborating across teams to ensure high-quality,
+                    production-ready systems.
+                  </div>
+                  
+                  <div className="whitespace-pre-line">
+                    Previously at <span className="font-bold">Moovit, as a senior QA Automation Engineer</span>,
+                    I was promoted to Tools Developer, where I designed and developed API test with Playwright and develop
+                    internal tools used daily by engineering teams.
+                    I built Electron-based applications with React and Vite frontends, 
+                    integrated with Node.js and Express backends, and developed data-intensive dashboards capable of rendering 100K+ records efficiently.
+                    These tools supported large-scale analytics workflows and integrated with multiple data services such as Redshift, BigQuery, and PostgreSQL.
+                  </div>
+                  
+                  <div className="whitespace-pre-line">
+                    My time at <span className="font-bold">ironSource as a QA Automation Engineer</span>,
+                    strengthened my API testing, UI Automation within the browser context,
+                    debugging, and AWS skills, while also giving me exposure to performance analysis and traffic inspection tools.
+                  </div>
               </div>
             </div>
           </Card>
