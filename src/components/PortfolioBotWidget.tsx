@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Mic, X, MessageCircleQuestion } from "lucide-react";
 import { useBotService } from "@/botService";
@@ -39,6 +39,10 @@ export const PortfolioBotWidget = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-md flex flex-col items-center justify-center p-8 bg-zinc-950/90 backdrop-blur-xl border-zinc-800 text-white rounded-2xl shadow-2xl">
+        <DialogTitle className="sr-only">AI Portfolio Assistant</DialogTitle>
+        <DialogDescription className="sr-only">
+          Interact with Dvir's AI avatar to learn more about his work and experience.
+        </DialogDescription>
 
         {/* Modern Interactive Video Container */}
         <div
@@ -65,6 +69,10 @@ export const PortfolioBotWidget = () => {
             playsInline
             muted
             onPlaying={() => setVideoStarted(true)}
+            onPlay={() => console.log("D-ID Video: Playing")}
+            onPause={() => console.log("D-ID Video: Paused")}
+            onEnded={() => console.log("D-ID Video: Ended")}
+            onError={(e) => console.error("D-ID Video Error:", e)}
           />
 
           {isConnecting && (
