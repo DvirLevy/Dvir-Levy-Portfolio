@@ -5,7 +5,6 @@ import { DAL } from "../utils/DAL";
 
 export const useBotService = (isOpen: boolean) => {
   const [isThinking, setIsThinking] = useState(false);
-  const hasAskedInitQuestion = useRef(false);
 
   const {
     videoRef,
@@ -32,8 +31,9 @@ export const useBotService = (isOpen: boolean) => {
 
     setIsThinking(true);
 
-    // Ensure video is playing and unmuted if needed
+    // Aggressively ensure video is unmuted and playing
     if (videoRef.current) {
+      videoRef.current.muted = false;
       if (videoRef.current.paused) {
         videoRef.current.play().catch(() => {
           if (videoRef.current) {
@@ -41,13 +41,6 @@ export const useBotService = (isOpen: boolean) => {
             videoRef.current.play().catch(() => {});
           }
         });
-      }
-      if (videoRef.current.muted) {
-        videoRef.current.muted = false;
-        if (videoRef.current.paused) {
-          videoRef.current.muted = true;
-          videoRef.current.play().catch(() => {});
-        }
       }
     }
 
@@ -65,17 +58,29 @@ export const useBotService = (isOpen: boolean) => {
           // Show video when avatar starts talking
           setVideoStarted(true);
 
-          // Wait for duration + 1s before hiding video
-          const duration = didData.duration || 5; // Default 5s if duration missing
+          // Wait for duration + 5s (generous buffer) before hiding video
+          const wordCount = data.reply.split(/\s+/).length;
+          const estimatedDuration = Math.max(wordCount / 2.3, 5); // ~140 words per minute
+          const duration = didData.duration || estimatedDuration; 
+          
+          console.log(`D-ID Talk. Duration: ${duration}s (EST: ${estimatedDuration.toFixed(1)}s). Buffer: 10s`);
+          
           stopVideoTimeoutRef.current = setTimeout(() => {
             setVideoStarted(false);
             stopVideoTimeoutRef.current = null;
-          }, (duration * 1000) + 1000);
+          }, (duration * 1000) + 10000);
 
         } else if (didData.kind === "SessionError" || !didRes.ok) {
+          console.warn("D-ID Talk failed, using fallback voice.");
           // Fallback to browser speech if D-ID fails or session error
           const utterance = new SpeechSynthesisUtterance(data.reply);
           utterance.lang = detectedLang;
+          
+          // Try to find a male voice for fallback
+          const voices = window.speechSynthesis.getVoices();
+          const maleVoice = voices.find(v => v.lang.startsWith(detectedLang.split('-')[0]) && (v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('david') || v.name.toLowerCase().includes('guy')));
+          if (maleVoice) utterance.voice = maleVoice;
+
           window.speechSynthesis.speak(utterance);
         }
       }
@@ -88,18 +93,10 @@ export const useBotService = (isOpen: boolean) => {
 
   const { isListening, toggleListening, stopListening } = useSpeechRecognition(askBot);
 
-  // Auto-pitch if it's the first time connected and widget is still open
-  useEffect(() => {
-    if (isConnected && isOpen && !hasAskedInitQuestion.current) {
-      hasAskedInitQuestion.current = true;
-      askBot("Who are you?");
-    }
-  }, [isConnected, isOpen, askBot]);
 
   // Reset init question flag when closed
   useEffect(() => {
     if (!isOpen) {
-      hasAskedInitQuestion.current = false;
       stopListening();
       if (stopVideoTimeoutRef.current) {
         clearTimeout(stopVideoTimeoutRef.current);

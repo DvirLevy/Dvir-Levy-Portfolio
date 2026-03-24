@@ -12,7 +12,8 @@ export const useWebRTC = (isOpen: boolean) => {
   const sessionIdRef = useRef<string | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  const SOURCE_IMAGE_URL = "s3://d-id-images-prod/google-oauth2|100268267952939492273/img_IztA4oF90ZkkXB1zmjC4y/dvir.png";
+  const connectionStateRef = useRef({ isConnecting: false, isConnected: false });
+  const SOURCE_IMAGE_URL = "dvir.png";
 
   const closeConnections = useCallback(async () => {
     // Stop any ongoing connection attempts
@@ -21,43 +22,75 @@ export const useWebRTC = (isOpen: boolean) => {
       abortControllerRef.current = null;
     }
 
-    if (streamIdRef.current && sessionIdRef.current) {
-      // Don't wait for deleteStream as we want to clear state immediately
-      DAL.deleteStream(streamIdRef.current, sessionIdRef.current).catch(() => {});
+    if (peerConnectionRef.current) {
+      peerConnectionRef.current.close();
+      peerConnectionRef.current = null;
     }
 
-    peerConnectionRef.current?.close();
-    peerConnectionRef.current = null;
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+
+    // Always attempt to delete from D-ID to save resources
+    const savedStreamId = localStorage.getItem("did_stream_id") || streamIdRef.current;
+    const savedSessionId = localStorage.getItem("did_session_id") || sessionIdRef.current;
+
+    if (savedStreamId && savedSessionId) {
+      DAL.deleteStream(savedStreamId, savedSessionId).catch(() => { });
+    }
+
+    localStorage.removeItem("did_stream_id");
+    localStorage.removeItem("did_session_id");
+    localStorage.removeItem("did_session_timestamp");
+
     streamIdRef.current = null;
     sessionIdRef.current = null;
-
+    connectionStateRef.current = { isConnecting: false, isConnected: false };
     setIsConnected(false);
     setIsConnecting(false);
     setVideoStarted(false);
-  }, []);
+  }, [videoRef]);
 
   const connectDID = useCallback(async () => {
-    if (isConnecting || isConnected || !isOpen) return;
+    if (connectionStateRef.current.isConnecting || connectionStateRef.current.isConnected || !isOpen) return;
 
     // Create a new abort controller for this connection attempt
     const abortController = new AbortController();
     abortControllerRef.current = abortController;
 
+    connectionStateRef.current.isConnecting = true;
     setIsConnecting(true);
 
     try {
+      // 1. Check if we have an old session in localStorage to clean up
+      const oldStreamId = localStorage.getItem("did_stream_id");
+      const oldSessionId = localStorage.getItem("did_session_id");
+      const oldTimestamp = parseInt(localStorage.getItem("did_session_timestamp") || "0");
+      const isExpired = Date.now() - oldTimestamp > 5 * 60 * 1000; // 5 mins
+
+      if (oldStreamId && oldSessionId) {
+        if (isExpired) {
+          // Explicitly clean up old expired session from D-ID
+          DAL.deleteStream(oldStreamId, oldSessionId).catch(() => { });
+        } else if (connectionStateRef.current.isConnected) {
+          // If not expired and we are already connected (e.g. just toggled UI), use existing
+          return;
+        }
+      }
+
       const createData = await DAL.createStream(SOURCE_IMAGE_URL);
 
       // Check if aborted while waiting for API
       if (abortController.signal.aborted || !isOpen) {
         if (createData.id && createData.session_id) {
-            DAL.deleteStream(createData.id, createData.session_id).catch(() => {});
+          DAL.deleteStream(createData.id, createData.session_id).catch(() => { });
         }
         return;
       }
 
       if (createData.kind === "Forbidden" || createData.message) {
         console.error("D-ID Error: ", createData);
+        connectionStateRef.current.isConnecting = false;
         setIsConnecting(false);
         return;
       }
@@ -65,8 +98,21 @@ export const useWebRTC = (isOpen: boolean) => {
       streamIdRef.current = createData.id;
       sessionIdRef.current = createData.session_id;
 
+      // Save to localStorage immediately
+      localStorage.setItem("did_stream_id", createData.id);
+      localStorage.setItem("did_session_id", createData.session_id);
+      localStorage.setItem("did_session_timestamp", Date.now().toString());
+
       const pc = new RTCPeerConnection({ iceServers: createData.ice_servers });
       peerConnectionRef.current = pc;
+      
+      // Listen for disconnection to auto-reconnect later
+      pc.addEventListener("connectionstatechange", () => {
+        if (pc.connectionState === "disconnected" || pc.connectionState === "failed" || pc.connectionState === "closed") {
+          connectionStateRef.current.isConnected = false;
+          setIsConnected(false);
+        }
+      });
 
       pc.addEventListener("icecandidate", async (event) => {
         if (event.candidate && streamIdRef.current && !abortController.signal.aborted) {
@@ -88,7 +134,7 @@ export const useWebRTC = (isOpen: boolean) => {
             } catch (e) {
               if (videoRef.current) {
                 videoRef.current.muted = true;
-                await videoRef.current.play().catch(() => {});
+                await videoRef.current.play().catch(() => { });
               }
             }
           };
@@ -114,23 +160,26 @@ export const useWebRTC = (isOpen: boolean) => {
         return;
       }
 
+      connectionStateRef.current.isConnected = true;
+      connectionStateRef.current.isConnecting = false;
       setIsConnected(true);
       setIsConnecting(false);
     } catch (err) {
       if (!abortController.signal.aborted) {
         console.error("Connection failed:", err);
+        connectionStateRef.current.isConnecting = false;
         setIsConnecting(false);
       }
     }
-  }, [isOpen, isConnecting, isConnected, closeConnections]);
+  }, [isOpen, closeConnections]);
 
   useEffect(() => {
     if (isOpen) {
       connectDID();
-    } else {
-      closeConnections();
     }
-  }, [isOpen, connectDID, closeConnections]);
+    // We NO LONGER call closeConnections() when isOpen is false.
+    // This keeps the stream alive in the background while the user scrolls.
+  }, [isOpen, connectDID]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -138,6 +187,20 @@ export const useWebRTC = (isOpen: boolean) => {
       closeConnections();
     };
   }, [closeConnections]);
+
+  // Reliable cleanup on window close or refresh
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (streamIdRef.current && sessionIdRef.current) {
+        // Fire and forget, DAL.deleteStream uses keepalive: true
+        DAL.deleteStream(streamIdRef.current, sessionIdRef.current).catch(() => { });
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return {
     videoRef,
