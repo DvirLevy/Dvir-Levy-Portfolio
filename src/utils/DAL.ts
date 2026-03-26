@@ -1,10 +1,13 @@
-const BACKEND_URL = "http://localhost:8000";
-
+const BACKEND_URL = `${import.meta.env.VITE_BACKEND_URL}`
+const HEADERS = {
+  "Content-Type": "application/json",
+  "ngrok-skip-browser-warning": "true"
+}
 export const DAL = {
   createStream: async (sourceUrl: string) => {
     const res = await fetch(`${BACKEND_URL}/api/did/create-stream`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: HEADERS,
       body: JSON.stringify({ source_url: sourceUrl }),
     });
     return res.json();
@@ -13,7 +16,7 @@ export const DAL = {
   submitIceCandidate: async (streamId: string, candidateData: any) => {
     const res = await fetch(`${BACKEND_URL}/api/did/ice/${streamId}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: HEADERS,
       body: JSON.stringify(candidateData),
     });
     return res.json();
@@ -22,7 +25,7 @@ export const DAL = {
   startStream: async (streamId: string, answer: RTCSessionDescriptionInit, sessionId: string) => {
     const res = await fetch(`${BACKEND_URL}/api/did/start-stream/${streamId}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: HEADERS,
       body: JSON.stringify({ answer, session_id: sessionId }),
     });
     return res.json();
@@ -31,7 +34,7 @@ export const DAL = {
   talkToStream: async (streamId: string, sessionId: string, scriptText: string, voiceId: string) => {
     const res = await fetch(`${BACKEND_URL}/api/did/talk/${streamId}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: HEADERS,
       body: JSON.stringify({
         script: {
           type: "text",
@@ -41,13 +44,13 @@ export const DAL = {
         session_id: sessionId,
       }),
     });
-    return res; 
+    return res;
   },
 
   deleteStream: async (streamId: string, sessionId: string) => {
     const res = await fetch(`${BACKEND_URL}/api/did/stream/${streamId}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: HEADERS,
       body: JSON.stringify({ session_id: sessionId }),
       keepalive: true, // Crucial for reliable cleanup on beforeunload
     });
@@ -57,7 +60,7 @@ export const DAL = {
   getChatReply: async (message: string, language: string) => {
     const res = await fetch(`${BACKEND_URL}/api/chat`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: HEADERS,
       body: JSON.stringify({ message, language }),
     });
     return res.json();
