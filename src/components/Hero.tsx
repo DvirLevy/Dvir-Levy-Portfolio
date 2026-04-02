@@ -20,24 +20,25 @@ const Hero = () => {
 
   const wa = { name: "waLogo", s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/WhatsApp.svg.webp" }
 
-  const handleWa = ()=>{
+  const handleWa = () => {
     const phoneNumber = '972542663619'
     const message = ''
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
   }
   const companies = [
-    { name: "ironSource", s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/ironsource.svg"},
+    { name: "ironSource", s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/ironsource.svg" },
     { name: "Moovit", s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/JifitiLogo.png" },
     { name: "Giphy", s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/moovitLogo.png" },
   ];
 
   // Duplicate companies for smoother infinite scroll
   const duplicatedCompanies = [...companies, ...companies];
-  const getResume = ()=>{
+  const getResume = () => {
     LambdaService.DataAnalytics({
       awsRoute: AwsRouts.DOWNLOAD,
       eventName: "download",
-      date: new Date().toString()})
+      date: new Date().toString()
+    })
     const url = 'https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/DvirLevyAutomationEngineer.pdf'
     window.open(url, '_blank', 'noopener,noreferrer');
   }
@@ -45,7 +46,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
-      <div 
+      <div
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: `url(https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/hero-bg.jpg)`,
@@ -86,15 +87,15 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 w-full max-w-3xl mx-auto">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-[0_0_20px_rgba(79,70,229,0.5)] hover:shadow-[0_0_30px_rgba(79,70,229,0.7)] transition-all bg-indigo-600 hover:bg-indigo-500 font-bold"
               onClick={() => window.dispatchEvent(new Event("open-portfolio-bot"))}
             >
               <MessageCircleQuestion className="mr-2 h-5 w-5" />
               Ask My AI Assistant!
             </Button>
-            <Button 
+            <Button
               size="lg"
               variant="outline"
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-lg transition-all"
@@ -104,9 +105,9 @@ const Hero = () => {
               View Projects
               <ArrowDown className="mr-2 h-5 w-5" />
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
+            <Button
+              size="lg"
+              variant="outline"
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               id="contactMeBtn"
@@ -120,21 +121,21 @@ const Hero = () => {
               onClick={()=>getResume()}
               id="downloadResumeBtn"
             > */}
-              {/* <a
+            {/* <a
                 href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Resume.pdf"
                 target='_blank'
                 rel="noopener noreferrer"
               > */}
-                {/* Download my Resume */}
-              {/* </a> */}
+            {/* Download my Resume */}
+            {/* </a> */}
             {/* </Button> */}
           </div>
 
 
           {/* Social Links */}
           <div className="flex gap-4 justify-center pt-8">
-            <a 
-              href="https://github.com/DvirLevy" 
+            <a
+              href="https://github.com/DvirLevy"
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
@@ -143,8 +144,8 @@ const Hero = () => {
             >
               <Github className="h-5 w-5" />
             </a>
-            <a 
-              href="https://www.linkedin.com/in/dvirlevyhakak" 
+            <a
+              href="https://www.linkedin.com/in/dvirlevyhakak"
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
@@ -153,7 +154,7 @@ const Hero = () => {
             >
               <Linkedin className="h-5 w-5" />
             </a>
-            <a 
+            <a
               href="mailto:dvirlh1@gmail.com"
               className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
               aria-label="Email"
