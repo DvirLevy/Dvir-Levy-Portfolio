@@ -1,16 +1,15 @@
-const BACKEND_URL = `${import.meta.env.VITE_BACKEND_URL}`
+const BACKEND_URL = "http://localhost:3000" //`${import.meta.env.VITE_BACKEND_URL}`
 const HEADERS = {
   "Content-Type": "application/json",
   "ngrok-skip-browser-warning": "true"
 }
 export const DAL = {
   createStream: async (sourceUrl: string) => {
-    const res = await fetch(`${BACKEND_URL}/api/did/create-stream`, {
+    return await fetch(`${BACKEND_URL}/api/did/create-stream`, {
       method: "POST",
       headers: HEADERS,
       body: JSON.stringify({ source_url: sourceUrl }),
     });
-    return res.json();
   },
 
   submitIceCandidate: async (streamId: string, candidateData: any) => {
@@ -58,10 +57,10 @@ export const DAL = {
   },
 
   getChatReply: async (message: string, language: string) => {
-    const res = await fetch(`${BACKEND_URL}/api/chat`, {
+    const res = await fetch(`${BACKEND_URL}/api/rag/ask`, {
       method: "POST",
       headers: HEADERS,
-      body: JSON.stringify({ message, language }),
+      body: JSON.stringify({ question: message, language }),
     });
     return res.json();
   },

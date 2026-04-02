@@ -31,17 +31,19 @@ export const useWebRTC = (isOpen: boolean) => {
       videoRef.current.srcObject = null;
     }
 
-    // Always attempt to delete from D-ID to save resources
-    const savedStreamId = localStorage.getItem("did_stream_id") || streamIdRef.current;
-    const savedSessionId = localStorage.getItem("did_session_id") || sessionIdRef.current;
-
-    if (savedStreamId && savedSessionId) {
-      DAL.deleteStream(savedStreamId, savedSessionId).catch(() => { });
+    // Capture IDs before clearing refs
+    const currentStreamId = streamIdRef.current;
+    const currentSessionId = sessionIdRef.current;
+    
+    if (currentStreamId && currentSessionId) {
+      console.log(`Cleaning up D-ID session: ${currentStreamId}`);
+      DAL.deleteStream(currentStreamId, currentSessionId).catch(() => { });
+      
+      // Always unconditionally wipe localStorage when tearing down a stream
+      localStorage.removeItem("did_stream_id");
+      localStorage.removeItem("did_session_id");
+      localStorage.removeItem("did_session_timestamp");
     }
-
-    localStorage.removeItem("did_stream_id");
-    localStorage.removeItem("did_session_id");
-    localStorage.removeItem("did_session_timestamp");
 
     streamIdRef.current = null;
     sessionIdRef.current = null;
@@ -62,23 +64,33 @@ export const useWebRTC = (isOpen: boolean) => {
     setIsConnecting(true);
 
     try {
-      // 1. Check if we have an old session in localStorage to clean up
+      // 1. Clean up any orphaned session from previous unclosed sessions (e.g. tab refresh)
       const oldStreamId = localStorage.getItem("did_stream_id");
       const oldSessionId = localStorage.getItem("did_session_id");
-      const oldTimestamp = parseInt(localStorage.getItem("did_session_timestamp") || "0");
-      const isExpired = Date.now() - oldTimestamp > 5 * 60 * 1000; // 5 mins
 
-      if (oldStreamId && oldSessionId) {
-        if (isExpired) {
-          // Explicitly clean up old expired session from D-ID
-          DAL.deleteStream(oldStreamId, oldSessionId).catch(() => { });
-        } else if (connectionStateRef.current.isConnected) {
-          // If not expired and we are already connected (e.g. just toggled UI), use existing
-          return;
-        }
+      if (
+        oldStreamId && oldStreamId !== "undefined" && 
+        oldSessionId && oldSessionId !== "undefined"
+      ) {
+        // Fire and forget to ensure no hanging streams are billed
+        DAL.deleteStream(oldStreamId, oldSessionId).catch(() => { });
+      }
+      
+      // Clear storage before starting new request
+      localStorage.removeItem("did_stream_id");
+      localStorage.removeItem("did_session_id");
+      localStorage.removeItem("did_session_timestamp");
+
+      const createResponse = await DAL.createStream(SOURCE_IMAGE_URL);
+
+      if (!createResponse.ok) {
+        console.error("D-ID Stream Creation Failed. Status:", createResponse.status);
+        connectionStateRef.current.isConnecting = false;
+        setIsConnecting(false);
+        return;
       }
 
-      const createData = await DAL.createStream(SOURCE_IMAGE_URL);
+      const createData = await createResponse.json();
 
       // Check if aborted while waiting for API
       if (abortController.signal.aborted || !isOpen) {
@@ -88,8 +100,9 @@ export const useWebRTC = (isOpen: boolean) => {
         return;
       }
 
-      if (createData.kind === "Forbidden" || createData.message) {
-        console.error("D-ID Error: ", createData);
+      // 2nd Issue Fix: DO NOT SAVE IF ID IS MISSING (PREVENTS "undefined" bug)
+      if (!createData.id || !createData.session_id) {
+        console.error("D-ID Missing IDs in response:", createData);
         connectionStateRef.current.isConnecting = false;
         setIsConnecting(false);
         return;
@@ -176,10 +189,10 @@ export const useWebRTC = (isOpen: boolean) => {
   useEffect(() => {
     if (isOpen) {
       connectDID();
+    } else {
+      closeConnections();
     }
-    // We NO LONGER call closeConnections() when isOpen is false.
-    // This keeps the stream alive in the background while the user scrolls.
-  }, [isOpen, connectDID]);
+  }, [isOpen, connectDID, closeConnections]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -194,6 +207,9 @@ export const useWebRTC = (isOpen: boolean) => {
       if (streamIdRef.current && sessionIdRef.current) {
         // Fire and forget, DAL.deleteStream uses keepalive: true
         DAL.deleteStream(streamIdRef.current, sessionIdRef.current).catch(() => { });
+        localStorage.removeItem("did_stream_id");
+        localStorage.removeItem("did_session_id");
+        localStorage.removeItem("did_session_timestamp");
       }
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
