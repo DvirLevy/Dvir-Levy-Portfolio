@@ -4,29 +4,29 @@ import { Badge } from "@/components/ui/badge";
 const Skills = () => {
   const skillCategories = [
     {
-      title: "Test Automation",
+      title: "AI & Data",
       icon: "🤖",
-      skills: ["Playwright", "Selenium", "Oxygen Platform", "E2E Testing", "UI Automation", "API Testing", "DB Validation"]
+      skills: ["LangChain", "OpenAI API", "RAG Systems", "Semantic Search", "Embeddings", "Vector Databases (pgvector)"]
     },
     {
-      title: "Performance & Monitoring",
+      title: "Backend Development",
       icon: "⚡",
-      skills: ["JMeter", "Coralogix", "Performance Testing", "Load Testing", "Trace Analysis", "Postman", "Fiddler", "Charles"]
-    },
-    {
-      title: "Development & Frameworks",
-      icon: "⚛️",
-      skills: ["React", "TypeScript", "JavaScript", "Node.js", "Express.js", "Vite", "Redux", "Material-UI","Figma", "Micro Services", "Electron"]
+      skills: ["Node.js", "Express", "TypeScript", "Micro Services", "MSSQL", "Moongose", "PM2"]
     },
     {
       title: "Cloud & DevOps",
       icon: "☁️",
-      skills: ["Azure DevOps", "CloudBeat", "AWS-S3","AWS-Buckets","AWS-Lambda", "CI/CD", "GitHub Actions", "VMware", "Git","SourceTree", "RabbitMQ", "Docker", "Kubernetes"]
+      skills: ["AWS (EC2, S3, Lambda, CloudFront)", "Docker", "Kubernetes", "CI/CD", "Azure DevOps", "CloudBeat", "GitHub Actions", "VMware", "Git", "RabbitMQ"]
+    },
+    {
+      title: "Frontend Development",
+      icon: "⚛️",
+      skills: ["React", "Vite", "Electron", "Redux"]
     },
     {
       title: "Databases & Analytics",
       icon: "🗄️",
-      skills: ["SQL", "MySQL", "MongoDB", "Oracle", "Redshift", "BigQuery", "SSMS","Oracle"]
+      skills: ["SQL", "MySQL", "MongoDB", "Oracle", "Redshift", "BigQuery", "SSMS", "TablePlus", "pgvector", "Postgres"]
     }
   ];
 
@@ -47,7 +47,7 @@ const Skills = () => {
           {/* Skills Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
             {skillCategories.map((category, index) => (
-              <Card 
+              <Card
                 key={index}
                 className="p-6 sm:p-8 card-hover bg-card/50 backdrop-blur-sm border-2"
                 style={{ animationDelay: `${index * 100}ms` }}
@@ -62,7 +62,7 @@ const Skills = () => {
                   {/* Skills Tags */}
                   <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill, skillIndex) => (
-                      <Badge 
+                      <Badge
                         key={skillIndex}
                         variant="secondary"
                         className="px-3 py-1.5 text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors cursor-default"

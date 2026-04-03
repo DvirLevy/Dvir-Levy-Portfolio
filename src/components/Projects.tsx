@@ -16,16 +16,29 @@ const Projects = () => {
     cloudDrivenAuthomation: false
   })
 
+  const newLocal = 'Run Portfolio Automation Test';
   const projects = [
     {
+      id: "AiBot",
+      title: "Portfolio Assistant - AI RAG System ",
+      description: `Built an AI-powered assistant based on a RAG architecture using LangChain, OpenAI, and PostgreSQL (pgvector).
+                    The system processes data through embedding and semantic retrieval, enabling context-aware responses in real time.
+                    Integrated into a React portfolio and connected to a Node.js backend, deployed on AWS.`,
+      tags: ["LangChain", "OpenAI", "RAG", "PostgreSQL (pgvector)", "Node.js", "Express", "React", "TypeScript", "AWS EC2", "Nginx", "PM2"],
+      type: "Development",
+      highlight: true,
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/ragPic.jpeg",
+      githubUrl: "https://github.com/DvirLevy/protofolio-bot-server"
+    },
+    {
       id: "cloudDrivenAuthomation",
-      title: "Cloud-Driven E2E Automation System",
+      title: "Cloud-Driven Automation System",
       description: `Architected & Developed a Cloud-Driven E2E Automation System using Playwright and TypeScript, 
                     exposed via AWS API Gateway and Lambda to trigger GitHub Actions workflows. 
                     Each execution runs cross-browser tests, publishes Playwright reports to GitHub Pages, 
                     and sends automated email notifications — simulating a real-world CI/CD testing platform.`,
       tags: ["Playwright", "MCP", "TypeScript", "GitHub Actions", "CI/CD", "Page Object Model", "Github Pages", "Docker", "Jenkins", "Kubernetes"],
-      type: "Automation",
+      type: "Development",
       highlight: true,
       runAutomation: true,
       report: true,
@@ -35,38 +48,12 @@ const Projects = () => {
       githubUrl: "https://github.com/DvirLevy/protofolio-automation-test"
     },
     {
-      id: "fof",
-      title: "API Automation - Fish of Fortune Game",
-      description: `Develop an automated API testing for MicroServie Backend framework.
-        A Lambda-triggered workflow executes Playwright tests,
-        publishes reports to GitHub Pages, and sends execution notifications.`,
-      tags: ["Playwright", "TypeScript", "CI/CD", "API Automation", "Newman", "AWS-Lambda", "Kuberneties", "Node.js", "GitHub Pages"],
-      type: "Automation",
-      highlight: true,
-      runAutomation: false,
-      report: false,
-      runBtnText: 'Run Fish of Fortune Automation Test',
-      reportUrl: 'https://dvirlevy.github.io/whalo-api-automtation-assignment/',
-      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/FOF-image2.PNG",
-      githubUrl: "https://github.com/DvirLevy/whalo-api-automtation-assignment",
-      whaloLogo: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/whalo-logo.png"
-    },
-    {
-      id: " e2eAutomation",
-      title: "E2E Automation Framework",
-      description: "Architected and implemented comprehensive E2E testing framework using Playwright from scratch at Jifiti. Includes project architecture, test design patterns, and best practices implementation.",
-      tags: ["Playwright", "TypeScript", "CI/CD", "Test Automation", "Azure DevOps"],
-      type: "Automation",
-      highlight: true,
-      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/e2e-automation.jpg",
-      githubUrl: null
-    },
-    {
       id: "ec2Logger",
-      title: "Live Logs Fetching Tool",
+      title: "EC2 Logger System",
       description: "Develop a streamlined tool at Moovit for fetching and analyzing live logs from EC2 servers, significantly improving debugging efficiency and QA testing time.",
       tags: ["AWS", "Node.js", "EC2 Servers", "Monitoring", "Electron", "React", "MUI", "Vite"],
       type: "Development",
+      highlight: true,
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/live-logs.jpg",
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Puttier",
       linkedinPost: "https://www.linkedin.com/feed/update/urn:li:activity:7185871122930749441/"
@@ -91,11 +78,38 @@ const Projects = () => {
       githubUrl: "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/UserId"
     },
     {
+      id: "fof",
+      title: "API Validation System",
+      description: `Develop an automated API testing for MicroServie Backend framework.
+        A Lambda-triggered workflow executes Playwright tests,
+        publishes reports to GitHub Pages, and sends execution notifications.`,
+      tags: ["Playwright", "TypeScript", "CI/CD", "API Automation", "Newman", "AWS-Lambda", "Kuberneties", "Node.js", "GitHub Pages"],
+      type: "Development",
+      highlight: false,
+      runAutomation: false,
+      report: false,
+      runBtnText: 'Run Fish of Fortune Automation Test',
+      reportUrl: 'https://dvirlevy.github.io/whalo-api-automtation-assignment/',
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/FOF-image2.PNG",
+      githubUrl: "https://github.com/DvirLevy/whalo-api-automtation-assignment",
+      whaloLogo: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/whalo-logo.png"
+    },
+    // {
+    //   id: " e2eAutomation",
+    //   title: "E2E Automation Framework",
+    //   description: "Architected and implemented comprehensive E2E testing framework using Playwright from scratch at Jifiti. Includes project architecture, test design patterns, and best practices implementation.",
+    //   tags: ["Playwright", "TypeScript", "CI/CD", "Test Automation", "Azure DevOps"],
+    //   type: "Automation",
+    //   highlight: true,
+    //   imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/e2e-automation.jpg",
+    //   githubUrl: null
+    // },
+    {
       id: "preformance",
-      title: "Performance Testing Suite",
+      title: "Performance System Suite",
       description: "Designed and executed comprehensive performance testing at Jifiti using JMeter with Coralogix integration for Pod monitoring and trace analysis.",
       tags: ["JMeter", "Coralogix", "Performance", "Azure DevOps"],
-      type: "Automation",
+      type: "Development",
       highlight: true,
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/performance-testing.jpg",
       githubUrl: null
@@ -113,7 +127,7 @@ const Projects = () => {
       id: "invitation",
       title: "Housewarming Invitation",
       description: "Designed and developed an elegant digital invitation platform for a housewarming celebration. Features interactive RSVP functionality, responsive design, and a beautiful user experience.",
-      tags: ["React", "Lovable", "Vite", "Frontend"],
+      tags: ["React", "Lovable-AI", "Vite", "Frontend"],
       type: "Development",
       imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/housewarming.jpg",
       githubUrl: "https://github.com/DvirLevy/levys",
@@ -203,7 +217,7 @@ const Projects = () => {
                     {/* Project Type Badge & Links */}
                     <div className="flex items-center justify-between">
                       <Badge
-                        variant={project.type === "Automation" ? "default" : "secondary"}
+                        variant={project.type === "Automation" ? "secondary" : "default"}
                         className="font-medium"
                       >
                         {project.type}
@@ -223,9 +237,13 @@ const Projects = () => {
                     </h3>
 
                     {/* Project Description */}
-                    <p className="card-description text-muted-foreground leading-relaxed">
-                      {project.description}
-                    </p>
+                    <div className="card-description text-muted-foreground leading-relaxed text-sm">
+                      {project.description.split('\n').map((line, lineIndex) => (
+                        <span key={lineIndex} className="block min-h-[1.25rem]">
+                          {line.trim()}
+                        </span>
+                      ))}
+                    </div>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 pt-2">

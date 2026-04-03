@@ -73,16 +73,16 @@ const Hero = () => {
 
           {/* Title */}
           <p id="professionalTitle" className="text-xl sm:text-2xl md:text-3xl text-foreground/90 font-medium">
-            Automation Engineer
+            AI Engineer
           </p>
 
           {/* Description */}
           <p id="description" className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Skilled with Frontend development capabilities in React,Vite and TypeScript,
+            AI Engineer building intelligent systems and real-time AI applications.
             <br className="hidden sm:block" />
-            I leverage my development and testing skills by creating tools and scripts that drive efficiency.
+            I specialize in backend development, LLM integrations, and scalable cloud-based architectures using Node.js, TypeScript, and AWS.
             <br className="hidden sm:block" />
-            Passionate about designing automation frameworks, CI/CD practices, and data-driven testing.
+            Focused on Retrieval-Augmented Generation (RAG), semantic search, and production-ready AI systems.
           </p>
 
           {/* CTA Buttons */}
