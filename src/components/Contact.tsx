@@ -1,81 +1,86 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Mail, Linkedin, Github, Send } from "lucide-react";
-import { toast } from "sonner";
-import React, { useEffect } from "react";
-import {LambdaService} from "@/utils/lambdaService";
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Badge } from "@/components/ui/badge"
+import { Mail, Linkedin, Github, Send } from "lucide-react"
+import { toast } from "sonner"
+import React, { useEffect } from "react"
+import { LambdaService } from "@/utils/lambdaService"
 const Contact = () => {
-  const [formError,setFormError] = React.useState<Record<string,string>>({})
+  const [formError, setFormError] = React.useState<Record<string, string>>({})
   const [isFormValid, setIsFormValid] = React.useState(false)
-  const [getInTouchForm,setGetInTouchForm] = React.useState({
-    fullName : '',
-    email : '',
-    to:"dvirlh1@gmail.com",
-    subject: '',
-    message: ''
+  const [getInTouchForm, setGetInTouchForm] = React.useState({
+    fullName: "",
+    email: "",
+    to: "dvirlh1@gmail.com",
+    subject: "",
+    message: "",
   })
   const [touched, setTouched] = React.useState({
     fullName: false,
     email: false,
     subject: false,
     message: false,
-  });
+  })
 
   const formValidator = () => {
-    const errors: Record<string,string> = {}
+    const errors: Record<string, string> = {}
 
     // Full Name validation
-    if(getInTouchForm.fullName.trim().length < 2){
-      errors.fullName = 'Full Name is required'
+    if (getInTouchForm.fullName.trim().length < 2) {
+      errors.fullName = "Full Name is required"
     }
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if(!emailRegex.test(getInTouchForm.email)){
-      errors.email = 'Invalid email address'
+    if (!emailRegex.test(getInTouchForm.email)) {
+      errors.email = "Invalid email address"
     }
     // Subject validation
-    if(getInTouchForm.subject.trim().length < 2 && getInTouchForm.message.trim().length>20){
-      errors.subject = 'Subject is required'
+    if (
+      getInTouchForm.subject.trim().length < 2 &&
+      getInTouchForm.message.trim().length > 20
+    ) {
+      errors.subject = "Subject is required"
     }
     // Message validation
-    if(getInTouchForm.message.trim().length < 5 && getInTouchForm.message.trim().length>100 ){
-      errors.message = 'Message must be at least 5 characters long and max 100 characters'
+    if (
+      getInTouchForm.message.trim().length < 5 &&
+      getInTouchForm.message.trim().length > 100
+    ) {
+      errors.message =
+        "Message must be at least 5 characters long and max 100 characters"
     }
 
     return errors
   }
 
-  const handleGetInTouchForm =(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
-      setGetInTouchForm({...getInTouchForm ,
-        [e.target.id]:e.target.value
-      })
+  const handleGetInTouchForm = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setGetInTouchForm({ ...getInTouchForm, [e.target.id]: e.target.value })
   }
 
-  const handleSubmit =async (e: React.FormEvent) => {
-    e.preventDefault();
-    if(!isFormValid){
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!isFormValid) {
       toast.error("error try again")
       console.log(formError)
-    }
-    else{
+    } else {
       console.log("from handleSubmit")
       console.log(getInTouchForm)
       await LambdaService.EmailServiceLambda(getInTouchForm)
-      toast.success("Message sent successfully! I'll get back to you soon.");
+      toast.success("Message sent successfully! I'll get back to you soon.")
     }
-  };
+  }
 
-   const handleWa = (e:React.FormEvent)=>{
-    if(e.currentTarget.id !== 'WhatsApp'){
+  const handleWa = (e: React.FormEvent) => {
+    if (e.currentTarget.id !== "WhatsApp") {
       return null
-    }
-    else{
-      const phoneNumber = '972542663619'
-      const message = ''
-      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
+    } else {
+      const phoneNumber = "972542663619"
+      const message = ""
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank")
     }
   }
 
@@ -84,35 +89,33 @@ const Contact = () => {
       icon: Mail,
       title: "Email",
       value: "Dvirlh1@gmail.com",
-      link: "mailto:dvirlh1@gmail.com"
+      link: "mailto:dvirlh1@gmail.com",
     },
     {
       icon: Linkedin,
       title: "LinkedIn",
       value: "linkedin.com/in/dvirlevyhakak",
-      link: "https://www.linkedin.com/in/dvirlevyhakak"
+      link: "https://www.linkedin.com/in/dvirlevyhakak",
     },
     {
       icon: Github,
       title: "GitHub",
       value: "github.com/DvirLevy",
-      link: "https://github.com/DvirLevy"
+      link: "https://github.com/DvirLevy",
     },
-     {
+    {
       s3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/WhatsApp.svg.webp",
       title: "WhatsApp",
       value: "Catch me on WhatsApp",
-      link: ''
-    }
+      link: "",
+    },
+  ]
 
-  ];
-
-  useEffect(()=>{
+  useEffect(() => {
     const errorValidation = formValidator()
     setFormError(errorValidation)
     setIsFormValid(Object.keys(errorValidation).length === 0)
-
-  },[getInTouchForm])
+  }, [getInTouchForm])
 
   return (
     <section className="py-20 sm:py-24 md:py-32" id="contact">
@@ -124,7 +127,7 @@ const Contact = () => {
               Get In Touch
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Interested in discussing your next automation project? Let's talk!
+              Interested in building AI-driven systems or scalable backend solutions? Let's talk.
             </p>
           </div>
 
@@ -136,7 +139,7 @@ const Contact = () => {
                   <label htmlFor="name" className="text-sm font-medium">
                     Full Name
                   </label>
-                  <Input 
+                  <Input
                     id="fullName"
                     placeholder="Your name"
                     required
@@ -145,14 +148,16 @@ const Contact = () => {
                     value={getInTouchForm.fullName}
                     onBlur={() => setTouched({ ...touched, fullName: true })}
                   />
-                  {touched.fullName && formError.fullName && <p className="text-red-500 text-sm">{formError.fullName}</p>}
+                  {touched.fullName && formError.fullName && (
+                    <p className="text-red-500 text-sm">{formError.fullName}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium">
                     Email
                   </label>
-                  <Input 
+                  <Input
                     id="email"
                     type="email"
                     placeholder="your.email@example.com"
@@ -162,14 +167,16 @@ const Contact = () => {
                     value={getInTouchForm.email}
                     onBlur={() => setTouched({ ...touched, email: true })}
                   />
-                  {touched.email && formError.email && <p className="text-red-500 text-sm">{formError.email}</p>}
+                  {touched.email && formError.email && (
+                    <p className="text-red-500 text-sm">{formError.email}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
                   <label htmlFor="subject" className="text-sm font-medium">
                     Subject
                   </label>
-                  <Input 
+                  <Input
                     id="subject"
                     placeholder="What would you like to discuss?"
                     required
@@ -178,28 +185,32 @@ const Contact = () => {
                     value={getInTouchForm.subject}
                     onBlur={() => setTouched({ ...touched, subject: true })}
                   />
-                  {touched.subject && formError.subject && <p className="text-red-500 text-sm">{formError.subject}</p>}
+                  {touched.subject && formError.subject && (
+                    <p className="text-red-500 text-sm">{formError.subject}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-sm font-medium">
                     Message
                   </label>
-                  <Textarea 
+                  <Textarea
                     id="message"
                     placeholder="Tell me about your project..."
                     rows={5}
                     required
                     className="bg-background resize-none"
-                    onChange={e=>handleGetInTouchForm(e)}
+                    onChange={(e) => handleGetInTouchForm(e)}
                     value={getInTouchForm.message}
                     onBlur={() => setTouched({ ...touched, message: true })}
                   />
-                  {touched.message && formError.message && <p className="text-red-500 text-sm">{formError.message}</p>}
+                  {touched.message && formError.message && (
+                    <p className="text-red-500 text-sm">{formError.message}</p>
+                  )}
                 </div>
 
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="w-full"
                   size="lg"
                   disabled={!isFormValid}
@@ -218,21 +229,31 @@ const Contact = () => {
                   {contactMethods.map((method, index) => (
                     <a
                       key={index}
-                      href={method.title !== "WhatsApp" ? method.link : 'no href'}
+                      href={
+                        method.title !== "WhatsApp" ? method.link : "no href"
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-start gap-4 p-4 rounded-lg hover:bg-background/50 transition-colors group"
-                      onClick={e=>handleWa(e)}
+                      onClick={(e) => handleWa(e)}
                       id={`${method.title}`}
                     >
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                        {method.title == "WhatsApp" ? <img src={method.s3} alt={method.title} className="h-10 w-10 text-primary"  />: 
-                        <method.icon className="h-6 w-6 text-primary" />}
-                        
+                        {method.title == "WhatsApp" ? (
+                          <img
+                            src={method.s3}
+                            alt={method.title}
+                            className="h-10 w-10 text-primary"
+                          />
+                        ) : (
+                          <method.icon className="h-6 w-6 text-primary" />
+                        )}
                       </div>
                       <div className="space-y-1">
                         <p className="font-medium">{method.title}</p>
-                        <p className="text-sm text-muted-foreground">{method.value}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {method.value}
+                        </p>
                       </div>
                     </a>
                   ))}
@@ -243,14 +264,13 @@ const Contact = () => {
                 <div className="space-y-4">
                   <h3 className="text-xl font-semibold">💼 Available For</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    I'm available for new opportunities and looking for exciting challenges.
-                    Whether you need automation solutions or development expertise -
-                    I'd love to hear from you!
+                    I'm open to new opportunities and excited to build AI-driven systems and scalable backend solutions.
+                    Focused on developing real-world applications using LLMs, cloud infrastructure, and modern software architectures.
                   </p>
                   <div className="flex flex-wrap gap-3 pt-2">
-                    <Badge variant="secondary">Test Automation</Badge>
-                    <Badge variant="secondary">Performance Testing</Badge>
-                    <Badge variant="secondary">Tools Development</Badge>
+                    <Badge variant="secondary">AI Software Engineer</Badge>
+                    {/* <Badge variant="secondary">Backend Developer</Badge> */}
+                    {/* <Badge variant="secondary">Cloud Engineer</Badge> */}
                   </div>
                 </div>
               </Card>
@@ -259,7 +279,7 @@ const Contact = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact

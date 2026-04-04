@@ -1,34 +1,70 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 const Skills = () => {
   const skillCategories = [
     {
       title: "AI & Data",
       icon: "🤖",
-      skills: ["LangChain", "OpenAI API", "RAG Systems", "Semantic Search", "Embeddings", "Vector Databases (pgvector)"]
+      skills: [
+        "LangChain",
+        "OpenAI API",
+        "RAG Systems",
+        "Semantic Search",
+        "Embeddings",
+        "Vector Databases (pgvector)",
+      ],
     },
     {
       title: "Backend Development",
       icon: "⚡",
-      skills: ["Node.js", "Express", "TypeScript", "Micro Services", "MSSQL", "Moongose", "PM2"]
+      skills: [
+        "Node.js",
+        "Express",
+        "TypeScript",
+        "Micro Services",
+        "MSSQL",
+        "Moongose",
+        "PM2",
+      ],
     },
     {
       title: "Cloud & DevOps",
       icon: "☁️",
-      skills: ["AWS (EC2, S3, Lambda, CloudFront)", "Docker", "Kubernetes", "CI/CD", "Azure DevOps", "CloudBeat", "GitHub Actions", "VMware", "Git", "RabbitMQ"]
+      skills: [
+        "AWS (EC2, S3, Lambda, CloudFront)",
+        "Docker",
+        "Kubernetes",
+        "CI/CD",
+        "Azure DevOps",
+        "CloudBeat",
+        "GitHub Actions",
+        "VMware",
+        "Git",
+        "RabbitMQ",
+      ],
     },
     {
       title: "Frontend Development",
       icon: "⚛️",
-      skills: ["React", "Vite", "Electron", "Redux"]
+      skills: ["React", "Vite", "Electron", "Redux"],
     },
     {
-      title: "Databases & Analytics",
+      title: "Databases",
       icon: "🗄️",
-      skills: ["SQL", "MySQL", "MongoDB", "Oracle", "Redshift", "BigQuery", "SSMS", "TablePlus", "pgvector", "Postgres"]
-    }
-  ];
+      skills: [
+        "pgvector",
+        "Postgres",
+        "MSSQL",
+        "MongoDB",
+        "Oracle",
+        "Redshift",
+        "BigQuery",
+        "SSMS",
+        "TablePlus",
+      ],
+    },
+  ]
 
   return (
     <section className="py-20 sm:py-24 md:py-32" id="skills">
@@ -55,8 +91,12 @@ const Skills = () => {
                 <div className="space-y-6">
                   {/* Category Header */}
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl sm:text-4xl">{category.icon}</span>
-                    <h3 className="text-xl sm:text-2xl font-semibold">{category.title}</h3>
+                    <span className="text-3xl sm:text-4xl">
+                      {category.icon}
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-semibold">
+                      {category.title}
+                    </h3>
                   </div>
 
                   {/* Skills Tags */}
@@ -79,13 +119,15 @@ const Skills = () => {
           {/* Additional Info */}
           <Card className="p-6 sm:p-8 bg-primary/5 border-primary/20">
             <p className="text-center text-base sm:text-lg text-muted-foreground">
-              🎯 It's not about how hard you hit. It's about how hard you can get hit and keep moving forward. How much you can take and keep moving forward (Rocky Balboa) 🎯
+              🎯 It's not about how hard you hit. It's about how hard you can
+              get hit and keep moving forward. How much you can take and keep
+              moving forward (Rocky Balboa) 🎯
             </p>
           </Card>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Skills;
+export default Skills
