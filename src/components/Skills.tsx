@@ -26,6 +26,8 @@ const Skills = () => {
         "MSSQL",
         "Moongose",
         "PM2",
+        "Nginx",
+        "ngrok",
       ],
     },
     {
@@ -42,6 +44,7 @@ const Skills = () => {
         "VMware",
         "Git",
         "RabbitMQ",
+        "Coralogix",
       ],
     },
     {
