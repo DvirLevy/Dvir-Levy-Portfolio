@@ -1,26 +1,15 @@
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
-// import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import React, { useState } from "react"
 import { Button } from "./ui/button"
-import { DAL } from "@/utils/DAL"
 import { LambdaService } from "@/utils/lambdaService"
-import { error } from "console"
 
-// type popupAutomationProps = {
-//   coolDown,
-//   repo
-// }
 
 const PopupAutomationRunner = ({ coolDown, repo, handleDisableBtn }) => {
   const [dialogOpen, setDialogOpen] = useState(!coolDown[repo])

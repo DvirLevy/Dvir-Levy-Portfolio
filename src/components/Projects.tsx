@@ -206,7 +206,7 @@ const Projects = () => {
       setOpenDialg(false)
     }
     else {
-      const COOL_DOWN = 5000//60000 * 20 // 20 minutes
+      const COOL_DOWN = 60000 * 20 // 20 minutes
       //disabling the button
       setCooldown((prev) => ({
         ...prev,
@@ -225,7 +225,6 @@ const Projects = () => {
   }
 
   const runAutomation = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    const COOL_DOWN = 60000 * 20 // 20 minutes
     const repo = event.currentTarget.value
     setRepo(repo)
     if (cooldown[repo]) {
