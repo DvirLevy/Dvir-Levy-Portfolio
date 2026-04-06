@@ -47,15 +47,18 @@ export const useBotService = (isOpen: boolean) => {
       }
 
       try {
-        const detectedLang = detectLanguage(question)
-        const data = await DAL.getChatReply(question, detectedLang)
+        const startTime = Date.now()
+        console.log(`[BotService] Asking LLM: "${question}"`)
+        
+        const data = await DAL.getChatReply(question, "en-US")
+        const llmDuration = (Date.now() - startTime) / 1000
+        console.log(`[BotService] LLM Reply (${llmDuration.toFixed(1)}s): "${data.reply.substring(0, 50)}..."`)
 
-        // Check if still open and connected after async call
+          // Force English for all replies
         if (isOpen && isConnected && streamId && sessionId) {
-          const maleVoiceId =
-            detectedLang === "he-IL"
-              ? "he-IL-AvriNeural"
-              : "en-US-ChristopherNeural"
+          const maleVoiceId = "en-US-AndrewNeural"
+          
+          console.log(`[BotService] Sending to D-ID. Voice: ${maleVoiceId}`)
           const didRes = await DAL.talkToStream(
             streamId,
             sessionId,
@@ -65,17 +68,16 @@ export const useBotService = (isOpen: boolean) => {
 
           const didData = await didRes.json()
           if (didRes.ok && didData.kind !== "SessionError") {
+            console.log(`[BotService] D-ID Talk SUCCESS.`, didData)
             // Show video when avatar starts talking
             setVideoStarted(true)
 
-            // Wait for duration + 5s (generous buffer) before hiding video
+            // Calculate duration
             const wordCount = data.reply.split(/\s+/).length
-            const estimatedDuration = Math.max(wordCount / 2.3, 5) // ~140 words per minute
+            const estimatedDuration = Math.max(wordCount / 2.3, 5) 
             const duration = didData.duration || estimatedDuration
 
-            console.log(
-              `D-ID Talk. Duration: ${duration}s (EST: ${estimatedDuration.toFixed(1)}s). Buffer: 10s`,
-            )
+            console.log(`[BotService] Est. Duration: ${duration}s. Words: ${wordCount}`)
 
             stopVideoTimeoutRef.current = setTimeout(
               () => {
@@ -84,28 +86,31 @@ export const useBotService = (isOpen: boolean) => {
               },
               duration * 1000 + 10000,
             )
-          } else if (didData.kind === "SessionError" || !didRes.ok) {
-            console.warn("D-ID Talk failed, using fallback voice.")
-            // Fallback to browser speech if D-ID fails or session error
+          } else {
+            console.warn("[BotService] D-ID Talk failed or SessionError:", didData)
+            
+            // Re-throw if it's a critical error we want to catch below
+            if (didData.kind === "SessionError") {
+              throw new Error("D-ID Session expired")
+            }
+
+            // Fallback to browser speech if D-ID fails
             const utterance = new SpeechSynthesisUtterance(data.reply)
-            utterance.lang = detectedLang
-
-            // Try to find a male voice for fallback
+            utterance.lang = "en-US"
+            
+            // Try to find a male voice in the browser list
             const voices = window.speechSynthesis.getVoices()
-            const maleVoice = voices.find(
-              (v) =>
-                v.lang.startsWith(detectedLang.split("-")[0]) &&
-                (v.name.toLowerCase().includes("male") ||
-                  v.name.toLowerCase().includes("david") ||
-                  v.name.toLowerCase().includes("guy")),
-            )
-            if (maleVoice) utterance.voice = maleVoice
-
+            const maleVoice = voices.find(v => (v.name.includes("Male") || v.name.includes("David") || v.name.includes("Andrew")) && v.lang.startsWith("en"))
+            
+            if (maleVoice) {
+              utterance.voice = maleVoice
+            }
+            
             window.speechSynthesis.speak(utterance)
           }
         }
       } catch (err) {
-        console.error("Error in askBot:", err)
+        console.error("[BotService] Error in askBot:", err)
       } finally {
         setIsThinking(false)
       }
