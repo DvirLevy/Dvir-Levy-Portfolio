@@ -37,7 +37,7 @@ export const useWebRTC = (isOpen: boolean) => {
 
     if (currentStreamId && currentSessionId) {
       console.log(`Cleaning up D-ID session: ${currentStreamId}`)
-      DAL.deleteStream(currentStreamId, currentSessionId).catch(() => {})
+      await DAL.deleteStream(currentStreamId, currentSessionId).catch(() => {})
 
       // Always unconditionally wipe localStorage when tearing down a stream
       localStorage.removeItem("did_stream_id")
@@ -79,8 +79,17 @@ export const useWebRTC = (isOpen: boolean) => {
         oldSessionId &&
         oldSessionId !== "undefined"
       ) {
-        // Fire and forget to ensure no hanging streams are billed
-        DAL.deleteStream(oldStreamId, oldSessionId).catch(() => {})
+        // AWAIT cleanup to ensure the D-ID slot is actually freed before we request a new one
+        console.log(`Cleaning up orphaned D-ID session before new connection: ${oldStreamId}`)
+        try {
+          await DAL.deleteStream(oldStreamId, oldSessionId)
+          await new Promise((resolve) => setTimeout(resolve, 1000))
+        } catch (e) {
+          console.warn(
+            "Failed to clean up old session (might already be expired):",
+            e,
+          )
+        }
       }
 
       // Clear storage before starting new request

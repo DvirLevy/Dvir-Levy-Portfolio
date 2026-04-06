@@ -21,7 +21,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-      {/* <PortfolioBotWidget /> */}
+      <PortfolioBotWidget />
     </TooltipProvider>
   </QueryClientProvider>
 )
