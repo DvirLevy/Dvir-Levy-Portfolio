@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { DAL } from "../utils/DAL"
+import dvirImage from "../../public/dvir.png"
 
 export const useWebRTC = (isOpen: boolean) => {
   const [isConnecting, setIsConnecting] = useState(false)
@@ -13,7 +14,7 @@ export const useWebRTC = (isOpen: boolean) => {
   const abortControllerRef = useRef<AbortController | null>(null)
 
   const connectionStateRef = useRef({ isConnecting: false, isConnected: false })
-  const SOURCE_IMAGE_URL = "dvir.png"
+  const SOURCE_IMAGE_URL = dvirImage
 
   const closeConnections = useCallback(async () => {
     // Stop any ongoing connection attempts
@@ -37,8 +38,8 @@ export const useWebRTC = (isOpen: boolean) => {
 
     if (currentStreamId && currentSessionId) {
       console.log(`Cleaning up D-ID session: ${currentStreamId}`)
-      await DAL.deleteStream(currentStreamId, currentSessionId).catch(() => {})
-
+      await DAL.deleteStream(currentStreamId, currentSessionId).catch(() => { })
+      await new Promise((resolve) => setTimeout(resolve, 1000))
       // Always unconditionally wipe localStorage when tearing down a stream
       localStorage.removeItem("did_stream_id")
       localStorage.removeItem("did_session_id")
@@ -114,7 +115,7 @@ export const useWebRTC = (isOpen: boolean) => {
       // Check if aborted while waiting for API
       if (abortController.signal.aborted || !isOpen) {
         if (createData.id && createData.session_id) {
-          DAL.deleteStream(createData.id, createData.session_id).catch(() => {})
+          DAL.deleteStream(createData.id, createData.session_id).catch(() => { })
         }
         return
       }
@@ -174,7 +175,7 @@ export const useWebRTC = (isOpen: boolean) => {
             } catch (e) {
               if (videoRef.current) {
                 videoRef.current.muted = true
-                await videoRef.current.play().catch(() => {})
+                await videoRef.current.play().catch(() => { })
               }
             }
           }
@@ -234,7 +235,7 @@ export const useWebRTC = (isOpen: boolean) => {
       if (streamIdRef.current && sessionIdRef.current) {
         // Fire and forget, DAL.deleteStream uses keepalive: true
         DAL.deleteStream(streamIdRef.current, sessionIdRef.current).catch(
-          () => {},
+          () => { },
         )
         localStorage.removeItem("did_stream_id")
         localStorage.removeItem("did_session_id")
