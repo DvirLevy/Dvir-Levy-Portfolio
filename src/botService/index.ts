@@ -84,7 +84,7 @@ export const useBotService = (isOpen: boolean) => {
                 setVideoStarted(false)
                 stopVideoTimeoutRef.current = null
               },
-              duration * 1000 + 10000,
+              duration * 1000 + 2000,
             )
           } else {
             console.warn("[BotService] D-ID Talk failed or SessionError:", didData)
@@ -143,9 +143,9 @@ export const useBotService = (isOpen: boolean) => {
   const handleToggleListening = useCallback(() => {
     if (videoRef.current && videoRef.current.muted)
       videoRef.current.muted = false
-    if (isThinking) return
+    if (isThinking || videoStarted) return
     toggleListening()
-  }, [isThinking, toggleListening, videoRef])
+  }, [isThinking, videoStarted, toggleListening, videoRef])
 
   return {
     videoRef,
