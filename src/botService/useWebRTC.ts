@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { DAL } from "../utils/DAL"
-import dvirImage from "../assets/dvir.png"
+// import dvirImage from "../assets/dvir.png"
 
 export const useWebRTC = (isOpen: boolean) => {
   const [isConnecting, setIsConnecting] = useState(false)
@@ -14,7 +14,7 @@ export const useWebRTC = (isOpen: boolean) => {
   const abortControllerRef = useRef<AbortController | null>(null)
 
   const connectionStateRef = useRef({ isConnecting: false, isConnected: false })
-  const SOURCE_IMAGE_URL = "dvir.png"
+  const SOURCE_IMAGE_URL = "../../public/dvir.png"
 
   const closeConnections = useCallback(async () => {
     // Stop any ongoing connection attempts

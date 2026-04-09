@@ -8,6 +8,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Mic, X, MessageCircleQuestion } from "lucide-react"
 import { useBotService } from "@/botService"
+import dvirImage from "../assets/dvir.png"
 
 export const PortfolioBotWidget = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -68,9 +69,9 @@ export const PortfolioBotWidget = () => {
           {/* Static Placeholder while waiting using the perfect user-uploaded frame */}
           {!videoStarted && (
             <img
-              src="/src/assets/dvir.png"
-              alt="Dvir Avatar"
-              className="w-full h-full object-cover object-center absolute top-0 left-0 z-10 opacity-100 transition-opacity duration-500"
+              src={dvirImage}
+              alt="Dvir Levy"
+              className="w-full h-full object-cover opacity-90 transition-opacity duration-500"
             />
           )}
 
