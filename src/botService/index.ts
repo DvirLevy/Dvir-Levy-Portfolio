@@ -143,9 +143,9 @@ export const useBotService = (isOpen: boolean) => {
   const handleToggleListening = useCallback(() => {
     if (videoRef.current && videoRef.current.muted)
       videoRef.current.muted = false
-    if (isThinking) return
+    if (isThinking || videoStarted) return
     toggleListening()
-  }, [isThinking, toggleListening, videoRef])
+  }, [isThinking, videoStarted, toggleListening, videoRef])
 
   return {
     videoRef,

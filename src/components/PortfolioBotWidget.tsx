@@ -125,7 +125,7 @@ export const PortfolioBotWidget = () => {
           <Button
             variant="default"
             onClick={toggleListening}
-            disabled={!isConnected || isThinking}
+            disabled={!isConnected || isThinking || videoStarted}
             className={`flex-1 min-w-[130px] rounded-full font-bold shadow-lg transition-all ${
               isListening
                 ? "bg-red-500 hover:bg-red-600"
@@ -139,7 +139,7 @@ export const PortfolioBotWidget = () => {
           <Button
             variant="secondary"
             onClick={() => askBot("Who are you?")}
-            disabled={!isConnected || isThinking || isListening}
+            disabled={!isConnected || isThinking || isListening || videoStarted}
             className="flex-1 min-w-[130px] rounded-full font-semibold border border-zinc-700 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 shadow-lg transition-colors"
           >
             <MessageCircleQuestion className="w-4 h-4 mr-1.5" />
