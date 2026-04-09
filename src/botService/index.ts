@@ -84,7 +84,7 @@ export const useBotService = (isOpen: boolean) => {
                 setVideoStarted(false)
                 stopVideoTimeoutRef.current = null
               },
-              duration * 1000 + 10000,
+              duration * 1000 + 2000,
             )
           } else {
             console.warn("[BotService] D-ID Talk failed or SessionError:", didData)

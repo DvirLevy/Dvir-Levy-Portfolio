@@ -25,6 +25,11 @@ export const PortfolioBotWidget = () => {
     toggleListening,
   } = useBotService(isOpen)
 
+  const onPlayHandler = () => {
+    console.log("D-ID Video: Playing")
+
+  }
+
   // Daily auto-trigger & Manual Event trigger
   useEffect(() => {
     const today = new Date().toDateString()
@@ -53,13 +58,12 @@ export const PortfolioBotWidget = () => {
         {/* Modern Interactive Video Container */}
         <div
           onClick={toggleListening}
-          className={`relative w-64 h-64 rounded-full overflow-hidden border-[6px] transition-all duration-300 shadow-2xl cursor-pointer hover:scale-105 active:scale-95 flex items-center justify-center bg-zinc-900 ${
-            isListening
-              ? "border-green-500 shadow-[0_0_30px_rgba(74,222,128,0.4)]"
-              : isThinking
-                ? "border-amber-500 shadow-[0_0_30px_rgba(245,158,11,0.4)]"
-                : "border-zinc-700 hover:border-zinc-500"
-          }`}
+          className={`relative w-64 h-64 rounded-full overflow-hidden border-[6px] transition-all duration-300 shadow-2xl cursor-pointer hover:scale-105 active:scale-95 flex items-center justify-center bg-zinc-900 ${isListening
+            ? "border-green-500 shadow-[0_0_30px_rgba(74,222,128,0.4)]"
+            : isThinking
+              ? "border-amber-500 shadow-[0_0_30px_rgba(245,158,11,0.4)]"
+              : "border-zinc-700 hover:border-zinc-500"
+            }`}
         >
           {/* Static Placeholder while waiting using the perfect user-uploaded frame */}
           {!videoStarted && (
@@ -78,9 +82,12 @@ export const PortfolioBotWidget = () => {
             playsInline
             muted
             onPlaying={() => setVideoStarted(true)}
-            onPlay={() => console.log("D-ID Video: Playing")}
+            onPlay={() => onPlayHandler}
             onPause={() => console.log("D-ID Video: Paused")}
-            onEnded={() => console.log("D-ID Video: Ended")}
+            onEnded={() => {
+              console.log("D-ID Video: Ended")
+              setVideoStarted(false)
+            }}
             onError={(e) => {
               const video = e.target as HTMLVideoElement;
               console.error("D-ID Video Error Details:", {
@@ -101,23 +108,22 @@ export const PortfolioBotWidget = () => {
 
         {/* Dynamic Status Text */}
         <p
-          className={`mt-6 text-sm font-medium tracking-wide transition-all duration-300 ${
-            isListening
-              ? "text-green-400"
-              : isThinking
-                ? "text-amber-400"
-                : "text-zinc-500"
-          }`}
+          className={`mt-6 text-sm font-medium tracking-wide transition-all duration-300 ${isListening
+            ? "text-green-400"
+            : isThinking
+              ? "text-amber-400"
+              : "text-zinc-500"
+            }`}
         >
           {isConnecting
-            ? "Connecting to Dvir's Neural Core..."
+            ? "Connecting to Dvir's Avatar..."
             : isThinking
               ? "Consulting internal Knowledge Base..."
               : isListening
-                ? "Listening intently to your voice..."
+                ? "I'm listening..."
                 : isConnected
                   ? "Online. Ask me anything!"
-                  : "System Offline"}
+                  : "Offline"}
         </p>
 
         {/* Control Desk */}
@@ -126,11 +132,10 @@ export const PortfolioBotWidget = () => {
             variant="default"
             onClick={toggleListening}
             disabled={!isConnected || isThinking || videoStarted}
-            className={`flex-1 min-w-[130px] rounded-full font-bold shadow-lg transition-all ${
-              isListening
-                ? "bg-red-500 hover:bg-red-600"
-                : "bg-emerald-600 hover:bg-emerald-500 text-white"
-            }`}
+            className={`flex-1 min-w-[130px] rounded-full font-bold shadow-lg transition-all ${isListening
+              ? "bg-red-500 hover:bg-red-600"
+              : "bg-emerald-600 hover:bg-emerald-500 text-white"
+              }`}
           >
             <Mic className="w-5 h-5 mr-1.5" />
             {isListening ? "STOP LISTENING" : "ASK ME"}

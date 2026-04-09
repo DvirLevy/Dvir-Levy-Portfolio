@@ -30,6 +30,7 @@ export const useSpeechRecognition = (
     finalTranscriptRef.current = ""
 
     recognition.onstart = () => {
+      console.log("[SpeechRecognition] Started");
       setIsListening(true)
       if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current)
       silenceTimerRef.current = setTimeout(() => stopListening(), 5000)
