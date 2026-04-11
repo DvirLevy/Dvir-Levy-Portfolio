@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Mic, X, MessageCircleQuestion } from "lucide-react"
 import { useBotService } from "@/botService"
-import dvirImage from "/dvir.png"
+import dvirImage from "@/assets/dvir.png"
 
 export const PortfolioBotWidget = () => {
   const [isOpen, setIsOpen] = useState(false)
