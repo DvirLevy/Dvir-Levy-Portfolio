@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { DAL } from "../utils/DAL"
-// import dvirImage from "../assets/dvir.png"
+
 
 export const useWebRTC = (isOpen: boolean) => {
   const [isConnecting, setIsConnecting] = useState(false)
@@ -14,7 +14,7 @@ export const useWebRTC = (isOpen: boolean) => {
   const abortControllerRef = useRef<AbortController | null>(null)
 
   const connectionStateRef = useRef({ isConnecting: false, isConnected: false })
-  const SOURCE_IMAGE_URL = "../../public/dvir.png"
+  const SOURCE_IMAGE_URL = "@/assets/dvir.png"
 
   const closeConnections = useCallback(async () => {
     // Stop any ongoing connection attempts
@@ -98,7 +98,14 @@ export const useWebRTC = (isOpen: boolean) => {
       localStorage.removeItem("did_session_id")
       localStorage.removeItem("did_session_timestamp")
 
-      const createResponse = await DAL.createStream(SOURCE_IMAGE_URL)
+      let createResponse = await DAL.createStream(SOURCE_IMAGE_URL)
+
+      // 403 Retry Logic: If sessions are full, wait 2 sec for cleanup and try ONE more time
+      if (createResponse.status === 403) {
+        console.warn("D-ID Sessions full (403). Waiting for backend cleanup...")
+        await new Promise(resolve => setTimeout(resolve, 2500))
+        createResponse = await DAL.createStream(SOURCE_IMAGE_URL)
+      }
 
       if (!createResponse.ok) {
         console.error(

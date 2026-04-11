@@ -6,6 +6,7 @@ const HEADERS = {
 }
 export const DAL = {
   createStream: async (sourceUrl: string) => {
+    sourceUrl = "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/dvir.png"
     return await fetch(`${BACKEND_URL}/api/did/create-stream`, {
       method: "POST",
       headers: HEADERS,
