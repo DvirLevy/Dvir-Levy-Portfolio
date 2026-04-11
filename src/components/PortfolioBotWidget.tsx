@@ -71,7 +71,7 @@ export const PortfolioBotWidget = () => {
             <img
               src={dvirImage}
               alt="Dvir Levy"
-              className="w-full h-full object-cover opacity-90 transition-opacity duration-500"
+              className="absolute inset-0 w-full h-full object-cover object-center opacity-100 transition-opacity duration-500"
             />
           )}
 
