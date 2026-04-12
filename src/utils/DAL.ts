@@ -68,11 +68,27 @@ export const DAL = {
   },
 
   getChatReply: async (message: string, language: string) => {
-    const res = await fetch(`${BACKEND_URL}/api/rag/ask`, {
-      method: "POST",
-      headers: HEADERS,
-      body: JSON.stringify({ question: message, language }),
-    })
-    return res.json()
+    if (message.toLowerCase() === "who are you?") {
+      // setTimeout(() => {
+      return {
+        reply: `Hi, I’m Dvir’s AI assistant — his most advanced AI project:).
+                    Dvir is a AI Software Engineer specializing in LLMs, Rag systems, and scalable AI architectures. He builds AI systems end-to-end — from retrieval pipelines and vector databases to backend services and cloud infrastructure.
+                    Dvir designed and developed a full Rag-based system. look at me!
+                    I’m powered by a vector database, running on AWS with EC2, Docker, Postgres, and N-ginx.
+                    Dvir combines strong backend engineering with AI expertise to deliver scalable, production-ready solutions.
+                    Ask me anything to explore what he can build.`,
+        sources: [],
+      }
+      // }, 5000)
+    }
+    else {
+
+      const res = await fetch(`${BACKEND_URL}/api/rag/ask`, {
+        method: "POST",
+        headers: HEADERS,
+        body: JSON.stringify({ question: message, language }),
+      })
+      return res.json()
+    }
   },
 }

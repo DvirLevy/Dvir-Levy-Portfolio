@@ -5,6 +5,7 @@ import { DAL } from "../utils/DAL"
 
 export const useBotService = (isOpen: boolean) => {
   const [isThinking, setIsThinking] = useState(false)
+  const [subtitle, setSubtitle] = useState("")
 
   const {
     videoRef,
@@ -32,6 +33,7 @@ export const useBotService = (isOpen: boolean) => {
       }
 
       setIsThinking(true)
+      setSubtitle("")
 
       // Aggressively ensure video is unmuted and playing
       if (videoRef.current) {
@@ -40,7 +42,7 @@ export const useBotService = (isOpen: boolean) => {
           videoRef.current.play().catch(() => {
             if (videoRef.current) {
               videoRef.current.muted = true
-              videoRef.current.play().catch(() => {})
+              videoRef.current.play().catch(() => { })
             }
           })
         }
@@ -49,15 +51,16 @@ export const useBotService = (isOpen: boolean) => {
       try {
         const startTime = Date.now()
         console.log(`[BotService] Asking LLM: "${question}"`)
-        
+
         const data = await DAL.getChatReply(question, "en-US")
+        // Wait to show subtitle until the avatar is actually triggered
         const llmDuration = (Date.now() - startTime) / 1000
         console.log(`[BotService] LLM Reply (${llmDuration.toFixed(1)}s): "${data.reply.substring(0, 50)}..."`)
 
-          // Force English for all replies
+        // Force English for all replies
         if (isOpen && isConnected && streamId && sessionId) {
           const maleVoiceId = "en-US-AndrewNeural"
-          
+
           console.log(`[BotService] Sending to D-ID. Voice: ${maleVoiceId}`)
           const didRes = await DAL.talkToStream(
             streamId,
@@ -71,10 +74,11 @@ export const useBotService = (isOpen: boolean) => {
             console.log(`[BotService] D-ID Talk SUCCESS.`, didData)
             // Show video when avatar starts talking
             setVideoStarted(true)
+            setSubtitle(data.reply)
 
             // Calculate duration
             const wordCount = data.reply.split(/\s+/).length
-            const estimatedDuration = Math.max(wordCount / 2.3, 5) 
+            const estimatedDuration = Math.max(wordCount / 2.3, 5)
             const duration = didData.duration || estimatedDuration
 
             console.log(`[BotService] Est. Duration: ${duration}s. Words: ${wordCount}`)
@@ -84,11 +88,13 @@ export const useBotService = (isOpen: boolean) => {
                 setVideoStarted(false)
                 stopVideoTimeoutRef.current = null
               },
-              duration * 1000 + 2000,
+              // Increase the buffer by 8 seconds to account for D-ID backend generation times
+              // plus WebRTC transit delay before the actual video starts playing
+              duration * 1000 + 8000,
             )
           } else {
             console.warn("[BotService] D-ID Talk failed or SessionError:", didData)
-            
+
             // Re-throw if it's a critical error we want to catch below
             if (didData.kind === "SessionError") {
               throw new Error("D-ID Session expired")
@@ -97,15 +103,15 @@ export const useBotService = (isOpen: boolean) => {
             // Fallback to browser speech if D-ID fails
             const utterance = new SpeechSynthesisUtterance(data.reply)
             utterance.lang = "en-US"
-            
+
             // Try to find a male voice in the browser list
             const voices = window.speechSynthesis.getVoices()
             const maleVoice = voices.find(v => (v.name.includes("Male") || v.name.includes("David") || v.name.includes("Andrew")) && v.lang.startsWith("en"))
-            
+
             if (maleVoice) {
               utterance.voice = maleVoice
             }
-            
+
             window.speechSynthesis.speak(utterance)
           }
         }
@@ -157,5 +163,6 @@ export const useBotService = (isOpen: boolean) => {
     setVideoStarted,
     askBot,
     toggleListening: handleToggleListening,
+    subtitle,
   }
 }

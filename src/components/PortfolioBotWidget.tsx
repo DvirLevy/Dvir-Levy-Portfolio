@@ -24,6 +24,7 @@ export const PortfolioBotWidget = () => {
     setVideoStarted,
     askBot,
     toggleListening,
+    subtitle,
   } = useBotService(isOpen)
 
   const onPlayHandler = () => {
@@ -126,6 +127,25 @@ export const PortfolioBotWidget = () => {
                   ? "Online. Ask me anything!"
                   : "Offline"}
         </p>
+
+        {/* Dynamic Answer */}
+        <div className={`mt-6 w-[90%] overflow-hidden relative h-6 transition-all duration-300 ${videoStarted ? "opacity-100" : "opacity-0"}`}>
+          <p
+            className="absolute text-sm font-medium tracking-wide text-zinc-200 whitespace-nowrap"
+            style={{
+              animation: (subtitle && videoStarted) ? `marquee ${Math.max(15, Math.ceil(subtitle.length / 10))}s linear infinite` : "none",
+            }}
+          >
+            {subtitle || " "}
+          </p>
+        </div>
+
+        <style>{`
+          @keyframes marquee {
+            0% { left: 100%; transform: translateX(0); }
+            100% { left: 0; transform: translateX(-100%); }
+          }
+        `}</style>
 
         {/* Control Desk */}
         <div className="flex flex-wrap items-center justify-center gap-3 mt-6 w-full">
