@@ -37,32 +37,10 @@ export const PortfolioBotWidget = () => {
 
   // Auto-trigger & Manual Event trigger
   useEffect(() => {
-    const hasVisited = localStorage.getItem("hasVisitedBot")
-
     // Always popup on every visit
     const popupTimer = setTimeout(() => {
       setIsOpen(true)
-      
-      if (!hasVisited) {
-        localStorage.setItem("hasVisitedBot", "true")
-        
-        // Wait a brief moment for the modal to render before asking for mic
-        setTimeout(() => {
-          navigator.mediaDevices.getUserMedia({ audio: true })
-            .then((stream) => {
-              // Immediately release the mic, we just wanted to grant the permission & user interaction
-              stream.getTracks().forEach(track => track.stop())
-              setPendingIntro(true)
-            })
-            .catch((err) => {
-              console.log("Mic permission denied or ignored", err)
-              setPendingIntro(true) // Still trigger intro anyway
-            })
-        }, 1000)
-      } else {
-        // Not the first visit - we already have permission memory, so just queue the intro
-        setPendingIntro(true)
-      }
+      setPendingIntro(true)
     }, 2500)
 
     const handleOpen = () => setIsOpen(true)
