@@ -6,6 +6,7 @@ import { DAL } from "../utils/DAL"
 export const useBotService = (isOpen: boolean) => {
   const [isThinking, setIsThinking] = useState(false)
   const [subtitle, setSubtitle] = useState("")
+  const [hasAudioBlocked, setHasAudioBlocked] = useState(false)
 
   const {
     videoRef,
@@ -34,6 +35,7 @@ export const useBotService = (isOpen: boolean) => {
 
       setIsThinking(true)
       setSubtitle("")
+      setHasAudioBlocked(false)
 
       // Aggressively ensure video is unmuted and playing
       if (videoRef.current) {
@@ -42,6 +44,7 @@ export const useBotService = (isOpen: boolean) => {
           videoRef.current.play().catch(() => {
             if (videoRef.current) {
               videoRef.current.muted = true
+              setHasAudioBlocked(true)
               videoRef.current.play().catch(() => { })
             }
           })
@@ -164,5 +167,7 @@ export const useBotService = (isOpen: boolean) => {
     askBot,
     toggleListening: handleToggleListening,
     subtitle,
+    hasAudioBlocked,
+    setHasAudioBlocked,
   }
 }

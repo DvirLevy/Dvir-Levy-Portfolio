@@ -6,12 +6,13 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { Mic, X, MessageCircleQuestion } from "lucide-react"
+import { Mic, X, MessageCircleQuestion, VolumeX } from "lucide-react"
 import { useBotService } from "@/botService"
 import dvirImage from "@/assets/dvir.png"
 
 export const PortfolioBotWidget = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [pendingIntro, setPendingIntro] = useState(false)
 
   // Isolate messy imperative API logic exactly into the custom hook
   const {
@@ -25,6 +26,8 @@ export const PortfolioBotWidget = () => {
     askBot,
     toggleListening,
     subtitle,
+    hasAudioBlocked,
+    setHasAudioBlocked,
   } = useBotService(isOpen)
 
   const onPlayHandler = () => {
@@ -32,21 +35,48 @@ export const PortfolioBotWidget = () => {
 
   }
 
-  // Daily auto-trigger & Manual Event trigger
+  // Auto-trigger & Manual Event trigger
   useEffect(() => {
-    const today = new Date().toDateString()
-    const lastShown = localStorage.getItem("botLastShown")
+    const hasVisited = localStorage.getItem("hasVisitedBot")
 
-    // Automatically popup on first visit of the day
-    if (lastShown !== today) {
-      localStorage.setItem("botLastShown", today)
-      setTimeout(() => setIsOpen(true), 2500)
-    }
+    // Always popup on every visit
+    const popupTimer = setTimeout(() => {
+      setIsOpen(true)
+      
+      if (!hasVisited) {
+        localStorage.setItem("hasVisitedBot", "true")
+        
+        // Wait a brief moment for the modal to render before asking for mic
+        setTimeout(() => {
+          navigator.mediaDevices.getUserMedia({ audio: true })
+            .then((stream) => {
+              // Immediately release the mic, we just wanted to grant the permission & user interaction
+              stream.getTracks().forEach(track => track.stop())
+              setPendingIntro(true)
+            })
+            .catch((err) => {
+              console.log("Mic permission denied or ignored", err)
+              setPendingIntro(true) // Still trigger intro anyway
+            })
+        }, 1000)
+      } else {
+        // Not the first visit - we already have permission memory, so just queue the intro
+        setPendingIntro(true)
+      }
+    }, 2500)
 
     const handleOpen = () => setIsOpen(true)
     window.addEventListener("open-portfolio-bot", handleOpen)
     return () => window.removeEventListener("open-portfolio-bot", handleOpen)
   }, [])
+
+  // Trigger the intro the moment the avatar connects, if permission was granted
+  useEffect(() => {
+    if (isConnected && pendingIntro) {
+      askBot("Who are you?")
+      setPendingIntro(false)
+    }
+  }, [isConnected, pendingIntro, askBot])
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -59,7 +89,15 @@ export const PortfolioBotWidget = () => {
 
         {/* Modern Interactive Video Container */}
         <div
-          onClick={toggleListening}
+          onClick={(e) => {
+            if (hasAudioBlocked && videoRef.current) {
+              e.stopPropagation()
+              videoRef.current.muted = false
+              setHasAudioBlocked(false)
+            } else {
+              toggleListening()
+            }
+          }}
           className={`relative w-64 h-64 rounded-full overflow-hidden border-[6px] transition-all duration-300 shadow-2xl cursor-pointer hover:scale-105 active:scale-95 flex items-center justify-center bg-zinc-900 ${isListening
             ? "border-green-500 shadow-[0_0_30px_rgba(74,222,128,0.4)]"
             : isThinking
@@ -74,6 +112,13 @@ export const PortfolioBotWidget = () => {
               alt="Dvir Levy"
               className="absolute inset-0 w-full h-full object-cover object-center opacity-100 transition-opacity duration-500"
             />
+          )}
+
+          {hasAudioBlocked && (
+            <div className="absolute inset-0 z-40 bg-black/60 flex flex-col items-center justify-center rounded-full">
+               <VolumeX className="w-10 h-10 text-white mb-2 animate-pulse drop-shadow-md" />
+               <span className="text-white text-xs font-bold px-3 py-1 bg-zinc-900/80 rounded-full shadow-lg border border-zinc-700">Tap to Unmute</span>
+            </div>
           )}
 
           {/* Core Video Player */}
