@@ -72,10 +72,16 @@ export const useWebRTC = (isOpen: boolean) => {
     try {
       // 0. Wait for user permission BEFORE touching the D-ID API, solving autoplay policy requirements natively
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-        stream.getTracks().forEach(track => track.stop())
+        const hasRequested = localStorage.getItem("mic_permission_requested")
+        if (!hasRequested) {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+          stream.getTracks().forEach(track => track.stop())
+          localStorage.setItem("mic_permission_requested", "true")
+        }
       } catch (e) {
         console.warn("User blocked or ignored mic permission. Connecting anyway...", e)
+        // Even if they blocked/ignored, we shouldn't keep nagging them on every refresh
+        localStorage.setItem("mic_permission_requested", "true")
       }
 
       // 1. Clean up any orphaned session from previous unclosed sessions (e.g. tab refresh)
