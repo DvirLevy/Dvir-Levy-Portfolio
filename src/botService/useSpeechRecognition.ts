@@ -2,6 +2,7 @@ import { useState, useRef, useCallback } from "react"
 
 export const useSpeechRecognition = (
   onTranscriptComplete: (transcript: string) => void,
+  lang: string = "en-US"
 ) => {
   const [isListening, setIsListening] = useState(false)
   const recognitionRef = useRef<any>(null)
@@ -25,12 +26,13 @@ export const useSpeechRecognition = (
       return alert("Speech Recognition is not supported in this browser.")
 
     const recognition = new SpeechRecognition()
+    recognition.lang = lang
     recognition.continuous = true
     recognition.interimResults = true
     finalTranscriptRef.current = ""
 
     recognition.onstart = () => {
-      console.log("[SpeechRecognition] Started");
+      console.log(`[SpeechRecognition] Started (${lang})`);
       setIsListening(true)
       if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current)
       silenceTimerRef.current = setTimeout(() => stopListening(), 5000)
@@ -60,7 +62,7 @@ export const useSpeechRecognition = (
 
     recognitionRef.current = recognition
     recognition.start()
-  }, [onTranscriptComplete, stopListening])
+  }, [onTranscriptComplete, stopListening, lang])
 
   const toggleListening = useCallback(() => {
     if (isListening) {

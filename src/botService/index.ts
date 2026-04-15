@@ -3,7 +3,7 @@ import { useWebRTC } from "./useWebRTC"
 import { useSpeechRecognition } from "./useSpeechRecognition"
 import { DAL } from "../utils/DAL"
 
-export const useBotService = (isOpen: boolean) => {
+export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US") => {
   const [isThinking, setIsThinking] = useState(false)
   const [subtitle, setSubtitle] = useState("")
   const [hasAudioBlocked, setHasAudioBlocked] = useState(false)
@@ -53,23 +53,27 @@ export const useBotService = (isOpen: boolean) => {
 
       try {
         const startTime = Date.now()
-        console.log(`[BotService] Asking LLM: "${question}"`)
+        console.log(`[BotService] Asking LLM (${selectedLanguage}): "${question}"`)
 
-        const data = await DAL.getChatReply(question, "en-US")
+        const data = await DAL.getChatReply(question, selectedLanguage)
         // Wait to show subtitle until the avatar is actually triggered
         const llmDuration = (Date.now() - startTime) / 1000
         console.log(`[BotService] LLM Reply (${llmDuration.toFixed(1)}s): "${data.reply.substring(0, 50)}..."`)
 
         // Force English for all replies
         if (isOpen && isConnected && streamId && sessionId) {
-          const maleVoiceId = "en-US-AndrewNeural"
+          // Detect actual language of response to pick right voice
+          const actualLanguage = detectLanguage(data.reply)
+          const voiceId = actualLanguage === "he-IL" 
+            ? "he-IL-AvriNeural" 
+            : "en-US-AndrewNeural"
 
-          console.log(`[BotService] Sending to D-ID. Voice: ${maleVoiceId}`)
+          console.log(`[BotService] Sending to D-ID. Voice: ${voiceId} (Detected: ${actualLanguage})`)
           const didRes = await DAL.talkToStream(
             streamId,
             sessionId,
             data.reply,
-            maleVoiceId,
+            voiceId,
           )
 
           const didData = await didRes.json()
@@ -105,11 +109,14 @@ export const useBotService = (isOpen: boolean) => {
 
             // Fallback to browser speech if D-ID fails
             const utterance = new SpeechSynthesisUtterance(data.reply)
-            utterance.lang = "en-US"
+            utterance.lang = actualLanguage
 
             // Try to find a male voice in the browser list
             const voices = window.speechSynthesis.getVoices()
-            const maleVoice = voices.find(v => (v.name.includes("Male") || v.name.includes("David") || v.name.includes("Andrew")) && v.lang.startsWith("en"))
+            const maleVoice = voices.find(v => 
+              (v.name.includes("Male") || v.name.includes("David") || v.name.includes("Andrew") || v.name.includes("Avri")) && 
+              v.lang.startsWith(actualLanguage.split('-')[0])
+            )
 
             if (maleVoice) {
               utterance.voice = maleVoice
@@ -132,11 +139,12 @@ export const useBotService = (isOpen: boolean) => {
       sessionId,
       videoRef,
       setVideoStarted,
+      selectedLanguage, // Added to dependency array
     ],
   )
 
   const { isListening, toggleListening, stopListening } =
-    useSpeechRecognition(askBot)
+    useSpeechRecognition(askBot, selectedLanguage)
 
   // Reset init question flag when closed
   useEffect(() => {

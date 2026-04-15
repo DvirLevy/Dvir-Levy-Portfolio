@@ -71,15 +71,22 @@ export const DAL = {
     if (message.toLowerCase() === "who are you?") {
       // setTimeout(() => {
       return {
-        reply: `Hi, I’m Dvir’s AI assistant — his most advanced AI project:).
-                    Dvir is a AI Software Engineer specializing in LLMs, Rag systems, and scalable AI architectures. He builds AI systems end-to-end — from retrieval pipelines and vector databases to backend services and cloud infrastructure.
-                    Dvir designed and developed a full Rag-based system. look at me!
-                    I’m powered by a vector database, running on AWS with EC2, Docker, Postgres, and N-ginx.
-                    Dvir combines strong backend engineering with AI expertise to deliver scalable, production-ready solutions.
-                    Ask me anything to explore what he can build.`,
+        reply: `היי, אני העוזר AI של דביר
+                דביר הוא מהנדס בינה מלאכותית, מתמחה ב-LLM, מערכות Rag,  וארכיטקטורות AI סקלביליות.
+                דביר בונה מערכות בינה מלאכותית מקצה לקצה. תראו אותי! אני הפרוייקט הכי מתקדם שלו,
+                אני תוצר פיתוח של מערכת שלמה מבוססת Rag,
+                עם תשתיות ענן, מאגר מידע ווקטורי פוסטגרס, docker, AWS, EC2, Nginx 
+                אתם יכולים לשאול אותי כל דבר עליו`,
+
+
+        // reply: `Hi, I’m Dvir’s AI assistant — his most advanced AI project:).
+        //             Dvir is a AI Software Engineer specializing in LLMs, Rag systems, and scalable AI architectures. He builds AI systems end-to-end — from retrieval pipelines and vector databases to backend services and cloud infrastructure.
+        //             Dvir designed and developed a full Rag-based system. look at me!
+        //             I’m powered by a vector database, running on AWS with EC2, Docker, Postgres, and N-ginx.
+        //             Dvir combines strong backend engineering with AI expertise to deliver scalable, production-ready solutions.
+        //             Ask me anything to explore what he can build.`,
         sources: [],
       }
-      // }, 5000)
     }
     else {
 

@@ -6,13 +6,21 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { Mic, X, MessageCircleQuestion, VolumeX } from "lucide-react"
+import { Mic, X, MessageCircleQuestion, VolumeX, Globe } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { useBotService } from "@/botService"
 import dvirImage from "@/assets/dvir.png"
 
 export const PortfolioBotWidget = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [pendingIntro, setPendingIntro] = useState(false)
+  const [language, setLanguage] = useState("en-US")
 
   // Isolate messy imperative API logic exactly into the custom hook
   const {
@@ -28,7 +36,7 @@ export const PortfolioBotWidget = () => {
     subtitle,
     hasAudioBlocked,
     setHasAudioBlocked,
-  } = useBotService(isOpen)
+  } = useBotService(isOpen, language)
 
   const onPlayHandler = () => {
     console.log("D-ID Video: Playing")
@@ -43,7 +51,7 @@ export const PortfolioBotWidget = () => {
       setPendingIntro(true)
     }, 2500)
 
-    const handleOpen = () => setIsOpen(true)
+    const handleOpen = () => setIsOpen(false)
     window.addEventListener("open-portfolio-bot", handleOpen)
     return () => window.removeEventListener("open-portfolio-bot", handleOpen)
   }, [])
@@ -54,7 +62,7 @@ export const PortfolioBotWidget = () => {
       askBot("Who are you?")
       setPendingIntro(false)
     }
-  }, [isConnected, pendingIntro, askBot])
+  }, [isConnected, pendingIntro, askBot, language])
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -64,6 +72,19 @@ export const PortfolioBotWidget = () => {
           Interact with Dvir's AI avatar to learn more about his work and
           experience.
         </DialogDescription>
+
+        <div className="absolute top-4 left-4 z-50">
+          <Select value={language} onValueChange={setLanguage}>
+            <SelectTrigger className="w-[110px] bg-zinc-900/50 border-zinc-700 text-xs h-8 rounded-full focus:ring-0">
+              <Globe className="w-3 h-3 mr-2 text-zinc-400" />
+              <SelectValue placeholder="Language" />
+            </SelectTrigger>
+            <SelectContent className="bg-zinc-900 border-zinc-700 text-white">
+              <SelectItem value="en-US">English</SelectItem>
+              <SelectItem value="he-IL">עברית</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
 
         {/* Modern Interactive Video Container */}
         <div
@@ -94,8 +115,8 @@ export const PortfolioBotWidget = () => {
 
           {hasAudioBlocked && (
             <div className="absolute inset-0 z-40 bg-black/60 flex flex-col items-center justify-center rounded-full">
-               <VolumeX className="w-10 h-10 text-white mb-2 animate-pulse drop-shadow-md" />
-               <span className="text-white text-xs font-bold px-3 py-1 bg-zinc-900/80 rounded-full shadow-lg border border-zinc-700">Tap to Unmute</span>
+              <VolumeX className="w-10 h-10 text-white mb-2 animate-pulse drop-shadow-md" />
+              <span className="text-white text-xs font-bold px-3 py-1 bg-zinc-900/80 rounded-full shadow-lg border border-zinc-700">Tap to Unmute</span>
             </div>
           )}
 
@@ -141,20 +162,21 @@ export const PortfolioBotWidget = () => {
             }`}
         >
           {isConnecting
-            ? "Connecting to Dvir's Avatar..."
+            ? (language === "he-IL" ? "מתחבר לאווטאר של דביר..." : "Connecting to Dvir's Avatar...")
             : isThinking
-              ? "Consulting internal Knowledge Base..."
+              ? (language === "he-IL" ? "מתייעץ עם מאגר הידע..." : "Consulting internal Knowledge Base...")
               : isListening
-                ? "I'm listening..."
+                ? (language === "he-IL" ? "אני מקשיב..." : "I'm listening...")
                 : isConnected
-                  ? "Online. Ask me anything!"
-                  : "Offline"}
+                  ? (language === "he-IL" ? "מחובר. שאל אותי כל דבר!" : "Online. Ask me anything!")
+                  : (language === "he-IL" ? "לא מחובר" : "Offline")}
         </p>
 
         {/* Dynamic Answer */}
         <div className={`mt-6 w-[90%] overflow-hidden relative h-6 transition-all duration-300 ${videoStarted ? "opacity-100" : "opacity-0"}`}>
           <p
-            className="absolute text-sm font-medium tracking-wide text-zinc-200 whitespace-nowrap"
+            className={`absolute text-sm font-medium tracking-wide text-zinc-200 whitespace-nowrap ${language === "he-IL" ? "text-right" : "text-left"}`}
+            dir={language === "he-IL" ? "rtl" : "ltr"}
             style={{
               animation: (subtitle && videoStarted) ? `marquee ${Math.max(15, Math.ceil(subtitle.length / 10))}s linear infinite` : "none",
             }}
@@ -182,17 +204,19 @@ export const PortfolioBotWidget = () => {
               }`}
           >
             <Mic className="w-5 h-5 mr-1.5" />
-            {isListening ? "STOP LISTENING" : "ASK ME"}
+            {isListening
+              ? (language === "he-IL" ? "הפסק להקשיב" : "STOP LISTENING")
+              : (language === "he-IL" ? "שאל אותי" : "ASK ME")}
           </Button>
 
           <Button
             variant="secondary"
-            onClick={() => askBot("Who are you?")}
+            onClick={() => askBot(language === "he-IL" ? "מי אתה?" : "Who are you?")}
             disabled={!isConnected || isThinking || isListening || videoStarted}
             className="flex-1 min-w-[130px] rounded-full font-semibold border border-zinc-700 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 shadow-lg transition-colors"
           >
             <MessageCircleQuestion className="w-4 h-4 mr-1.5" />
-            WHO AM I?
+            {language === "he-IL" ? "מי אני?" : "WHO AM I?"}
           </Button>
 
           <Button
@@ -201,7 +225,7 @@ export const PortfolioBotWidget = () => {
             className="flex-none rounded-full px-4 border border-zinc-800 bg-zinc-900/50 hover:bg-red-500/20 hover:text-red-400 hover:border-red-500/50 shadow-lg transition-all"
           >
             <X className="w-4 h-4 mr-1.5" />
-            CLOSE
+            {language === "he-IL" ? "סגור" : "CLOSE"}
           </Button>
         </div>
       </DialogContent>
