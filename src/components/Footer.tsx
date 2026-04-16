@@ -112,15 +112,15 @@ const Footer = () => {
                 >
                   <Mail className="h-5 w-5" />
                 </a>
-                {/* <a
+                <a
                   id="resumeLinkFooter"
-                  href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Resume.pdf"
+                  href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+AI+Engineer.pdf"
                   className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center"
                   target='_blank'
-                  rel="noopener noreferrer"           
+                  rel="noopener noreferrer"
                 >
-                  <FileUser className="h-5 w-5"/>
-                </a> */}
+                  <FileUser className="h-5 w-5" />
+                </a>
                 <img
                   src={wa.s3}
                   alt={wa.name}
