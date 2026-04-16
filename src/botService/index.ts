@@ -24,7 +24,7 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
   const stopVideoTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const askBot = useCallback(
-    async (question: string) => {
+    async (question: string, onRender = false) => {
       if (!question || isThinking || !isOpen || !isConnected) return
 
       // Clear any pending video stop timer
@@ -64,8 +64,8 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
         if (isOpen && isConnected && streamId && sessionId) {
           // Detect actual language of response to pick right voice
           const actualLanguage = detectLanguage(data.reply)
-          const voiceId = actualLanguage === "he-IL" 
-            ? "he-IL-AvriNeural" 
+          const voiceId = actualLanguage === "he-IL"
+            ? "he-IL-AvriNeural"
             : "en-US-AndrewNeural"
 
           console.log(`[BotService] Sending to D-ID. Voice: ${voiceId} (Detected: ${actualLanguage})`)
@@ -113,8 +113,8 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
 
             // Try to find a male voice in the browser list
             const voices = window.speechSynthesis.getVoices()
-            const maleVoice = voices.find(v => 
-              (v.name.includes("Male") || v.name.includes("David") || v.name.includes("Andrew") || v.name.includes("Avri")) && 
+            const maleVoice = voices.find(v =>
+              (v.name.includes("Male") || v.name.includes("David") || v.name.includes("Andrew") || v.name.includes("Avri")) &&
               v.lang.startsWith(actualLanguage.split('-')[0])
             )
 

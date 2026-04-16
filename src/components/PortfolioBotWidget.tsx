@@ -59,7 +59,7 @@ export const PortfolioBotWidget = () => {
   // Trigger the intro the moment the avatar connects, if permission was granted
   useEffect(() => {
     if (isConnected && pendingIntro) {
-      askBot("Who are you?")
+      askBot("Who are you?", true)
       setPendingIntro(false)
     }
   }, [isConnected, pendingIntro, askBot, language])
