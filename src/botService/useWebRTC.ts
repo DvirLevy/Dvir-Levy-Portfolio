@@ -6,6 +6,7 @@ export const useWebRTC = (isOpen: boolean) => {
   const [isConnecting, setIsConnecting] = useState(false)
   const [isConnected, setIsConnected] = useState(false)
   const [videoStarted, setVideoStarted] = useState(false)
+  const [isVideoVisible, setIsVideoVisible] = useState(false)
 
   const videoRef = useRef<HTMLVideoElement>(null)
   const peerConnectionRef = useRef<RTCPeerConnection | null>(null)
@@ -52,6 +53,7 @@ export const useWebRTC = (isOpen: boolean) => {
     setIsConnected(false)
     setIsConnecting(false)
     setVideoStarted(false)
+    setIsVideoVisible(false)
   }, [videoRef])
 
   const connectDID = useCallback(async () => {
@@ -273,6 +275,8 @@ export const useWebRTC = (isOpen: boolean) => {
     videoRef,
     isConnecting,
     isConnected,
+    isVideoVisible,
+    setIsVideoVisible,
     videoStarted,
     setVideoStarted,
     streamId: streamIdRef.current,

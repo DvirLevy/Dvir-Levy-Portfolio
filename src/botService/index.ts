@@ -5,6 +5,7 @@ import { DAL } from "../utils/DAL"
 
 export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US") => {
   const [isThinking, setIsThinking] = useState(false)
+  const [botLanguage, setBotLanguage] = useState(selectedLanguage)
   const [subtitle, setSubtitle] = useState("")
   const [hasAudioBlocked, setHasAudioBlocked] = useState(false)
 
@@ -12,12 +13,16 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
     videoRef,
     isConnecting,
     isConnected,
-    videoStarted,
+    isVideoVisible,
+    setIsVideoVisible,
     setVideoStarted,
+    videoStarted,
     streamId,
     sessionId,
     closeConnections,
   } = useWebRTC(isOpen)
+
+  const videoBuffer: number = 12000
 
   const detectLanguage = (text: string) =>
     /[\u0590-\u05FF]/.test(text) ? "he-IL" : "en-US"
@@ -55,20 +60,23 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
         const startTime = Date.now()
         console.log(`[BotService] Asking LLM (${selectedLanguage}): "${question}"`)
 
-        const data = await DAL.getChatReply(question, selectedLanguage)
+        const data = await DAL.getChatReply(question, selectedLanguage, onRender)
         // Wait to show subtitle until the avatar is actually triggered
         const llmDuration = (Date.now() - startTime) / 1000
         console.log(`[BotService] LLM Reply (${llmDuration.toFixed(1)}s): "${data.reply.substring(0, 50)}..."`)
 
         // Force English for all replies
         if (isOpen && isConnected && streamId && sessionId) {
-          // Detect actual language of response to pick right voice
-          const actualLanguage = detectLanguage(data.reply)
+          // Use server-returned language or fallback to detection
+          const actualLanguage = data.language || detectLanguage(data.reply)
+          setBotLanguage(actualLanguage)
+
           const voiceId = actualLanguage === "he-IL"
             ? "he-IL-AvriNeural"
             : "en-US-AndrewNeural"
 
           console.log(`[BotService] Sending to D-ID. Voice: ${voiceId} (Detected: ${actualLanguage})`)
+          setIsVideoVisible(true)
           const didRes = await DAL.talkToStream(
             streamId,
             sessionId,
@@ -78,9 +86,9 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
 
           const didData = await didRes.json()
           if (didRes.ok && didData.kind !== "SessionError") {
-            console.log(`[BotService] D-ID Talk SUCCESS.`, didData)
-            // Show video when avatar starts talking
             setVideoStarted(true)
+            console.log(`[BotService] D-ID Talk SUCCESS.`, didData)
+            // Set subtitle immediately — video will show when onPlaying fires (actual frames)
             setSubtitle(data.reply)
 
             // Calculate duration
@@ -93,11 +101,12 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
             stopVideoTimeoutRef.current = setTimeout(
               () => {
                 setVideoStarted(false)
+                setIsVideoVisible(false)
                 stopVideoTimeoutRef.current = null
               },
               // Increase the buffer by 8 seconds to account for D-ID backend generation times
               // plus WebRTC transit delay before the actual video starts playing
-              duration * 1000 + 8000,
+              duration * 1000 + videoBuffer,
             )
           } else {
             console.warn("[BotService] D-ID Talk failed or SessionError:", didData)
@@ -172,9 +181,12 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
     isThinking,
     videoStarted,
     setVideoStarted,
+    isVideoVisible,
+    setIsVideoVisible,
     askBot,
     toggleListening: handleToggleListening,
     subtitle,
+    botLanguage,
     hasAudioBlocked,
     setHasAudioBlocked,
   }

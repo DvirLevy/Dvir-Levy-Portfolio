@@ -21,6 +21,7 @@ export const PortfolioBotWidget = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [pendingIntro, setPendingIntro] = useState(false)
   const [language, setLanguage] = useState("en-US")
+  // const [isVideoVisable, setIsVideoVisable] = useState(false)
 
   // Isolate messy imperative API logic exactly into the custom hook
   const {
@@ -31,9 +32,12 @@ export const PortfolioBotWidget = () => {
     isThinking,
     videoStarted,
     setVideoStarted,
+    setIsVideoVisible,
+    isVideoVisible,
     askBot,
     toggleListening,
     subtitle,
+    botLanguage,
     hasAudioBlocked,
     setHasAudioBlocked,
   } = useBotService(isOpen, language)
@@ -51,14 +55,21 @@ export const PortfolioBotWidget = () => {
       setPendingIntro(true)
     }, 2500)
 
-    const handleOpen = () => setIsOpen(false)
+    const handleOpen = () => {
+      setIsOpen(true)
+      // setPendingIntro(true)
+    }
     window.addEventListener("open-portfolio-bot", handleOpen)
-    return () => window.removeEventListener("open-portfolio-bot", handleOpen)
+    return () => {
+      clearTimeout(popupTimer)
+      window.removeEventListener("open-portfolio-bot", handleOpen)
+    }
   }, [])
 
   // Trigger the intro the moment the avatar connects, if permission was granted
   useEffect(() => {
     if (isConnected && pendingIntro) {
+      videoRef.current.play().catch(() => { })
       askBot("Who are you?", true)
       setPendingIntro(false)
     }
@@ -123,17 +134,15 @@ export const PortfolioBotWidget = () => {
           {/* Core Video Player */}
           <video
             ref={videoRef}
-            className={`w-full h-full object-cover object-center relative z-20 transition-opacity duration-500 ${videoStarted ? "opacity-100" : "opacity-0"}`}
+            className={`w-full h-full object-cover object-center relative z-20 transition-opacity duration-300 ${videoStarted ? "opacity-100" : "opacity-0"}`}
             autoPlay
             playsInline
             muted
-            onPlaying={() => setVideoStarted(true)}
-            onPlay={() => onPlayHandler}
+            onCanPlay={() => console.log('D-ID Video: Can Play')}
+            onPlaying={() => console.log('D-ID Video: Playing')}
+            onPlay={() => console.log("D-ID Video: Playing")}
             onPause={() => console.log("D-ID Video: Paused")}
-            onEnded={() => {
-              console.log("D-ID Video: Ended")
-              setVideoStarted(false)
-            }}
+            onEnded={() => { console.log("D-ID Video: Ended") }}
             onError={(e) => {
               const video = e.target as HTMLVideoElement;
               console.error("D-ID Video Error Details:", {
@@ -172,25 +181,21 @@ export const PortfolioBotWidget = () => {
                   : (language === "he-IL" ? "לא מחובר" : "Offline")}
         </p>
 
-        {/* Dynamic Answer */}
-        <div className={`mt-6 w-[90%] overflow-hidden relative h-6 transition-all duration-300 ${videoStarted ? "opacity-100" : "opacity-0"}`}>
+        {/* Dynamic Answer — visible as soon as subtitle is set to prevent synchronization lag */}
+        <div className={`mt-6 w-[90%] overflow-hidden relative h-6 transition-all duration-100 ${isVideoVisible ? "opacity-100" : "opacity-0"}`}>
           <p
-            className={`absolute text-sm font-medium tracking-wide text-zinc-200 whitespace-nowrap ${language === "he-IL" ? "text-right" : "text-left"}`}
-            dir={language === "he-IL" ? "rtl" : "ltr"}
+            key={`${subtitle}-${botLanguage}`}
+            data-language={botLanguage}
+            className="absolute text-sm font-medium tracking-wide text-zinc-200 whitespace-nowrap"
             style={{
-              animation: (subtitle && videoStarted) ? `marquee ${Math.max(15, Math.ceil(subtitle.length / 10))}s linear infinite` : "none",
+              animation: isVideoVisible //try video started
+                ? `${botLanguage?.startsWith("he") ? "marquee-ltr" : "marquee-rtl"} ${Math.max(15, Math.ceil(subtitle.length / 10))}s linear infinite`
+                : "none",
             }}
           >
             {subtitle || " "}
           </p>
         </div>
-
-        <style>{`
-          @keyframes marquee {
-            0% { left: 100%; transform: translateX(0); }
-            100% { left: 0; transform: translateX(-100%); }
-          }
-        `}</style>
 
         {/* Control Desk */}
         <div className="flex flex-wrap items-center justify-center gap-3 mt-6 w-full">
