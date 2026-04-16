@@ -58,7 +58,7 @@ const Hero = () => {
       date: new Date().toString(),
     })
     const url =
-      "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/DvirLevyAutomationEngineer.pdf"
+      "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+AI+Engineer.pdf"
     window.open(url, "_blank", "noopener,noreferrer")
   }
 
@@ -154,21 +154,21 @@ const Hero = () => {
             >
               Contact Me
             </Button>
-            {/* <Button
-              size="lg" 
-              variant="outline" 
+            <Button
+              size="lg"
+              variant="outline"
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
-              onClick={()=>getResume()}
+              onClick={() => getResume()}
               id="downloadResumeBtn"
-            > */}
-            {/* <a
+            >
+              <a
                 href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Resume.pdf"
                 target='_blank'
                 rel="noopener noreferrer"
-              > */}
-            {/* Download my Resume */}
-            {/* </a> */}
-            {/* </Button> */}
+              >
+                Download my Resume
+              </a>
+            </Button>
           </div>
 
           {/* Social Links */}
