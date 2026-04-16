@@ -30,7 +30,7 @@ const Projects = () => {
       highlight: true,
       imgS3:
         "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/ragPic.jpeg",
-      githubUrl: "https://github.com/DvirLevy/protofolio-bot-server",
+      githubUrl: "https://github.com/DvirLevy/portfolio-bot-server",
     },
     {
       id: "cloudDrivenAuthomation",
@@ -154,16 +154,6 @@ const Projects = () => {
       whaloLogo:
         "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/whalo-logo.png",
     },
-    // {
-    //   id: " e2eAutomation",
-    //   title: "E2E Automation Framework",
-    //   description: "Architected and implemented comprehensive E2E testing framework using Playwright from scratch at Jifiti. Includes project architecture, test design patterns, and best practices implementation.",
-    //   tags: ["Playwright", "TypeScript", "CI/CD", "Test Automation", "Azure DevOps"],
-    //   type: "Automation",
-    //   highlight: true,
-    //   imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/e2e-automation.jpg",
-    //   githubUrl: null
-    // },
     {
       id: "preformance",
       title: "Performance System Suite",

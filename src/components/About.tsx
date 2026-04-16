@@ -76,17 +76,6 @@ const About = () => {
                 Professional Background
               </h3>
               <div className="space-y-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
-                {/* <p className="whitespace-pre-line">
-                  <span className="font-bold">Senior Automation Engineer</span>,
-                  with hands-on experience designing and developing end-to-end
-                  automation frameworks and internal tools. Strong background in
-                  building automation solutions that include frontend components
-                  using React and TypeScript, alongside cloud-based
-                  implementations on AWS. Experienced in integrating automation
-                  with backend services, CI/CD pipelines, and
-                  infrastructure-driven workflows in production environments.
-                </p> */}
-
                 <div className="whitespace-pre-line">
                   In my current role at
                   <span className="font-bold">
