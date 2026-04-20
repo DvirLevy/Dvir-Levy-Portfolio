@@ -1,5 +1,5 @@
-// const BACKEND_URL = "http://localhost:3000"
-const BACKEND_URL = `${import.meta.env.VITE_BACKEND_URL}`
+const BACKEND_URL = "http://localhost:3000"
+// const BACKEND_URL = `${import.meta.env.VITE_BACKEND_URL}`
 const HEADERS = {
   "Content-Type": "application/json",
   "ngrok-skip-browser-warning": "true",
@@ -67,29 +67,19 @@ export const DAL = {
     return res // Some DELETE requests might not return JSON
   },
 
-  getChatReply: async (message: string, language: string, onRender: boolean = false) => {
+  getChatReply: async (
+    message: string,
+    language: string,
+    onRender: boolean = false,
+    isMessage: boolean = false,
+  ) => {
     console.log(onRender)
-    // if (message.toLowerCase() === "who are you?") {
-    //   // setTimeout(() => {
-    //   return {
-    //     reply: `Hi, I’m Dvir’s AI assistant — his most advanced AI project:).
-    //                 Dvir is a AI Software Engineer specializing in LLMs, Rag systems, and scalable AI architectures. He builds AI systems end-to-end — from retrieval pipelines and vector databases to backend services and cloud infrastructure.
-    //                 Dvir designed and developed a full Rag-based system. look at me!
-    //                 I’m powered by a vector database, running on AWS with EC2, Docker, Postgres, and N-ginx.
-    //                 Dvir combines strong backend engineering with AI expertise to deliver scalable, production-ready solutions.
-    //                 Ask me anything to explore what he can build.`,
-    //     sources: [],
-    //   }
-    //   // }, 5000)
-    // }
-    // else {
 
     const res = await fetch(`${BACKEND_URL}/api/rag/ask`, {
       method: "POST",
       headers: HEADERS,
-      body: JSON.stringify({ question: message, language, onRender }),
+      body: JSON.stringify({ question: message, language, onRender, isMessage }),
     })
     return res.json()
-    // }
   },
 }

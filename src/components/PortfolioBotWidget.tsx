@@ -6,7 +6,8 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { Mic, X, MessageCircleQuestion, VolumeX, Globe } from "lucide-react"
+import { Mic, X, MessageCircleQuestion, VolumeX, Globe, Send } from "lucide-react"
+import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
@@ -21,6 +22,7 @@ export const PortfolioBotWidget = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [pendingIntro, setPendingIntro] = useState(false)
   const [language, setLanguage] = useState("en-US")
+  const [textInput, setTextInput] = useState("")
   // const [isVideoVisable, setIsVideoVisable] = useState(false)
 
   // Isolate messy imperative API logic exactly into the custom hook
@@ -74,6 +76,13 @@ export const PortfolioBotWidget = () => {
       setPendingIntro(false)
     }
   }, [isConnected, pendingIntro, askBot, language])
+
+  const handleSendText = () => {
+    if (textInput.trim() && isConnected && !isThinking && !isListening) {
+      askBot(textInput.trim(), false, true)
+      setTextInput("")
+    }
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -231,6 +240,36 @@ export const PortfolioBotWidget = () => {
           >
             <X className="w-4 h-4 mr-1.5" />
             {language === "he-IL" ? "סגור" : "CLOSE"}
+          </Button>
+        </div>
+
+        {/* Text Input Area */}
+        <div className="relative w-full mt-6 group">
+          <Input
+            type="text"
+            placeholder={
+              language === "he-IL" ? "הקלד שאלה פה..." : "Type your question..."
+            }
+            value={textInput}
+            onChange={(e) => setTextInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSendText()
+              }
+            }}
+            disabled={!isConnected || isThinking || isListening}
+            dir={language === "he-IL" ? "rtl" : "ltr"}
+            className="w-full bg-zinc-900/40 border-zinc-800 focus:border-emerald-500/50 focus:ring-emerald-500/20 rounded-2xl h-14 pl-5 pr-14 text-zinc-100 placeholder:text-zinc-600 transition-all duration-300 backdrop-blur-sm"
+          />
+          <Button
+            size="icon"
+            onClick={handleSendText}
+            disabled={
+              !isConnected || isThinking || isListening || !textInput.trim()
+            }
+            className="absolute top-2 right-2 w-10 h-10 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition-all duration-300 active:scale-90 shadow-lg shadow-emerald-900/20"
+          >
+            <Send className="w-5 h-5" />
           </Button>
         </div>
       </DialogContent>
