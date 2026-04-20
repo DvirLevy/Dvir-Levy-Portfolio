@@ -29,7 +29,7 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
   const stopVideoTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const askBot = useCallback(
-    async (question: string, onRender = false) => {
+    async (question: string, onRender = false, isMessage = false) => {
       if (!question || isThinking || !isOpen || !isConnected) return
 
       // Clear any pending video stop timer
@@ -50,7 +50,7 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
             if (videoRef.current) {
               videoRef.current.muted = true
               setHasAudioBlocked(true)
-              videoRef.current.play().catch(() => { })
+              videoRef.current.play().catch(() => {})
             }
           })
         }
@@ -58,9 +58,16 @@ export const useBotService = (isOpen: boolean, selectedLanguage: string = "en-US
 
       try {
         const startTime = Date.now()
-        console.log(`[BotService] Asking LLM (${selectedLanguage}): "${question}"`)
+        console.log(
+          `[BotService] Asking LLM (${selectedLanguage}): "${question}"`,
+        )
 
-        const data = await DAL.getChatReply(question, selectedLanguage, onRender)
+        const data = await DAL.getChatReply(
+          question,
+          selectedLanguage,
+          onRender,
+          isMessage,
+        )
         // Wait to show subtitle until the avatar is actually triggered
         const llmDuration = (Date.now() - startTime) / 1000
         console.log(`[BotService] LLM Reply (${llmDuration.toFixed(1)}s): "${data.reply.substring(0, 50)}..."`)
