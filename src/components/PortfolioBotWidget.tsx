@@ -86,14 +86,14 @@ export const PortfolioBotWidget = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-md flex flex-col items-center justify-center p-8 bg-zinc-950/90 backdrop-blur-xl border-zinc-800 text-white rounded-2xl shadow-2xl">
+      <DialogContent id="portfolio-bot-dialog" className="sm:max-w-md flex flex-col items-center justify-center p-8 bg-zinc-950/90 backdrop-blur-xl border-zinc-800 text-white rounded-2xl shadow-2xl">
         <DialogTitle className="sr-only">AI Portfolio Assistant</DialogTitle>
         <DialogDescription className="sr-only">
           Interact with Dvir's AI avatar to learn more about his work and
           experience.
         </DialogDescription>
 
-        <div className="absolute top-4 left-4 z-50">
+        <div id="languageSelection" className="absolute top-4 left-4 z-50">
           <Select value={language} onValueChange={setLanguage}>
             <SelectTrigger className="w-[110px] bg-zinc-900/50 border-zinc-700 text-xs h-8 rounded-full focus:ring-0">
               <Globe className="w-3 h-3 mr-2 text-zinc-400" />
@@ -209,6 +209,7 @@ export const PortfolioBotWidget = () => {
         {/* Control Desk */}
         <div className="flex flex-wrap items-center justify-center gap-3 mt-6 w-full">
           <Button
+            id="askMeButton"
             variant="default"
             onClick={toggleListening}
             disabled={!isConnected || isThinking || videoStarted}
@@ -224,6 +225,7 @@ export const PortfolioBotWidget = () => {
           </Button>
 
           <Button
+            id="whoAmIBtn"
             variant="secondary"
             onClick={() => askBot(language === "he-IL" ? "מי אתה?" : "Who are you?")}
             disabled={!isConnected || isThinking || isListening || videoStarted}
@@ -234,6 +236,7 @@ export const PortfolioBotWidget = () => {
           </Button>
 
           <Button
+            id="closeBtn"
             variant="ghost"
             onClick={() => setIsOpen(false)}
             className="flex-none rounded-full px-4 border border-zinc-800 bg-zinc-900/50 hover:bg-red-500/20 hover:text-red-400 hover:border-red-500/50 shadow-lg transition-all"
@@ -246,6 +249,7 @@ export const PortfolioBotWidget = () => {
         {/* Text Input Area */}
         <div className="relative w-full mt-6 group">
           <Input
+            id="chatInput"
             type="text"
             placeholder={
               language === "he-IL" ? "הקלד שאלה פה..." : "Type your question..."
@@ -262,6 +266,7 @@ export const PortfolioBotWidget = () => {
             className="w-full bg-zinc-900/40 border-zinc-800 focus:border-emerald-500/50 focus:ring-emerald-500/20 rounded-2xl h-14 pl-5 pr-14 text-zinc-100 placeholder:text-zinc-600 transition-all duration-300 backdrop-blur-sm"
           />
           <Button
+            id="sendBtn"
             size="icon"
             onClick={handleSendText}
             disabled={
