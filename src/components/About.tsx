@@ -18,7 +18,7 @@ const About = () => {
       icon: ServerCog,
       title: "Backend Development",
       description:
-        "Designing scalable backend systems with Node.js, TypeScript, and API-driven architectures.",
+        "Designing scalable backend systems with Python, Node.js, TypeScript, and API-driven architectures.",
     },
     {
       icon: Code2,
