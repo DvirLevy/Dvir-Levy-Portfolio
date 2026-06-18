@@ -27,10 +27,39 @@ const Projects = () => {
       // prettier-ignore
       tags: ["LangChain", "OpenAI", "RAG", "PostgreSQL (pgvector)", "Node.js", "Express", "React", "TypeScript", "AWS EC2", "Nginx", "PM2"],
       type: "Development",
+      imgFit: "contain",
+      roleLabel: "Full Stack Engineering",
       highlight: true,
       imgS3:
         "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/ragPic.jpeg",
       githubUrl: "https://github.com/DvirLevy/portfolio-bot-server",
+    },
+    {
+      id: "telegramChatBot",
+      title: "Telegram Bridge Chat",
+      description: `Built a production-quality real-time bridge connecting a React frontend (with multiple named participants) to a single Telegram user, using WebSockets and the Telegram Bot API.
+                    Designed a layered FastAPI backend (API / BL / DAL / Infrastructure) with async PostgreSQL persistence, asyncio-based concurrency safety for turn-taking, and Docker Compose orchestration.`,
+      tags: [
+        "FastAPI",
+        "WebSockets",
+        "Python",
+        "python-telegram-bot",
+        "PostgreSQL",
+        "SQLAlchemy",
+        "Alembic",
+        "AsyncIO",
+        "Docker",
+        "Pytest",
+        "React",
+        "TypeScript",
+      ],
+      type: "Development",
+      roleLabel: "Full Stack Engineering",
+      highlight: true,
+      imgS3: "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/chat-pic-mobile.jpeg",
+      imgFit: "contain",
+      githubUrlFrontend: "https://github.com/DvirLevy/chat-bot-fe",
+      githubUrlBackend: "https://github.com/DvirLevy/chat-bot-be",
     },
     {
       id: "cloudDrivenAuthomation",
@@ -53,6 +82,7 @@ const Projects = () => {
       highlight: true,
       runAutomation: true,
       report: true,
+      imgFit: "contain",
       runBtnText: "Run Portfolio Automation Test",
       reportUrl: "https://dvirlevy.github.io/protofolio-automation-test/",
       imgS3:
@@ -78,8 +108,6 @@ const Projects = () => {
       highlight: true,
       imgS3:
         "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/live-logs.jpg",
-      githubUrl:
-        "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Puttier",
       linkedinPost:
         "https://www.linkedin.com/feed/update/urn:li:activity:7185871122930749441/",
     },
@@ -102,8 +130,6 @@ const Projects = () => {
       highlight: true,
       imgS3:
         "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/sql-analytics.jpg",
-      githubUrl:
-        "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/Analytics",
     },
     {
       id: "dataFetcher",
@@ -122,8 +148,6 @@ const Projects = () => {
       type: "Development",
       imgS3:
         "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/analytics-config.jpg",
-      githubUrl:
-        "https://github.com/DvirLevy/Meron/tree/main/src/renderer/src/components/UserId",
     },
     {
       id: "fof",
@@ -145,6 +169,7 @@ const Projects = () => {
       type: "Development",
       highlight: false,
       runAutomation: false,
+      imgFit: "contain",
       report: false,
       runBtnText: "Run Fish of Fortune Automation Test",
       reportUrl: "https://dvirlevy.github.io/whalo-api-automtation-assignment/",
@@ -184,6 +209,7 @@ const Projects = () => {
         "Designed and developed an elegant digital invitation platform for a housewarming celebration. Features interactive RSVP functionality, responsive design, and a beautiful user experience.",
       tags: ["React", "Lovable-AI", "Vite", "Frontend"],
       type: "Development",
+      imgFit: "contain",
       imgS3:
         "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/projects/housewarming.jpg",
       githubUrl: "https://github.com/DvirLevy/levys",
@@ -273,11 +299,21 @@ const Projects = () => {
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {/* Project Image */}
-                  <div className="relative h-48 overflow-hidden">
+                  <div
+                    className={`relative overflow-hidden ${
+                      project.imgFit === "contain"
+                        ? "h-64 sm:h-72 bg-zinc-950 flex items-center justify-center"
+                        : "h-48"
+                    }`}
+                  >
                     <img
                       src={project.imgS3}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      className={
+                        project.imgFit === "contain"
+                          ? "h-full w-auto max-w-full object-contain transition-transform duration-300 hover:scale-105"
+                          : "w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      }
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                   </div>
@@ -285,16 +321,23 @@ const Projects = () => {
                   <div className="p-6 sm:p-8 space-y-4">
                     {/* Project Type Badge & Links */}
                     <div className="flex items-center justify-between">
-                      <Badge
-                        variant={
-                          project.type === "Automation"
-                            ? "secondary"
-                            : "default"
-                        }
-                        className="font-medium"
-                      >
-                        {project.type}
-                      </Badge>
+                      <div className="flex gap-2">
+                        <Badge
+                          variant={
+                            project.type === "Automation"
+                              ? "secondary"
+                              : "default"
+                          }
+                          className="font-medium"
+                        >
+                          {project.type}
+                        </Badge>
+                        {project.roleLabel && (
+                          <Badge variant="outline" className="font-medium">
+                            {project.roleLabel}
+                          </Badge>
+                        )}
+                      </div>
                       <div className="flex gap-2">
                         {project.highlight && (
                           <Badge
@@ -350,6 +393,30 @@ const Projects = () => {
                           >
                             <Github className="mr-2 h-4 w-4" />
                             View Code
+                          </a>
+                        </Button>
+                      )}
+                      {project.githubUrlFrontend && (
+                        <Button variant="outline" size="sm" asChild>
+                          <a
+                            href={project.githubUrlFrontend}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Github className="mr-2 h-4 w-4" />
+                            Frontend Code
+                          </a>
+                        </Button>
+                      )}
+                      {project.githubUrlBackend && (
+                        <Button variant="outline" size="sm" asChild>
+                          <a
+                            href={project.githubUrlBackend}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Github className="mr-2 h-4 w-4" />
+                            Backend Code
                           </a>
                         </Button>
                       )}

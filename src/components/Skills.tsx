@@ -20,6 +20,7 @@ const Skills = () => {
       icon: "⚡",
       skills: [
         "Node.js",
+        "Python",
         "Express",
         "TypeScript",
         "Micro Services",
@@ -28,6 +29,7 @@ const Skills = () => {
         "PM2",
         "Nginx",
         "ngrok",
+        "Websockets",
       ],
     },
     {
