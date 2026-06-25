@@ -13,7 +13,7 @@ export const DAL = {
     })
   },
 
-  submitIceCandidate: async (streamId: string, candidateData: any) => {
+  submitIceCandidate: async (streamId: string, candidateData: RTCIceCandidateInit) => {
     const res = await fetch(`${BACKEND_URL}/api/did/ice/${streamId}`, {
       method: "POST",
       headers: HEADERS,
