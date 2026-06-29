@@ -53,3 +53,4 @@ See [CLAUDE.md](./CLAUDE.md) for a deeper architecture overview (backend surface
 
 - GitHub Actions runs the unit test suite and a production build on every pull request into `main` and on every push to `main` (see `.github/workflows/ci.yml`).
 - The site is deployed on Netlify: once a pull request is approved and merged into `main`, an automated pipeline runs `npm run build` and deploys the output from the `dist` directory.
+    
