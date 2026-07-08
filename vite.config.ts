@@ -18,4 +18,14 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes(path.join("src", "components", "Hero"))) return "hero"
+          if (id.includes(path.join("src", "components", "Footer"))) return "footer"
+        },
+      },
+    },
+  },
 }))

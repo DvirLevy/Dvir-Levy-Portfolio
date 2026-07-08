@@ -201,12 +201,14 @@ const Hero = () => {
             >
               <Mail className="h-5 w-5" />
             </a>
-            <img
-              src={wa.s3}
-              alt={wa.name}
-              className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
+            <button
+              type="button"
               onClick={handleWa}
-            />
+              aria-label="Chat on WhatsApp"
+              className="w-12 h-12 rounded-full bg-card hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center shadow-md hover:shadow-glow card-hover"
+            >
+              <img src={wa.s3} alt="" width={20} height={20} />
+            </button>
           </div>
         </div>
 
@@ -234,6 +236,7 @@ const Hero = () => {
                     <img
                       src={company.s3}
                       alt={`${company.name} logo`}
+                      loading="lazy"
                       className={
                         company.name == "ironSource"
                           ? "h-24 md:h-36 w-auto scale-750"
