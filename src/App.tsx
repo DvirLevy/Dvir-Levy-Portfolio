@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react"
 import { Toaster } from "@/components/ui/toaster"
 import { Toaster as Sonner } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
@@ -6,7 +7,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Index from "./pages/Index"
 import NotFound from "./pages/NotFound"
-import { PortfolioBotWidget } from "./components/PortfolioBotWidget"
+
+const PortfolioBotWidget = lazy(() =>
+  import("./components/PortfolioBotWidget").then((m) => ({ default: m.PortfolioBotWidget })),
+)
 
 const queryClient = new QueryClient()
 
@@ -23,7 +27,9 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-        <PortfolioBotWidget />
+        <Suspense fallback={null}>
+          <PortfolioBotWidget />
+        </Suspense>
       </TooltipProvider>
     </QueryClientProvider>
   </ThemeProvider>

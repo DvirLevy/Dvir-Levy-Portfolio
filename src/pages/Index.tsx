@@ -1,9 +1,11 @@
+import { Suspense, lazy } from "react"
 import Hero from "@/components/Hero"
 import About from "@/components/About"
 import Skills from "@/components/Skills"
-import Projects from "@/components/Projects"
-import Contact from "@/components/Contact"
 import Footer from "@/components/Footer"
+
+const Projects = lazy(() => import("@/components/Projects"))
+const Contact = lazy(() => import("@/components/Contact"))
 
 const Index = () => {
   return (
@@ -11,8 +13,12 @@ const Index = () => {
       <Hero />
       <About />
       <Skills />
-      <Projects />
-      <Contact />
+      <Suspense fallback={<div className="min-h-[50vh]" />}>
+        <Projects />
+      </Suspense>
+      <Suspense fallback={<div className="min-h-[50vh]" />}>
+        <Contact />
+      </Suspense>
       <Footer />
     </div>
   )
