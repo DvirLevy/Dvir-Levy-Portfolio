@@ -67,8 +67,6 @@ const Contact = () => {
       toast.error("error try again")
       console.log(formError)
     } else {
-      console.log("from handleSubmit")
-      console.log(getInTouchForm)
       await LambdaService.EmailServiceLambda(getInTouchForm)
       toast.success("Message sent successfully! I'll get back to you soon.")
     }
