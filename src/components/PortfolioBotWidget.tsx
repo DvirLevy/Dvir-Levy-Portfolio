@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react"
 import {
   Dialog,
@@ -51,11 +52,16 @@ export const PortfolioBotWidget = () => {
 
   // Auto-trigger & Manual Event trigger
   useEffect(() => {
-    // Always popup on every visit
-    const popupTimer = setTimeout(() => {
-      setIsOpen(true)
-      setPendingIntro(true)
-    }, 2500)
+    // Allow disabling the avatar entirely via ?bot=false
+    const botDisabled = new URLSearchParams(window.location.search).get("bot") === "false"
+
+    // Only auto-popup when the avatar isn't disabled via ?bot=false
+    const popupTimer = botDisabled
+      ? undefined
+      : setTimeout(() => {
+        setIsOpen(true)
+        setPendingIntro(true)
+      }, 2500)
 
     const handleOpen = () => {
       setIsOpen(true)
