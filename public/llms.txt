@@ -1,0 +1,16 @@
+# Dvir Levy
+
+> AI Software Engineer focused on building AI-driven systems, intelligent workflows, and scalable cloud-based architectures.
+
+This is the personal portfolio site of Dvir Levy. It is a single-page React application; the sections below are anchors on the same page rather than separate URLs.
+
+## Sections
+
+- [About](https://dvir-levy.netlify.app/#about): Background and experience summary.
+- [Skills](https://dvir-levy.netlify.app/#skills): Technical stack and areas of expertise.
+- [Projects](https://dvir-levy.netlify.app/#projects): Portfolio Assistant (AI RAG System), Telegram Bridge Chat, Cloud-Driven System, EC2 Logger System, SQL Analytics Platform, Data Fetcher, API Validation System, Performance System Suite, Progressive Web App, Housewarming Invitation.
+- [Contact](https://dvir-levy.netlify.app/#contact): Get-in-touch form.
+
+## Notes
+
+- The site includes an interactive AI avatar chat widget (talking-avatar RAG assistant) that can answer questions about Dvir's background and work.

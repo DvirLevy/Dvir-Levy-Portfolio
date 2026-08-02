@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://yaara-law.net/sitemap.xml
+Sitemap: https://dvir-levy.netlify.app/sitemap.xml
