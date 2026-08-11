@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://dvir-levy.netlify.app/sitemap.xml
+Sitemap: https://dvir-levy.dev/sitemap.xml
