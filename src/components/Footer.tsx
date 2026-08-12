@@ -114,7 +114,7 @@ const Footer = () => {
                 </a>
                 <a
                   id="resumeLinkFooter"
-                  href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+AI+Engineer.pdf"
+                  href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/DvirLevyResume.pdf"
                   className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center"
                   target='_blank'
                   rel="noopener noreferrer"
