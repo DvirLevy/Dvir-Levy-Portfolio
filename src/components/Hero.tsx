@@ -58,7 +58,7 @@ const Hero = () => {
       date: new Date().toString(),
     })
     const url =
-      "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/F.pdf"
+      "https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/DvirLevyResume.pdf"
     window.open(url, "_blank", "noopener,noreferrer")
   }
 
