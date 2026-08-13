@@ -162,7 +162,7 @@ const Hero = () => {
               id="downloadResumeBtn"
             >
               <a
-                href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/Dvir+Levy+-+Resume.pdf"
+                href="https://dvir-portfolio-asset-s3.s3.eu-north-1.amazonaws.com/assets/companies/DvirLevyResume.pdf"
                 target='_blank'
                 rel="noopener noreferrer"
               >
