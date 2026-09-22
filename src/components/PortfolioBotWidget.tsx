@@ -7,7 +7,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { Mic, X, MessageCircleQuestion, VolumeX, Globe, Send } from "lucide-react"
+import { Mic, MessageCircleQuestion, VolumeX, Globe, Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import {
   Select,
@@ -239,16 +239,6 @@ export const PortfolioBotWidget = () => {
           >
             <MessageCircleQuestion className="w-4 h-4 mr-1.5" />
             {language === "he-IL" ? "מי אני?" : "WHO AM I?"}
-          </Button>
-
-          <Button
-            id="closeBtn"
-            variant="ghost"
-            onClick={() => setIsOpen(false)}
-            className="flex-none rounded-full px-4 border border-zinc-800 bg-zinc-900/50 hover:bg-red-500/20 hover:text-red-400 hover:border-red-500/50 shadow-lg transition-all"
-          >
-            <X className="w-4 h-4 mr-1.5" />
-            {language === "he-IL" ? "סגור" : "CLOSE"}
           </Button>
         </div>
 

@@ -11,8 +11,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run format` — run Prettier (write mode)
 - `npm run preview` — preview a production build locally
 - `npm run docker` — run the already-built `portfolio-app` image on port 3000 (build it first: `docker build -t portfolio-app .`)
+- `npm run test` — run the unit test suite once (Vitest)
+- `npm run test:watch` — run Vitest in watch mode
+- `npm run coverage` — run tests with v8 coverage (text + html reporters)
 
-There is no test suite/runner configured in this repo (no `test` script, no test files). "Automated testing" referenced in the README is an external cloud-triggered E2E pipeline, not something run locally — see `PopupAutomationRunner.tsx` / `LambdaService.regressionTest`.
+Run a single test file with `npx vitest run src/utils/DAL.test.ts` (drop `run` to watch just that file).
+
+Unit tests (Vitest + Testing Library + MSW) live alongside the code they cover: `src/utils/DAL.test.ts`, `src/utils/lambdaService.test.ts`, `src/botService/index.test.ts`, `src/botService/useSpeechRecognition.test.ts`, `src/botService/useWebRTC.test.ts`. Shared test setup is in `src/test/setup.ts` (an MSW server via `src/test/mocks/server.ts`, and a real in-memory `localStorage` polyfill — Node 22's built-in `localStorage` shadows jsdom's with a non-functional stub). `useWebRTC.test.ts` relies on the `FakeRTCPeerConnection` in `src/test/mocks/webrtc.ts` to simulate the D-ID WebRTC negotiation without a real browser API.
+
+Separately, "automated testing" referenced in the README's regression-suite section is an external cloud-triggered cross-browser E2E pipeline, not run locally — see `PopupAutomationRunner.tsx` / `LambdaService.regressionTest`.
 
 ## Architecture
 
