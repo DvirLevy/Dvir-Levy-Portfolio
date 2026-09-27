@@ -154,7 +154,7 @@ const Hero = () => {
             >
               Contact Me
             </Button>
-            <Button
+            {/* <Button
               size="lg"
               variant="outline"
               className="w-full sm:w-auto text-base sm:text-lg px-8 py-6"
@@ -168,7 +168,7 @@ const Hero = () => {
               >
                 Download my Resume
               </a>
-            </Button>
+            </Button> */}
           </div>
 
           {/* Social Links */}
